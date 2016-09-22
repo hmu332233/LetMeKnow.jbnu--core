@@ -14,7 +14,7 @@ class JBNU_Parser
     if word == ""
       uri = URI(URI.encode("http://www.chonbuk.ac.kr/bb/board.php?boardID="+boardId(id)))
     else
-      uri = URI(URI.encode("http://www.jbnu.ac.kr/bb/board.php?boardID="+boardId(id)+"&cTitle=Y&query="+word))
+      uri = URI(URI.encode("http://www.chonbuk.ac.kr/bb/board.php?boardID="+boardId(id)+"&cTitle=Y&query="+word))
     end
     req = Net::HTTP::Get.new(uri)
 
