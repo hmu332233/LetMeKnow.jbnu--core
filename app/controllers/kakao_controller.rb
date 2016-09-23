@@ -18,24 +18,24 @@ class KakaoController < ApplicationController
         content = params[:content].split
         message_Manager = Message_Manager.new
         
-        if content[0] == "알려줘"
-            if content[1] == "학사공지"
-                result = message_Manager.getMessage_Notice(0)
-            elsif content[1] == "알바"
-                result = message_Manager.getMessage_Notice(5)
-            elsif content[1] == "진수당" || content[1] == "진수원"
-                result = message_Manager.getJinsuMenu
-            elsif content[1] == "의대"
-                result = message_Manager.getMediMenu
-            elsif content[1] == "학생회관"
-                result = message_Manager.getStudentHallMenu
-            end
-        end
+        # if content[0] == "알려줘"
+        #     if content[1] == "학사공지"
+        #         result = message_Manager.getMessage_Notice(0)
+        #     elsif content[1] == "알바"
+        #         result = message_Manager.getMessage_Notice(5)
+        #     elsif content[1] == "진수당" || content[1] == "진수원"
+        #         result = message_Manager.getJinsuMenu
+        #     elsif content[1] == "의대"
+        #         result = message_Manager.getMediMenu
+        #     elsif content[1] == "학생회관"
+        #         result = message_Manager.getStudentHallMenu
+        #     end
+        # end
         
         
+        result = Time.now.strftime("%A")
         
        
-        
         render json: {
                 "message":{
                     "text": "#{result}"
