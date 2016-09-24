@@ -21,29 +21,34 @@ class Message_Manager
         return titles
     end
     
-    
-    def getJinsuMenu
-        return makeMenuTextAll(0)
+    def getJinsuMenu(day,sw)
+        
+        if sw == 0
+            return makeMenuTextAll(0)
+        else
+            return makeMenuTextDay(0,day)
+        end
+       
     end
     
-    def getJinsuMenu(day)
-        return makeMenuTextDay(0,day)
+ 
+    def getMediMenu(day,sw)
+        
+        if sw == 0
+            return makeMenuTextAll(1)
+        else
+            return makeMenuTextDay(1,day)
+        end
     end
     
-    def getMediMenu
-        return makeMenuTextAll(1)
-    end
     
-    def getMediMenu(day)
-        return makeMenuTextDay(1,day)
-    end
-    
-    def getStudentHallMenu
-        return makeMenuTextAll(2)
-    end
-    
-    def getStudentHallMenu(day)
-        return makeMenuTextDay(2,day)
+    def getStudentHallMenu(day,sw)
+        
+        if sw == 0
+            return makeMenuTextAll(2)
+        else
+            return makeMenuTextDay(2,day)
+        end
     end
     
     
@@ -69,6 +74,10 @@ class Message_Manager
     end
     
     def makeMenuTextDay(id,day)
+        
+        if day == 5
+            return "주말에는 운영하지 않습니다"
+        end
         
         parser = JBNU_Food_Parser.new
         menus = parser.requestMenu(id)

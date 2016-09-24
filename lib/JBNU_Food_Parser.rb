@@ -54,5 +54,18 @@ class JBNU_Food_Parser
         return menus
     end
     
+    def requestMenu_hu
+        
+        doc = requestHTML
+        
+        tables = doc.css("#sub_right//table")
+        
+        t = tables[4].css("tr//td")
+        
+       
+        print t.inner_text + "\n\n"
+       
+        
+    end
 
 end
