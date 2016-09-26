@@ -51,12 +51,30 @@ class Message_Manager
         end
     end
     
+    def getHu(day,sw)
+        
+        if sw == 0
+            return makeMenuText_hu_all
+        else
+            return makeMenuText_hu_day(day)
+        end
+    end
+    
     def getDomitory(day,sw)
         
         if sw == 0
             return makeMenuText_domitory_all
         else
             return makeMenuText_domitory_day(day)
+        end
+    end
+    
+    def getDomitory2(day,sw)
+        
+        if sw == 0
+            return makeMenuText_domitory2_all
+        else
+            return makeMenuText_domitory2_day(day)
         end
     end
     
@@ -236,6 +254,158 @@ class Message_Manager
         
         
         return content.chop!.chop!.chop!
+    end
+    
+    def makeMenuText_domitory2_day(day)
+        
+        if day == 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_domitory2
+        
+        days = %w[월 화 수 목 금]
+        
+        if day >= menus.size
+            content = "식단표가 제공되어 있지않습니다."
+        else
+            
+            menu = menus[day]
+        
+            content = ""
+            
+            content += days[day] + "\n\n"
+                
+            content += "아침" + "\n"
+            content += menu.breakfast[0].split(": ")[1] + "\n\n"
+            content += "점심" + "\n"
+            content += menu.lunch[0].split(": ")[1] + "\n\n"
+            content += "저녁" + "\n"
+            content += menu.dinner[0].split(": ")[1] + "\n\n"
+                    
+         
+            
+        end
+        
+            
+        return content.chop!.chop!.chop!
+    end
+    
+    def makeMenuText_domitory2_all
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_domitory2
+        
+        days = %w[월 화 수 목 금]
+        
+        content = ""
+        menus.each_with_index do |menu,i|
+            
+            content += days[i] + "\n\n"
+                
+            
+            content += "아침" + "\n"
+            content += menu.breakfast[0].split(": ")[1] + "\n\n"
+            content += "점심" + "\n"
+            content += menu.lunch[0].split(": ")[1] + "\n\n"
+            content += "저녁" + "\n"
+            content += menu.dinner[0].split(": ")[1] + "\n\n"
+          
+            
+            content += "\n"
+        
+        end
+        
+        
+        return content.chop!.chop!.chop!
+    end
+    
+     def makeMenuText_hu_all
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_hu
+        
+        
+        contents = ""
+        
+        # menus.each do |menu|
+        #     text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
+        #     menu.contents.each do |m|
+        #         text += m + "\n"
+        #     end
+            
+        #     contents += text + "\n\n"
+        # end
+        i = 0
+        while i < menus.size
+        
+            contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
+            contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+            contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+            contents += "\n"
+            contents += menus[i+2].category + ":" + "\n\n"
+            menus[i+2].contents.each do |con|
+                contents += con + "\n"
+            end
+            
+            contents += "\n\n"
+            
+            contents += menus[i+3].week + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
+            menus[i+3].contents.each do |con|
+                contents += con + "\n"
+            end
+            
+            contents += "\n\n\n"
+            
+            i += 4
+        end
+        
+        return contents.to_s.chop!.chop!.chop!.chop!
+        
+    end
+    
+    def makeMenuText_hu_day(day)
+        
+        if day == 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_hu
+        
+        
+        contents = ""
+        
+        # menus.each do |menu|
+        #     text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
+        #     menu.contents.each do |m|
+        #         text += m + "\n"
+        #     end
+            
+        #     contents += text + "\n\n"
+        # end
+        i = day*4
+       
+        
+        contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
+        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+        contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+        contents += "\n"
+        contents += menus[i+2].category + ":" + "\n\n"
+        menus[i+2].contents.each do |con|
+            contents += con + "\n"
+        end
+        
+        contents += "\n\n"
+        
+        contents += menus[i+3].week + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
+        menus[i+3].contents.each do |con|
+            contents += con + "\n"
+        end
+        
+        return contents.to_s.chop!
+        
     end
     
 end
