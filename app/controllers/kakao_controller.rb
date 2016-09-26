@@ -12,7 +12,7 @@ class KakaoController < ApplicationController
     
     def message
         
-        day = Time.now.strftime("%A").to_s
+        day = (Time.now + (9*60*60)).strftime("%A").to_s
      
         result="잘못된 명령어입니다. \n '알려줘 도움말' 을 입력하시면 자세한 사용방법을 알려드립니다"
         
@@ -55,6 +55,8 @@ class KakaoController < ApplicationController
                 result = message_Manager.getMediMenu(dayNumber(day),menu_all)
             when "학생회관"
                 result = message_Manager.getStudentHallMenu(dayNumber(day),menu_all)
+            when "참빛관"
+                result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
             when "도움말"
                 result = "알려줘전북대의 사용방법 입니다\n\n\n공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매/구매\n알려줘 자취\n알려줘 분실물\n\n\n학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 학생회관 이번주"
             end
@@ -83,6 +85,10 @@ class KakaoController < ApplicationController
         #           }
         #     }
         
+        # a = JBNU_Food_Parser.new
+        
+        # # result = message_Manager.makeMenuText_domitory_day(dayNumber_domitory(day))
+        # result = message_Manager.makeMenuText_domitory_all
         render json: {
             "message":{
                 "text": "#{result}"
@@ -119,6 +125,29 @@ class KakaoController < ApplicationController
             result = 4
         else
            result = 5
+        end
+        
+        return result
+    end
+    
+    
+    def dayNumber_domitory(day)
+    
+        case day
+        when 'Sunday'
+           result = 0
+        when 'Monday'
+           result = 1
+        when 'Tuesday'
+           result = 2
+        when 'Wednesday'
+           result = 3
+        when 'Thursday'
+           result = 4
+        when 'Friday'
+           result = 5
+        when 'Saturday'
+           result = 6
         end
         
         return result
