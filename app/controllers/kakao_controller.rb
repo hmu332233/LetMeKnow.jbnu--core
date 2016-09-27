@@ -19,6 +19,8 @@ class KakaoController < ApplicationController
         content = params[:content].split
         message_Manager = Message_Manager.new
         
+        result = easterEgg(content,result)
+        
         if content[0] == "알려줘"
             
             menu_all = 1
@@ -152,6 +154,29 @@ class KakaoController < ApplicationController
            result = 5
         when 'Saturday'
            result = 6
+        end
+        
+        return result
+    end
+    
+    def easterEgg(contents,_result)
+        
+        result = ""
+        
+        contents.each do |con|
+            
+            case con
+            when "만든이" , "개발자"
+                result = "소프트웨어공학과 mu"
+            when "남친" , "여친" , "남자친구" , "여자친구"
+                result = ["태어나지 않았습니다","내일 태어날 예정입니다","존재하지 않습니다"].sample
+            when "나래짓"
+                result = "전북대 유일의 중앙 댄스동아리\n나래짓의 정기공연이\n11월 12일 토요일에\n구정문 삼각지에서 있을 예정입니다!"
+            else
+                result = _result
+            end
+            
+            
         end
         
         return result
