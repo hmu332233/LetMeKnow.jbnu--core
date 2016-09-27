@@ -50,7 +50,7 @@ class JBNU_Parser
 
           content_link = post_data.css("th//a")[0].attr('href')
 
-          post = Post.new(number,title,content_link,period,writer)
+          post = Post.new(number,title,content_link,period,writer,boardId(id))
 
           posts << post
 
@@ -81,7 +81,7 @@ class JBNU_Parser
 
           content_link = post_data.css("th//a")[0].attr('href')
 
-          post = Post.new(number,title,content_link,period,writer)
+          post = Post.new(number,title,content_link,period,writer,boardId(id))
 
           posts << post
         end

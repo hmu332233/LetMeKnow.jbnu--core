@@ -1,13 +1,14 @@
 class Post
 
-  attr_reader :number, :title, :content, :period, :writer
+  attr_reader :number, :title, :link, :period, :writer, :category
 
-  def initialize(number, title, content,period,writer)
+  def initialize(number, title, link,period,writer,category)
     @number = number
     @title = title
-    @content = content
+    @link = link
     @period = period
     @writer = writer
+    @category = category
   end
 
 end

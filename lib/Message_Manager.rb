@@ -13,9 +13,15 @@ class Message_Manager
             
         posts = parser.getPosts(board_id,word)
         
+        main_link = "http://www.chonbuk.ac.kr"
+        
         titles = ""
         posts.each do |post|
-            titles += post.title.to_s.strip + "\n\n"
+            titles += post.number + "\n"
+            titles += post.title.to_s.strip + "\n"
+            titles += post.period + "\n"
+            titles += ("http://www.chonbuk.ac.kr/bb/board.php?action=view&boardID="+post.category+"&SEQ="+ post.number.to_s.strip).to_s + "\n\n"
+            titles.to_s
         end
         
         return titles
@@ -289,7 +295,7 @@ class Message_Manager
         end
         
             
-        return content.chop!.chop!.chop!
+        return content.chop!.chop!
     end
     
     def makeMenuText_domitory2_all
@@ -318,7 +324,7 @@ class Message_Manager
         end
         
         
-        return content.chop!.chop!.chop!
+        return content.chop!.chop!
     end
     
      def makeMenuText_hu_all
