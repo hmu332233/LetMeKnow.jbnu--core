@@ -234,7 +234,7 @@ class Message_Manager
             
             content += days[i] + "\n\n"
                 
-            if i == 0
+            if i == 0 || i == 6
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
                 content += "점심" + "\n"
