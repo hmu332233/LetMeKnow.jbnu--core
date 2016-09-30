@@ -1,5 +1,6 @@
 require 'JBNU_Parser'
 require 'JBNU_Food_Parser'
+require 'Datas'
 
 class Message_Manager
     
@@ -412,6 +413,41 @@ class Message_Manager
         
         return contents.to_s.chop!
         
+    end
+    
+    def getChikMessage
+        
+        result = ""
+        
+        datas = Datas.new
+        
+        chik = datas.getChick
+        
+        chik.each do |c|
+            result += c[0] + "\n"
+            result += c[1] + "\n\n"
+        end
+        
+        
+        return result
+    end
+    
+    
+    def getChinaMessage
+        
+        result = ""
+        
+        datas = Datas.new
+        
+        chik = datas.getChina
+        
+        chik.each do |c|
+            result += c[0] + "\n"
+            result += c[1] + "\n\n"
+        end
+        
+        
+        return result
     end
     
 end
