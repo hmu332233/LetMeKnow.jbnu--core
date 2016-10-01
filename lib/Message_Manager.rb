@@ -187,7 +187,7 @@ class Message_Manager
         days = %w[일 월 화 수 목 금 토]
         
         if day >= menus.size
-            content = "식단표가 제공되어 있지않습니다."
+            content = "등록된 식단이 없습니다."
         else
             
             menu = menus[day]
@@ -196,7 +196,7 @@ class Message_Manager
             
             content += days[day] + "\n\n"
                 
-            if day == 0
+            if day == 0 || day == 6
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
                 content += "점심" + "\n"
@@ -265,17 +265,13 @@ class Message_Manager
     
     def makeMenuText_domitory2_day(day)
         
-        if day == 5
-            return "주말에는 운영하지 않습니다"
-        end
-        
         parser = JBNU_Food_Parser.new
         menus = parser.requestMenu_domitory2
         
         days = %w[월 화 수 목 금]
         
         if day >= menus.size
-            content = "식단표가 제공되어 있지않습니다."
+            content = "등록된 식단이 없습니다.\n"
         else
             
             menu = menus[day]
