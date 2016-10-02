@@ -28,6 +28,8 @@ class KakaoController < ApplicationController
             if content.size >= 3
                 if content[2] == "이번주"
                     menu_all = 0
+                else content[2] == "내일"
+                    day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
                 end
             end
             
