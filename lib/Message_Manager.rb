@@ -196,21 +196,48 @@ class Message_Manager
             
             content += days[day] + "\n\n"
                 
-            if day == 0 || day == 6
+            # if day == 0 || day == 6
+            #     content += "아침" + "\n"
+            #     content += menu.breakfast[0].split(":")[1] + "\n\n"
+            #     content += "점심" + "\n"
+            #     content += menu.lunch[0].split(":")[1] + "\n\n"
+            #     content += "저녁" + "\n"
+            #     content += menu.dinner[0].split(":")[1] + "\n\n"
+                    
+            # else
+            #     content += "아침" + "\n"
+            #     content += menu.breakfast[0].split(":")[1] + "\n\n"
+            #     content += menu.breakfast[1] + "\n\n\n"
+            #     content += "점심" + "\n"
+            #     content += menu.lunch[0].split(":")[1] + "\n\n"
+            #     content += menu.lunch[1] + "\n\n\n"
+            #     content += "저녁" + "\n"
+            #     content += menu.dinner[0].split(":")[1] + "\n\n"
+            #     content += menu.dinner[1] + "\n\n\n"
+            # end
+            
+            if menu.breakfast.size == 1
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
-                content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
-                    
             else
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
                 content += menu.breakfast[1] + "\n\n\n"
+            end
+            
+            if menu.lunch.size == 1
                 content += "점심" + "\n"
                 content += menu.lunch[0].split(":")[1] + "\n\n"
+            else
+                 content += "점심" + "\n"
+                content += menu.lunch[0].split(":")[1] + "\n\n"
                 content += menu.lunch[1] + "\n\n\n"
+            end
+            
+            if menu.dinner.size == 1
+                content += "저녁" + "\n"
+                content += menu.dinner[0].split(":")[1] + "\n\n"
+            else
                 content += "저녁" + "\n"
                 content += menu.dinner[0].split(":")[1] + "\n\n"
                 content += menu.dinner[1] + "\n\n\n"
@@ -235,25 +262,54 @@ class Message_Manager
             
             content += days[i] + "\n\n"
                 
-            if i == 0 || i == 6
+            # if i == 0 || i == 6
+            #     content += "아침" + "\n"
+            #     content += menu.breakfast[0].split(":")[1] + "\n\n"
+            #     content += "점심" + "\n"
+            #     content += menu.lunch[0].split(":")[1] + "\n\n"
+            #     content += "저녁" + "\n"
+            #     content += menu.dinner[0].split(":")[1] + "\n\n"
+                    
+            # else
+            #     content += "아침" + "\n"
+            #     content += menu.breakfast[0].split(":")[1] + "\n\n"
+            #     content += menu.breakfast[1] + "\n\n\n"
+            #     content += "점심" + "\n"
+            #     content += menu.lunch[0].split(":")[1] + "\n\n"
+            #     content += menu.lunch[1] + "\n\n\n"
+            #     content += "저녁" + "\n"
+            #     content += menu.dinner[0].split(":")[1] + "\n\n"
+            #     content += menu.dinner[1] + "\n\n\n"
+            # end
+            
+            if menu.breakfast.size == 1
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
-                content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
-                    
             else
                 content += "아침" + "\n"
                 content += menu.breakfast[0].split(":")[1] + "\n\n"
                 content += menu.breakfast[1] + "\n\n\n"
+            end
+            
+            if menu.lunch.size == 1
                 content += "점심" + "\n"
                 content += menu.lunch[0].split(":")[1] + "\n\n"
+            else
+                 content += "점심" + "\n"
+                content += menu.lunch[0].split(":")[1] + "\n\n"
                 content += menu.lunch[1] + "\n\n\n"
+            end
+            
+            if menu.dinner.size == 1
+                content += "저녁" + "\n"
+                content += menu.dinner[0].split(":")[1] + "\n\n"
+            else
                 content += "저녁" + "\n"
                 content += menu.dinner[0].split(":")[1] + "\n\n"
                 content += menu.dinner[1] + "\n\n\n"
             end
+                
+            
             
             content += "\n"
         
