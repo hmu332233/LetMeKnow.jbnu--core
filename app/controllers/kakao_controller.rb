@@ -15,6 +15,7 @@ class KakaoController < ApplicationController
         
         day = (Time.now + (9*60*60)).strftime("%A").to_s
      
+        show_btn = false
         result="잘못된 명령어입니다. \n '알려줘 도움말' 을 입력하시면 자세한 사용방법을 알려드립니다"
         
         content = params[:content].split(" ")
@@ -75,16 +76,63 @@ class KakaoController < ApplicationController
             
                 
             when "도움말"
-                result = "알려줘전북대의 사용방법 입니다\n\n\n공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n\n\n배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
+                
+                show_btn = true
+                
+                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n학교 공지사항 확인\n건지커뮤니티 글 확인\n학식 메뉴 확인\n근처 치킨집, 중국집 번호 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
+ 
+                result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
+                
             end
  
         end
         
-        render json: {
-            "message":{
-                "text": "#{result}"
+        
+        notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
+        menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
+        delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
+        
+        
+        case content[0]
+        when "도움말"
+            result = "감사합니다"
+        when "공지사항"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + notice_message
+        when "학식"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + menu_message
+        when "배달음식점"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
+        end
+        
+        if show_btn
+            render json: {
+                "message":{
+                    "text": "#{result}"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": [
+                        "도움말 종료",
+                        "공지사항 확인 키워드",
+                        "학식 메뉴 확인 키워드",
+                        "배달음식점 번호 확인 키워드"
+                        ]
+                    }
+                }
+            
+        else
+            render json: {
+                "message":{
+                    "text": "#{result}"
+                }
             }
-        }
+            
+        end
+        
+     
 
     end
     
