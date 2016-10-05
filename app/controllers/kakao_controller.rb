@@ -74,7 +74,13 @@ class KakaoController < ApplicationController
                 result = message_Manager.getChikMessage
             when "중국집"
                 result = message_Manager.getChinaMessage
-            
+                
+            when "과사"
+                if content.size == 2
+                    result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
+                else
+                    result = message_Manager.getMajorMessage(content[2])
+                end
                 
             when "도움말"
                 
@@ -92,6 +98,7 @@ class KakaoController < ApplicationController
         notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
         menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
         delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
+        major_message = "학과사무실 정보 확인\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
         
         case content[0]
@@ -106,18 +113,10 @@ class KakaoController < ApplicationController
         when "배달음식점"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
+        when "학과사무실"
+            show_btn = true
+            result = "\n" + major_message
         end
-        
-        
-        
-        
-        # majors = Datas.new.getMajors
-        
-        # majors.each do |major|
-        #     result += major.name + "\n"
-        # end
-        
-        # Parser.new.parser
         
         
         if show_btn
@@ -131,7 +130,8 @@ class KakaoController < ApplicationController
                         "도움말 종료",
                         "공지사항 확인 키워드",
                         "학식 메뉴 확인 키워드",
-                        "배달음식점 번호 확인 키워드"
+                        "배달음식점 번호 확인 키워드",
+                        "학과사무실 정보 확인 키워드"
                         ]
                     }
                 }
@@ -211,6 +211,8 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
+            when "쌍지은"
+                result = "\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆\n☆   댄 ☆ 싱\n☆   머 ☆ 신\n☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n"
             when "전도사"
                 result = "***************************\n*\n*   14 식영 두유현주\n*   14 소공 아뱅지현\n*\n***************************\n"
             when "만든이" , "개발자"

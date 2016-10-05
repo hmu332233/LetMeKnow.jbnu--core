@@ -502,4 +502,39 @@ class Message_Manager
         return result
     end
     
+    
+    def getMajorMessage(word)
+        
+        result_majors = []
+        
+        majors = Datas.new.getMajors
+        
+        majors.each do |major|
+            
+            if major.name.include?word
+                result_majors << major
+            end
+            
+        end
+        
+        
+        
+        result = ""
+        
+        result_majors.each do |major|
+            
+            result += major.name + "\n\n"
+            result += major.office + "\n"
+            result += major.tel + "\n"
+            result += major.fax + "\n\n"
+            
+        end
+        
+        if result == ""
+            result = "검색결과가 없습니다."
+        end
+        return result
+        
+    end
+    
 end
