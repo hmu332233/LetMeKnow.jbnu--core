@@ -526,14 +526,14 @@ class Message_Manager
             result += major.name + "\n\n"
             result += major.office + "\n"
             result += major.tel + "\n"
-            result += major.fax + "\n\n"
+            result += major.fax + "\n\n\n"
             
         end
         
         if result == ""
             result = "검색결과가 없습니다."
         end
-        return result
+        return result.chop!.chop!
         
     end
     
