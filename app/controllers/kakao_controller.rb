@@ -1,6 +1,7 @@
 require 'Message_Manager'
 require 'JBNU_Food_Parser'
 require 'Datas'
+require 'Parser'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -79,7 +80,7 @@ class KakaoController < ApplicationController
                 
                 show_btn = true
                 
-                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n학교 공지사항 확인\n건지커뮤니티 글 확인\n학식 메뉴 확인\n근처 치킨집, 중국집 번호 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
+                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n학교 공지사항 확인\n건지커뮤니티 글 확인\n학식 메뉴 확인\n근처 치킨집, 중국집 번호 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
  
                 result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
                 
@@ -107,6 +108,18 @@ class KakaoController < ApplicationController
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
         end
         
+        
+        
+        
+        # majors = Datas.new.getMajors
+        
+        # majors.each do |major|
+        #     result += major.name + "\n"
+        # end
+        
+        # Parser.new.parser
+        
+        
         if show_btn
             render json: {
                 "message":{
@@ -133,7 +146,6 @@ class KakaoController < ApplicationController
         end
         
      
-
     end
     
     def friend
@@ -199,10 +211,12 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
+            when "전도사"
+                result = "***************************\n*\n*   14 식영 두유현주\n*   14 소공 아뱅지현\n*\n***************************\n"
             when "만든이" , "개발자"
-                result = "소프트웨어공학과 mu"
+                result = "_CopyRight@ 소프트웨어공학과 mu"
             when "남친" , "여친" , "남자친구" , "여자친구"
-                result = ["태어나지 않았습니다","내일 태어날 예정입니다","존재하지 않습니다"].sample
+                result = ["태어나지 않았습니다","태어날 예정입니다","존재하지 않습니다"].sample
             when "나래짓"
                 result = "전북대 유일의 중앙 댄스동아리\n나래짓의 정기공연이\n11월 12일 토요일에\n구정문 삼각지에서 있을 예정입니다!"
             else
