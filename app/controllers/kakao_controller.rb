@@ -101,7 +101,7 @@ class KakaoController < ApplicationController
         major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
         
-        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]"
+        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n"
         
         case content[0]
         when "도움말"
@@ -109,15 +109,19 @@ class KakaoController < ApplicationController
         when "공지사항"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + notice_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('notice.jpg')
         when "학식"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + menu_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('domi.jpg')
         when "배달음식점"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('chik.jpg')
         when "학과사무실"
             show_btn = true
             result = "\n" + major_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
         when "전체"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
@@ -125,9 +129,11 @@ class KakaoController < ApplicationController
         
         
         if show_btn
-            render json: {
+            
+            if photo_url == nil
+                render json: {
                 "message":{
-                    "text": "#{result}"
+                    "text": "#{result}",
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -141,8 +147,34 @@ class KakaoController < ApplicationController
                         ]
                     }
                 }
-            
+                
+            else
+                
+                render json: {
+                "message":{
+                    "text": "#{result}",
+                    "photo": {
+                        "url": photo_url,
+                        "width": 960,
+                        "height": 960
+                    }
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": [
+                        "도움말 종료",
+                        "전체 키워드",
+                        "학식 메뉴 확인 키워드",
+                        "공지사항 확인 키워드",
+                        "배달음식점 번호 확인 키워드",
+                        "학과사무실 정보 확인 키워드"
+                        ]
+                    }
+                }
+                
+            end
         else
+            
             render json: {
                 "message":{
                     "text": "#{result}"
