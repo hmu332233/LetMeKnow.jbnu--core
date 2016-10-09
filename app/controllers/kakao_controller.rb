@@ -14,6 +14,13 @@ class KakaoController < ApplicationController
     
     def message
         
+        #사용량 측정
+        hits = Hit.all
+        hit = hits.find_or_create_by(name: "master")
+        
+        hit.connect_hits += 1
+        
+        
         day = (Time.now + (9*60*60)).strftime("%A").to_s
      
         show_btn = false
@@ -38,42 +45,59 @@ class KakaoController < ApplicationController
             case content[1]
             when "학사공지"
                 result = message_Manager.getMessage_Notice(0)
+                hit.notice_hits += 1
             when "일반공지"
                 result = message_Manager.getMessage_Notice(1)
+                hit.notice_hits += 1
             when "교내채용"
                 result = message_Manager.getMessage_Notice(2)
+                hit.notice_hits += 1
             when "특강"
                 result = message_Manager.getMessage_Notice(3)
+                hit.notice_hits += 1
             when "스터디"
                 result = message_Manager.getMessage_Notice(4)
+                hit.notice_hits += 1
             when "알바"
                 result = message_Manager.getMessage_Notice(5)
+                hit.notice_hits += 1
             when "판매구매"
                 result = message_Manager.getMessage_Notice(6)
+                hit.notice_hits += 1
             when "자취"
                 result = message_Manager.getMessage_Notice(7)
+                hit.notice_hits += 1
             when "분실물"
                 result = message_Manager.getMessage_Notice(8)
+                hit.notice_hits += 1
                 
                 
             when "진수당" , "진수원"
                 result = message_Manager.getJinsuMenu(dayNumber(day),menu_all)
+                hit.domi_hits += 1
             when "의대"
                 result = message_Manager.getMediMenu(dayNumber(day),menu_all)
+                hit.domi_hits += 1
             when "학생회관"
                 result = message_Manager.getStudentHallMenu(dayNumber(day),menu_all)
+                hit.domi_hits += 1
             when "후생관"
                 result = message_Manager.getHu(dayNumber(day),menu_all)
+                hit.domi_hits += 1
             when "참빛관"
                 result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
+                hit.domi_hits += 1
             when "기존관" , "새빛관" , "대동관" , "평화관"
                 result = message_Manager.getDomitory2(dayNumber(day),menu_all)
+                hit.domi_hits += 1
                 
                 
             when "치킨집"
                 result = message_Manager.getChikMessage
+                hit.chik_hits += 1
             when "중국집"
                 result = message_Manager.getChinaMessage
+                hit.chik_hits += 1
                 
             when "과사"
                 if content.size == 2
@@ -81,6 +105,8 @@ class KakaoController < ApplicationController
                 else
                     result = message_Manager.getMajorMessage(content[2])
                 end
+                hit.office_hits += 1
+                
                 
             when "도움말"
                 
@@ -90,9 +116,13 @@ class KakaoController < ApplicationController
  
                 result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
                 
+                hit.help_hits += 1
+                
             end
  
         end
+        
+        hit.save
         
         
         notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
@@ -126,7 +156,6 @@ class KakaoController < ApplicationController
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
         end
-        
         
         if show_btn
             
@@ -249,6 +278,8 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
+            when "사용량"
+                result = Message_Manager.new.getHitsMessage
             when "쌍지은" , "허지은" , "신지은"
                 result = "\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆\n☆   댄 ☆ 싱\n☆   머 ☆ 신\n☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n"
             when "전도사"

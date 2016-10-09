@@ -537,4 +537,24 @@ class Message_Manager
         
     end
     
+    
+    def getHitsMessage
+        
+        hits = Hit.all
+        hit = hits.find_or_create_by(name: "master")
+        
+        result = ""
+        
+        result += "알려줘 전북대 사용량\n\n"
+        result += "접속 : " + hit.connect_hits.to_s + "\n\n"
+        result += "전체 : " + hit.all_hits.to_s + "\n"
+        result += "공지 : " + hit.notice_hits.to_s + "\n"
+        result += "학식 : " + hit.domi_hits.to_s + "\n"
+        result += "과사 : " + hit.office_hits.to_s + "\n"
+        result += "치킨 : " + hit.chik_hits.to_s + "\n"
+        result += "도움말 : " + hit.help_hits.to_s + "\n\n"
+        
+        return result
+    end
+    
 end
