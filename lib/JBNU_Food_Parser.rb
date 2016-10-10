@@ -168,6 +168,39 @@ class JBNU_Food_Parser
        
     end
     
+    def requestYeji
+        
+        doc = requestHTML
+        
+        tables = doc.css("#sub_right//table")
+        
+        menu_data = tables[5].css("tr//td")
+        
+        menu = []
+        menu_data.each_with_index do |td,i|
+            print i.to_s + " : " + td.inner_text.strip + "\n"
+            menu << td.inner_text.strip
+        end
+        
+        place = "예지원"
+        
+        menus = [
+            Menu.new(place,"월","중식","일품",[menu[9],menu[15]]),
+            Menu.new(place,"월","중식","특식",[menu[22]]),
+            Menu.new(place,"화","중식","일품",[menu[10],menu[16]]),
+            Menu.new(place,"화","중식","특식",[menu[23]]),
+            Menu.new(place,"수","중식","일품",[menu[11],menu[17]]),
+            Menu.new(place,"수","중식","특식",[menu[24]]),
+            Menu.new(place,"목","중식","일품",[menu[12],menu[18]]),
+            Menu.new(place,"목","중식","특식",[menu[25]]),
+            Menu.new(place,"금","중식","일품",[menu[13],menu[19]]),
+            Menu.new(place,"금","중식","특식",[menu[26]])
+            ]
+        
+       return menus
+    
+    end
+    
     def requestMenu_domitory
         
         doc = requestHTML_domitory

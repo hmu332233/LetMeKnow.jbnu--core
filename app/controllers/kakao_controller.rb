@@ -2,6 +2,7 @@ require 'Message_Manager'
 require 'JBNU_Food_Parser'
 require 'Datas'
 require 'Parser'
+require 'date'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -37,7 +38,7 @@ class KakaoController < ApplicationController
             if content.size >= 3
                 if content[2] == "이번주"
                     menu_all = 0
-                else content[2] == "내일"
+                elsif content[2] == "내일"
                     day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
                 end
             end
@@ -84,6 +85,9 @@ class KakaoController < ApplicationController
             when "후생관"
                 result = message_Manager.getHu(dayNumber(day),menu_all)
                 hit.domi_hits += 1
+            when "예지원"
+                result = Message_Manager.new.getYejiMessage(dayNumber(day),menu_all)
+                hit.domi_hits += 1
             when "참빛관"
                 result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
                 hit.domi_hits += 1
@@ -98,7 +102,6 @@ class KakaoController < ApplicationController
             when "중국집"
                 result = message_Manager.getChinaMessage
                 hit.chik_hits += 1
-                
             when "과사"
                 if content.size == 2
                     result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
@@ -156,6 +159,7 @@ class KakaoController < ApplicationController
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
         end
+        
         
         if show_btn
             
@@ -280,6 +284,16 @@ class KakaoController < ApplicationController
             case con
             when "사용량"
                 result = Message_Manager.new.getHitsMessage
+                
+            when "박도현"
+                
+                start = Date.parse("24/03/2016")
+                today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+                
+                result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+                result += "300일 : " + (today.mjd - (start+300).mjd + 1).to_s + "\n"
+                result += "1년 : " + (today.mjd - Date.parse("24/03/2017").mjd + 1).to_s
+                
             when "쌍지은" , "허지은" , "신지은"
                 result = "\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆\n☆   댄 ☆ 싱\n☆   머 ☆ 신\n☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n"
             when "전도사"

@@ -85,6 +85,16 @@ class Message_Manager
         end
     end
     
+    def getYejiMessage(day,sw)
+        
+        if sw == 0
+            return getYejiMessage_all
+        else
+            return getYejiMessage_day(day)
+        end
+        
+    end
+    
     def makeMenuText_studentHall_all
         
         parser = JBNU_Food_Parser.new
@@ -467,6 +477,57 @@ class Message_Manager
         
     end
     
+    def getYejiMessage_all
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestYeji
+        
+        contents = ""
+        
+        menus.each do |menu|
+            
+            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+            
+        end
+        
+        
+        return contents.chop!
+    end
+    
+    def getYejiMessage_day(day)
+        
+        if day == 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        i = day*2
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestYeji
+        menus_m = [menus[i],menus[i+1]]
+            
+        contents = ""
+        
+        menus_m.each do |menu|
+            
+            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+            
+        end
+        
+        
+        return contents.chop!
+    end
+    
     def getChikMessage
         
         result = ""
@@ -556,5 +617,7 @@ class Message_Manager
         
         return result
     end
+    
+    
     
 end
