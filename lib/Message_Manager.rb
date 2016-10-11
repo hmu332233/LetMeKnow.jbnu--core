@@ -227,30 +227,30 @@ class Message_Manager
             # end
             
             if menu.breakfast.size == 1
-                content += "아침" + "\n"
-                content += menu.breakfast[0].split(":")[1] + "\n\n"
+                content += "아침" + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[0].split(":")[1]) + "\n\n"
             else
-                content += "아침" + "\n"
-                content += menu.breakfast[0].split(":")[1] + "\n\n"
-                content += menu.breakfast[1] + "\n\n\n"
+                content += "아침" + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[1]) + "\n\n\n"
             end
             
             if menu.lunch.size == 1
-                content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
+                content += "점심" + "\n\n"
+                content += makeMessageDomiSplit(menu.lunch[0].split(":")[1]) + "\n\n"
             else
-                 content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
-                content += menu.lunch[1] + "\n\n\n"
+                 content += "점심" + "\n\n"
+                content += makeMessageDomiSplit(menu.lunch[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.lunch[1]) + "\n\n\n"
             end
             
             if menu.dinner.size == 1
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
+                content += "저녁" + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[0].split(":")[1]) + "\n\n"
             else
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
-                content += menu.dinner[1] + "\n\n\n"
+                content += "저녁" + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[1]) + "\n\n\n"
             end
 
             
@@ -293,30 +293,37 @@ class Message_Manager
             # end
             
             if menu.breakfast.size == 1
-                content += "아침" + "\n"
-                content += menu.breakfast[0].split(":")[1] + "\n\n"
+                content += "아침" + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[0].split(":")[1]) + "\n\n"
             else
-                content += "아침" + "\n"
-                content += menu.breakfast[0].split(":")[1] + "\n\n"
-                content += menu.breakfast[1] + "\n\n\n"
+                content += "아침" + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.breakfast[1]) + "\n\n\n"
             end
             
             if menu.lunch.size == 1
-                content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
+                content += "점심" + "\n\n"
+                content += makeMessageDomiSplit(menu.lunch[0].split(":")[1]) + "\n\n"
             else
-                 content += "점심" + "\n"
-                content += menu.lunch[0].split(":")[1] + "\n\n"
-                content += menu.lunch[1] + "\n\n\n"
+                # content += "점심" + "\n"
+                # content += menu.lunch[0].split(":")[1] + "\n\n"
+                # content += menu.lunch[1] + "\n\n\n"
+                
+                content += "점심" + "\n\n"
+                
+                content += makeMessageDomiSplit(menu.lunch[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.lunch[1]) + "\n\n\n"
+              
+                
             end
             
             if menu.dinner.size == 1
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
+                content += "저녁" + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[0].split(":")[1]) + "\n\n"
             else
-                content += "저녁" + "\n"
-                content += menu.dinner[0].split(":")[1] + "\n\n"
-                content += menu.dinner[1] + "\n\n\n"
+                content += "저녁" + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[0].split(":")[1]) + "\n\n"
+                content += makeMessageDomiSplit(menu.dinner[1]) + "\n\n\n"
             end
                 
             
@@ -346,12 +353,12 @@ class Message_Manager
             
             content += days[day] + "\n\n"
                 
-            content += "아침" + "\n"
-            content += menu.breakfast[0].split(": ")[1] + "\n\n"
-            content += "점심" + "\n"
-            content += menu.lunch[0].split(": ")[1] + "\n\n"
-            content += "저녁" + "\n"
-            content += menu.dinner[0].split(": ")[1] + "\n\n"
+            content += "아침" + "\n\n"
+            content += makeMessageDomiSplit2(menu.breakfast[0].split(": ")[1]) + "\n\n"
+            content += "점심" + "\n\n"
+            content += makeMessageDomiSplit2(menu.lunch[0].split(": ")[1]) + "\n\n"
+            content += "저녁" + "\n\n"
+            content += makeMessageDomiSplit2(menu.dinner[0].split(": ")[1]) + "\n\n"
                     
          
             
@@ -374,12 +381,12 @@ class Message_Manager
             content += days[i] + "\n\n"
                 
             
-            content += "아침" + "\n"
-            content += menu.breakfast[0].split(": ")[1] + "\n\n"
-            content += "점심" + "\n"
-            content += menu.lunch[0].split(": ")[1] + "\n\n"
-            content += "저녁" + "\n"
-            content += menu.dinner[0].split(": ")[1] + "\n\n"
+            content += "아침" + "\n\n"
+            content += makeMessageDomiSplit2(menu.breakfast[0].split(": ")[1]) + "\n\n"
+            content += "점심" + "\n\n"
+            content += makeMessageDomiSplit2(menu.lunch[0].split(": ")[1]) + "\n\n"
+            content += "저녁" + "\n\n"
+            content += makeMessageDomiSplit2(menu.dinner[0].split(": ")[1]) + "\n\n"
           
             
             content += "\n"
@@ -619,5 +626,38 @@ class Message_Manager
     end
     
     
+    
+    def makeMessageDomiSplit(menu_data)
+        
+        content = ""
+        
+        menu_data.split(",").each_with_index do |lunch_d,i|
+            
+            if i == 0
+                tmp = lunch_d.split(")")
+                content += tmp[0].strip + ")" + "\n"
+                content += tmp[1] + "\n"
+            else
+                content += lunch_d + "\n"
+            end
+            
+           
+        end
+        
+        return content.chop!
+    end
+    
+    def makeMessageDomiSplit2(menu_data)
+        
+        content = ""
+        
+        menu_data.split(",").each_with_index do |lunch_d,i|
+            
+            content += lunch_d.strip + "\n"
+    
+        end
+        
+        return content.chop!
+    end
     
 end
