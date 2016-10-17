@@ -660,4 +660,16 @@ class Message_Manager
         return content.chop!
     end
     
+    def makeMessageChiknum(people_num)
+        
+        if people_num > 100
+            return "101명 이상은 지원하지 않는다네"
+        else
+            result = Datas.new.getChikNum(people_num-1).split(": ")[1]
+            result += "마리를 시키면 될 것이야!"
+            return result
+        end
+
+    end
+    
 end

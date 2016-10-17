@@ -102,6 +102,10 @@ class KakaoController < ApplicationController
             when "중국집"
                 result = message_Manager.getChinaMessage
                 hit.chik_hits += 1
+                
+            when "치킨몇마리"
+                result = message_Manager.makeMessageChiknum(content[2].to_i)
+
             when "과사"
                 if content.size == 2
                     result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
@@ -159,9 +163,6 @@ class KakaoController < ApplicationController
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
         end
-        
-        JBNU_Food_Parser.new.testTables
-        
         
         if show_btn
             
