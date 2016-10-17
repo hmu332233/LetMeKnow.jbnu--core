@@ -160,6 +160,8 @@ class KakaoController < ApplicationController
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
         end
         
+        JBNU_Food_Parser.new.testTables
+        
         
         if show_btn
             

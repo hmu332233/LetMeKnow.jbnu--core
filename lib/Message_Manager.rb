@@ -641,7 +641,7 @@ class Message_Manager
                 content += lunch_d + "\n"
             end
             
-           
+
         end
         
         return content.chop!
