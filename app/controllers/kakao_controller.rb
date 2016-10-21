@@ -15,9 +15,16 @@ class KakaoController < ApplicationController
     
     def message
         
+        message_content = params[:content]
+        
         #사용량 측정
         hits = Hit.all
         hit = hits.find_or_create_by(name: "master")
+        
+        words = Word.all
+        word = words.find_or_create_by(content: message_content)
+        word.count += 1
+        word.save
         
         hit.connect_hits += 1
         
@@ -167,6 +174,19 @@ class KakaoController < ApplicationController
             result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
         end
         
+        # render json: {
+        #     "message": {
+        #         "text": "전주버스",
+        #         "message_button": {
+        #           "label": "주유 쿠폰받기",
+        #           "url": "http://m.jeonjuits.go.kr/traffic/bus_location2.jsp"
+        #         }
+        #     }
+        # }
+        
+        # return
+    
+        
         if show_btn
             
             if photo_url == nil
@@ -290,6 +310,11 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
+            when "데이터1"
+                result = Message_Manager.new.makeMessageData(true)
+            when "데이터2"
+                result = Message_Manager.new.makeMessageData(false)
+            
             when "과사노예"
                 result = "이정철"
             

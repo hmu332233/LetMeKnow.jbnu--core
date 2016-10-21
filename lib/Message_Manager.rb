@@ -672,4 +672,25 @@ class Message_Manager
 
     end
     
+    def makeMessageData(sw)
+        
+        if sw
+            words = Word.order(:content)
+        else
+            words = Word.order(count: :desc)
+        end
+        
+        result = "\n"
+        words.each do |word|
+            result += word.content
+            result += " : "
+            result += word.count.to_s
+            result += "\n"
+        end
+        
+        return result
+            
+    end
+
+    
 end
