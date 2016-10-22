@@ -3,6 +3,8 @@ require 'JBNU_Food_Parser'
 require 'Datas'
 require 'Parser'
 require 'date'
+require 'JsonMaker'
+require 'Bus_Parser'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -39,6 +41,14 @@ class KakaoController < ApplicationController
         
         result = easterEgg(content,result)
         
+        
+        
+        if content.size == 1
+            main_keyword = content[0]
+        elsif content.size > 1
+            main_keyword = content[1]
+        end
+        
         if content[0] == "알려줘"
             
             menu_all = 1
@@ -50,7 +60,7 @@ class KakaoController < ApplicationController
                 end
             end
             
-            case content[1]
+            case main_keyword
             when "학사공지"
                 result = message_Manager.getMessage_Notice(0)
                 hit.notice_hits += 1
@@ -121,6 +131,34 @@ class KakaoController < ApplicationController
                 end
                 hit.office_hits += 1
                 
+            when "버스번호"
+
+                unless content[2] == nil
+                
+                    result = "버스번호 '" + content[2] + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
+                    label = "버스 시간 확인"
+                    url = Bus_Parser.new.getAddressBusNo(content[2])
+                
+                    render json: JsonMaker.new.getUrlBtnJson(result,label,url)
+                    return
+                else
+                    result = "벗버ㅅ"
+                end
+                
+            when "버스정류장"
+
+                unless content[2] == nil
+                
+                    result = "버스정류장 '" + content[2] + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
+                    label = "버스 정류장 확인"
+                    url = Bus_Parser.new.getAddressBusStop(content[2])
+                
+                    render json: JsonMaker.new.getUrlBtnJson(result,label,url)
+                    return
+                else
+                    result = "벗버ㅅ"
+                end
+                
                 
             when "도움말"
                 
@@ -174,18 +212,6 @@ class KakaoController < ApplicationController
             result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
         end
         
-        # render json: {
-        #     "message": {
-        #         "text": "전주버스",
-        #         "message_button": {
-        #           "label": "주유 쿠폰받기",
-        #           "url": "http://m.jeonjuits.go.kr/traffic/bus_location2.jsp"
-        #         }
-        #     }
-        # }
-        
-        # return
-    
         
         if show_btn
             
