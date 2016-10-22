@@ -43,22 +43,24 @@ class KakaoController < ApplicationController
         
         
         
-        if content.size == 1
-            main_keyword = content[0]
-        elsif content.size > 1
+        if content[0] == "알려줘"
             main_keyword = content[1]
+            sub_keyword = content[2]
+        else 
+            main_keyword = content[0]
+            sub_keyword = content[1]
         end
+        
         
         if content[0] == "알려줘"
             
             menu_all = 1
-            if content.size >= 3
-                if content[2] == "이번주"
-                    menu_all = 0
-                elsif content[2] == "내일"
-                    day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
-                end
+            if sub_keyword == "이번주"
+                menu_all = 0
+            elsif sub_keyword == "내일"
+                day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
             end
+            
             
             case main_keyword
             when "학사공지"
@@ -121,42 +123,42 @@ class KakaoController < ApplicationController
                 hit.chik_hits += 1
                 
             when "치킨몇마리"
-                result = message_Manager.makeMessageChiknum(content[2].to_i)
+                result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
 
             when "과사"
                 if content.size == 2
                     result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
                 else
-                    result = message_Manager.getMajorMessage(content[2])
+                    result = message_Manager.getMajorMessage(sub_keyword)
                 end
                 hit.office_hits += 1
                 
-            when "버스번호"
+            when "버스"
 
-                unless content[2] == nil
+                unless sub_keyword == nil
                 
-                    result = "버스번호 '" + content[2] + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
+                    result = "버스번호 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
                     label = "버스 시간 확인"
-                    url = Bus_Parser.new.getAddressBusNo(content[2])
+                    url = Bus_Parser.new.getAddressBusNo(sub_keyword)
                 
                     render json: JsonMaker.new.getUrlBtnJson(result,label,url)
                     return
                 else
-                    result = "벗버ㅅ"
+                    result = "\n검색할 버스번호를 입력해주세요\n\n알려줘 버스 [번호]\n\nex)\n알려줘 버스 385\n알려줘 버스 165\n"
                 end
                 
-            when "버스정류장"
+            when "버스정류장" , "버정"
 
-                unless content[2] == nil
+                unless sub_keyword == nil
                 
-                    result = "버스정류장 '" + content[2] + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
+                    result = "버스정류장 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
                     label = "버스 정류장 확인"
-                    url = Bus_Parser.new.getAddressBusStop(content[2])
+                    url = Bus_Parser.new.getAddressBusStop(sub_keyword)
                 
                     render json: JsonMaker.new.getUrlBtnJson(result,label,url)
                     return
                 else
-                    result = "벗버ㅅ"
+                    result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버스정류장 동물원\n"
                 end
                 
                 

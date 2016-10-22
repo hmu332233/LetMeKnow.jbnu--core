@@ -599,7 +599,7 @@ class Message_Manager
         end
         
         if result == ""
-            result = "검색결과가 없습니다."
+            result = "검색결과가 없습니다.\n\n"
         end
         return result.chop!.chop!
         
