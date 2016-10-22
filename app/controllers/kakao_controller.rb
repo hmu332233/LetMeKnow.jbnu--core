@@ -310,11 +310,19 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
+            when "고마워"
+                result = "저도 감사합니다!"
+            
             when "데이터1"
                 result = Message_Manager.new.makeMessageData(true)
             when "데이터2"
                 result = Message_Manager.new.makeMessageData(false)
-            
+            when "데이터삭제"
+                result = "모든데이터가 삭제되었습니다"
+                Word.delete_all
+            when "사용량삭제"
+                result = "사용량이 초기화되었습니다"
+                Hit.delete_all
             when "과사노예"
                 result = "이정철"
             
