@@ -36,12 +36,15 @@ class KakaoController < ApplicationController
         show_btn = false
         result="잘못된 명령어입니다. \n '알려줘 도움말' 을 입력하시면 자세한 사용방법을 알려드립니다"
         
-        content = params[:content].split(" ")
+        # content = params[:content].split(" ")
         message_Manager = Message_Manager.new
         
+        
+        
+        converted_message = converter(message_content)
+        content = converted_message.split(" ")
+        
         result = easterEgg(content,result)
-        
-        
         
         if content[0] == "알려줘"
             main_keyword = content[1]
@@ -50,7 +53,6 @@ class KakaoController < ApplicationController
             main_keyword = content[0]
             sub_keyword = content[1]
         end
-        
         
         if content[0] == "알려줘"
             
@@ -137,8 +139,8 @@ class KakaoController < ApplicationController
 
                 unless sub_keyword == nil
                 
-                    result = "버스번호 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
-                    label = "버스 시간 확인"
+                    result = "버스번호 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 확인을 눌러주세요"
+                    label = "버스 확인"
                     url = Bus_Parser.new.getAddressBusNo(sub_keyword)
                 
                     render json: JsonMaker.new.getUrlBtnJson(result,label,url)
@@ -151,7 +153,7 @@ class KakaoController < ApplicationController
 
                 unless sub_keyword == nil
                 
-                    result = "버스정류장 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 시간 확인을 눌러주세요"
+                    result = "버스정류장 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 정류장 확인을 눌러주세요"
                     label = "버스 정류장 확인"
                     url = Bus_Parser.new.getAddressBusStop(sub_keyword)
                 
@@ -188,7 +190,7 @@ class KakaoController < ApplicationController
         all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
         
         case content[0]
-        when "도움말"
+        when ".도움말"
             result = "감사합니다"
         when "공지사항"
             show_btn = true
@@ -215,6 +217,13 @@ class KakaoController < ApplicationController
         end
         
         
+        #----테스트하는곳
+        
+        # result = converter(message_content)
+        
+        #---------------
+        
+        
         if show_btn
             
             if photo_url == nil
@@ -225,7 +234,7 @@ class KakaoController < ApplicationController
                 "keyboard": {
                     "type": "buttons",
                     "buttons": [
-                        "도움말 종료",
+                        ".도움말 종료",
                         "전체 키워드",
                         "학식 메뉴 확인 키워드",
                         "공지사항 확인 키워드",
@@ -250,7 +259,7 @@ class KakaoController < ApplicationController
                 "keyboard": {
                     "type": "buttons",
                     "buttons": [
-                        "도움말 종료",
+                        ".도움말 종료",
                         "전체 키워드",
                         "학식 메뉴 확인 키워드",
                         "공지사항 확인 키워드",
@@ -384,6 +393,47 @@ class KakaoController < ApplicationController
         end
         
         return result
+    end
+    
+    def converter(dialog)
+        
+        convert = false
+        
+        main_keyword = ""
+        sub_keyword = ""
+        
+        notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
+        food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 참빛관 기존관 새빛관 대동관 평화관]
+        etc_keyword = %w[치킨집 중국집]
+        sub_datas = %w[이번주 내일]
+        
+        
+        main_datas = notice_keyword + food_keyword + etc_keyword
+        
+        main_datas.each do |main_data|
+            
+            if dialog.include?(main_data)
+                main_keyword = main_data
+                convert = true
+            end
+            
+        end
+        
+        sub_datas.each do |sub_data|
+            
+            if dialog.include?(sub_data)
+                sub_keyword = sub_data
+            end
+        end
+        
+        # print "변환완료\n"
+        
+        if convert
+            return "알려줘 " + main_keyword + " " + sub_keyword
+        else
+            return dialog
+        end
+        
     end
     
 end
