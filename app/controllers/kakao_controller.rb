@@ -38,7 +38,7 @@ class KakaoController < ApplicationController
         
         # content = params[:content].split(" ")
         message_Manager = Message_Manager.new
-        
+        jsonMaker = JsonMaker.new
         
         
         converted_message = converter(message_content)
@@ -107,12 +107,12 @@ class KakaoController < ApplicationController
                 result = message_Manager.getHu(dayNumber(day),menu_all)
                 hit.domi_hits += 1
             when "예지원"
-                result = Message_Manager.new.getYejiMessage(dayNumber(day),menu_all)
+                result = message_Manager.getYejiMessage(dayNumber(day),menu_all)
                 hit.domi_hits += 1
-            when "참빛관"
+            when "참빛관" , "참빛"
                 result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
                 hit.domi_hits += 1
-            when "기존관" , "새빛관" , "대동관" , "평화관"
+            when "기존관" , "새빛관" , "대동관" , "평화관" , "새빛" , "대동" , "평화"
                 result = message_Manager.getDomitory2(dayNumber(day),menu_all)
                 hit.domi_hits += 1
                 
@@ -120,9 +120,9 @@ class KakaoController < ApplicationController
             when "치킨집"
                 result = message_Manager.getChikMessage
                 hit.chik_hits += 1
-            when "중국집"
-                result = message_Manager.getChinaMessage
-                hit.chik_hits += 1
+            # when "중국집"
+            #     result = message_Manager.getChinaMessage
+            #     hit.chik_hits += 1
                 
             when "치킨몇마리"
                 result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
@@ -134,6 +134,12 @@ class KakaoController < ApplicationController
                     result = message_Manager.getMajorMessage(sub_keyword)
                 end
                 hit.office_hits += 1
+            when "버스시간"
+                
+                result = "\n학교 근처 정류장 버스시간을 알려드립니다.\n\n하단의 버스정류장을 선택해주세요.\n\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n를 이용하면 직접 검색도 가능합니다.\n\n"
+                
+                render json: JsonMaker.new.getBusMenuJson(result)
+                return;
                 
             when "버스"
 
@@ -160,7 +166,7 @@ class KakaoController < ApplicationController
                     render json: JsonMaker.new.getUrlBtnJson(result,label,url)
                     return
                 else
-                    result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버스정류장 동물원\n"
+                    result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n알려줘 버정 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버정 동물원\n"
                 end
                 
                 
@@ -181,46 +187,55 @@ class KakaoController < ApplicationController
         hit.save
         
         
+        # 버스 버튼에 따른 결과
+        results = busMessage(message_content)
+        if results[1]
+            render json: JsonMaker.new.getBusMenuJson(results[0])
+            return;
+        end
+        
+        # 도움말 버튼에 따른 결과
         notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
         menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
         delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
-        major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
+        major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
         
         all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
         
-        case content[0]
-        when ".도움말"
+        case message_content
+        when "나가기"
             result = "감사합니다"
-        when "공지사항"
+        when "공지사항 확인 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + notice_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('notice.jpg')
-        when "학식"
+        when "학식 메뉴 확인 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + menu_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('domi.jpg')
-        when "배달음식점"
+        when "배달음식점 번호 확인 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('chik.jpg')
-        when "학과사무실"
+        when "학과사무실 정보 확인 키워드"
             show_btn = true
             result = "\n" + major_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
-        when "전체"
+        when "전체 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
-        when "기타"
+        when "기타 키워드"
             show_btn = true
             result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
         end
         
-        
         #----테스트하는곳
         
         # result = converter(message_content)
-        
+        # result = message_Manager.makeMessageBusStop(1)
+        # render json: JsonMaker.new.getBusMenuJson(result)
+        # return;
         #---------------
         
         
@@ -234,7 +249,7 @@ class KakaoController < ApplicationController
                 "keyboard": {
                     "type": "buttons",
                     "buttons": [
-                        ".도움말 종료",
+                        "나가기",
                         "전체 키워드",
                         "학식 메뉴 확인 키워드",
                         "공지사항 확인 키워드",
@@ -259,7 +274,7 @@ class KakaoController < ApplicationController
                 "keyboard": {
                     "type": "buttons",
                     "buttons": [
-                        ".도움말 종료",
+                        "나가기",
                         "전체 키워드",
                         "학식 메뉴 확인 키워드",
                         "공지사항 확인 키워드",
@@ -403,10 +418,11 @@ class KakaoController < ApplicationController
         sub_keyword = ""
         
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
-        food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 참빛관 기존관 새빛관 대동관 평화관]
+        food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 참빛관 기존관 새빛관 대동관 평화관 참빛 새빛 대동 평화]
         etc_keyword = %w[치킨집 중국집]
         sub_datas = %w[이번주 내일]
         
+        ect_keyword = %w[학식 기숙사]
         
         main_datas = notice_keyword + food_keyword + etc_keyword
         
@@ -427,6 +443,17 @@ class KakaoController < ApplicationController
         end
         
         # print "변환완료\n"
+        unless convert
+            ect_keyword.each do |keyword|
+                
+                if dialog.include?(keyword)
+                    return "학식"
+                end
+                
+            end
+        end
+        
+        
         
         if convert
             return "알려줘 " + main_keyword + " " + sub_keyword
@@ -434,6 +461,83 @@ class KakaoController < ApplicationController
             return dialog
         end
         
+    end
+    
+    def helpMessage(message_content)
+        
+        notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
+        menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
+        delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
+        major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
+        
+        
+        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
+        
+        show_btn = false
+        
+        case message_content
+        when "나가기"
+            result = "감사합니다"
+        when "공지사항 확인 키워드"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + notice_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('notice.jpg')
+        when "학식 메뉴 확인 키워드"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + menu_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('domi.jpg')
+        when "배달음식점 번호 확인 키워드"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('chik.jpg')
+        when "학과사무실 정보 확인 키워드"
+            show_btn = true
+            result = "\n" + major_message
+            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
+        when "전체 키워드"
+            show_btn = true
+            result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
+        when "기타 키워드"
+            show_btn = true
+            result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
+        else
+            result = message_content
+        end
+        
+        return result, show_btn
+        
+    end
+    
+    def busMessage(message)
+        
+        m = Message_Manager.new
+        
+        id = -1
+        
+        case message
+            when "전북대학교(농협앞)"
+                id = 0
+            when "전북대학교(덕진성당앞)"
+                id = 3
+            when "전북대학교(일양병원앞)"
+                id = 4
+            when "전북대학교(한나여성병원)"
+                id = 5
+            when "소방서(시청방향)"
+                id = 2
+            when "전북은행본점"
+                id = 1
+        end
+        
+        if id == -1
+            result = message
+            busMessage_sw = false
+        else
+            result = m.makeMessageBusStop(id)
+            busMessage_sw = true
+        end
+        
+        return result,busMessage_sw
     end
     
 end

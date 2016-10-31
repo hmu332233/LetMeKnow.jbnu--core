@@ -692,5 +692,22 @@ class Message_Manager
             
     end
 
+    def makeMessageBusStop(id)
+        
+        buses = Bus_Parser.new.getSelectedBusStop(id)
+        
+        result = ""
+        
+        buses.each do |bus|
+            result += "\n"+bus.number + "\n"
+            result += "남은정거장 : " + bus.remain_busstop_num
+            result += "\t(" + bus.arrive_time.to_s + "분전)" + "\n"
+            result += "최근통과지점 : " + bus.lately_busstop + "\n"
+            result +=  "---\n"
+        end
+        
+        
+        return result
+    end
     
 end
