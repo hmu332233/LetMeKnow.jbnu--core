@@ -169,7 +169,6 @@ class KakaoController < ApplicationController
                     result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n알려줘 버정 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버정 동물원\n"
                 end
                 
-                
             when "도움말"
                 
                 show_btn = true
@@ -190,7 +189,7 @@ class KakaoController < ApplicationController
         # 버스 버튼에 따른 결과
         results = busMessage(message_content)
         if results[1]
-            render json: JsonMaker.new.getBusMenuJson(results[0])
+            render json: jsonMaker.getBusMenuJson(results[0])
             return;
         end
         
@@ -238,62 +237,19 @@ class KakaoController < ApplicationController
         # return;
         #---------------
         
-        
+         
         if show_btn
-            
             if photo_url == nil
-                render json: {
-                "message":{
-                    "text": "#{result}",
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": [
-                        "나가기",
-                        "전체 키워드",
-                        "학식 메뉴 확인 키워드",
-                        "공지사항 확인 키워드",
-                        "배달음식점 번호 확인 키워드",
-                        "학과사무실 정보 확인 키워드",
-                        "기타 키워드"
-                        ]
-                    }
-                }
-                
+                render json: jsonMaker.getHelpMenuJson(result)
             else
-                
-                render json: {
-                "message":{
-                    "text": "#{result}",
-                    "photo": {
-                        "url": photo_url,
-                        "width": 960,
-                        "height": 960
-                    }
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": [
-                        "나가기",
-                        "전체 키워드",
-                        "학식 메뉴 확인 키워드",
-                        "공지사항 확인 키워드",
-                        "배달음식점 번호 확인 키워드",
-                        "학과사무실 정보 확인 키워드",
-                        "기타 키워드"
-                        ]
-                    }
-                }
-                
+                render json: jsonMaker.getHelpMenuPicJson(result,photo_url)
             end
         else
-            
             render json: {
                 "message":{
                     "text": "#{result}"
                 }
             }
-            
         end
         
      
