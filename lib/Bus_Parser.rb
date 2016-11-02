@@ -8,10 +8,12 @@ class Bus_Parser
         array = bus_no.to_s.split('-')
         
         if array.size > 1
-            url = "http://m.jeonjuits.go.kr/traffic/bus_location1.jsp?search_nm="+bus_no+"inp_brt_id_route="+array[0]+"&inp_brt_class_route="+array[1]
+            url = "http://m.jeonjuits.go.kr/traffic/bus_location1.jsp?search_nm="+bus_no+"&inp_brt_id_route="+array[0]+"&inp_brt_class_route="+array[1]
         else
             url = "http://m.jeonjuits.go.kr/traffic/bus_location1.jsp?search_nm="+bus_no+"&inp_brt_id_route="+array[0]
         end
+        
+        puts url
        
        return url
     end

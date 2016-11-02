@@ -221,6 +221,9 @@ class KakaoController < ApplicationController
             show_btn = true
             result = "\n" + major_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
+        when "버스, 버스정류장 확인 키워드"
+            show_btn = true
+            result = "---\n@ 학교 주변 정거장 버스시간 확인\n\n알려줘 버스시간\n\n----\n@ 버스 검색\n\n알려줘 버스 [버스번호]\n\nex)\n알려줘 버스 385\n\n----\n@ 버스정류장 검색\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\n\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n----\n"
         when "전체 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
