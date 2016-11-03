@@ -168,6 +168,14 @@ class KakaoController < ApplicationController
                     result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n알려줘 버정 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버정 동물원\n"
                 end
                 
+            when "날씨"
+                
+                result = message_Manager.getTodayWeatherMessage
+                
+             when "내일날씨"
+                
+                result = message_Manager.getTomorrowWeatherMessage
+                
             when "도움말"
                 
                 show_btn = true

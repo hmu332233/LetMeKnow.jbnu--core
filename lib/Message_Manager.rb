@@ -1,5 +1,6 @@
 require 'JBNU_Parser'
 require 'JBNU_Food_Parser'
+require 'Weather_Parser'
 require 'Datas'
 
 class Message_Manager
@@ -698,16 +699,65 @@ class Message_Manager
         
         result = ""
         
-        buses.each do |bus|
-            result += "\n"+bus.number + "\n"
-            result += "남은정거장 : " + bus.remain_busstop_num
-            result += "\t(" + bus.arrive_time.to_s + "분전)" + "\n"
-            result += "최근통과지점 : " + bus.lately_busstop + "\n"
-            result +=  "---\n"
+        if buses.length == 0
+            result += "도착예정 버스가 없습니다"
+        else
+            buses.each do |bus|
+                result += "\n"+bus.number + "\n"
+                result += "남은정거장 : " + bus.remain_busstop_num
+                result += "\t(" + bus.arrive_time.to_s + "분전)" + "\n"
+                result += "최근통과지점 : " + bus.lately_busstop + "\n"
+                result +=  "---\n"
+            end
         end
         
+        return result
+    end
+    
+    #날씨
+    def getTodayWeatherMessage
+        return makeWeatherMessage(0)
+    end
+    
+    def getTomorrowWeatherMessage
+        return makeWeatherMessage(1)
+    end
+    
+    def makeWeatherMessage(day)
+        
+        weathers = Weather_Parser.new.getTodayWeather
+        
+        if day.to_s == "0"
+            tmx = weathers.first.tmx
+            tmn = weathers.first.tmn
+            day_string = "오늘"
+        elsif day.to_s == "1"
+            tmx = weathers.last.tmx
+            tmn = weathers.last.tmn
+            day_string = "내일"
+        end
+        
+        result = "\n"
+        result += "덕진구 "+ day_string +" 날씨입니다.\n"
+        result += "최고 : " + tmx + "\n"
+        result += "최저 : " + tmn + "\n\n"
+        
+        weathers.each do |weather|
+            
+            if weather.day.to_s == day.to_s
+            
+                # result += weather.day + "\n"
+                result += weather.hour + "시 - "
+                result += weather.temp + "도\n"
+                result += weather.wfKor
+                result += " (강수확률 : " + weather.pop + "% )\n"
+                # result += "\n"
+            end
+            
+        end
         
         return result
+        
     end
     
 end
