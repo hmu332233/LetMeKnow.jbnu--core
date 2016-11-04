@@ -10,6 +10,16 @@ class Weather
     @tmn = tmn      #최저온도
     @wfKor = wfKor  #날씨상태
     @pop = pop      #강수확률
+    
+    # 이모티콘
+    # case wfKor
+    # when "흐리고 비" , "흐리고비"
+    #   @wfKor += " (비)"
+    # when "구름많음" , "구름 많음"
+    #   @wfKor += " (구름)"
+    # when "구름조금" , "구름 조금"
+    #   @wfKor += " (해)"
+    # end
   end
 
 end

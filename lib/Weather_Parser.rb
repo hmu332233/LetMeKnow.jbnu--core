@@ -14,6 +14,35 @@ class Weather_Parser
         return doc
     end
     
+    def requestXML_week
+        uri = URI(URI.encode("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=146"))
+       
+        req = Net::HTTP::Get.new(uri)
+    
+        res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+        doc = Nokogiri::XML(res.body)
+    
+        return doc
+    end
+    
+    def getWeekDayWeather
+        doc = requestXML_week
+    
+        days = doc.xpath("//tmEf")
+        tmx = doc.xpath("//tmx")
+        tmn = doc.xpath("//tmn")
+        wfKors = doc.xpath("//wf")
+        
+        weathers = []
+        
+        for i in 0..days.length-1
+            weather = Weather.new("",days[i].inner_text.to_s,"",tmx[i].inner_text.to_s,tmn[i].inner_text.to_s,wfKors[i+1].inner_text.to_s,"")
+            weathers << weather
+        end
+        
+        return weathers
+    end
+    
     
     def getTodayWeather
         

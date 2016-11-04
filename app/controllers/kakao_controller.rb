@@ -170,17 +170,19 @@ class KakaoController < ApplicationController
                 
             when "날씨"
                 
-                result = message_Manager.getTodayWeatherMessage
-                
-             when "내일날씨"
-                
-                result = message_Manager.getTomorrowWeatherMessage
+                if sub_keyword == "내일"
+                    result = message_Manager.getTomorrowWeatherMessage
+                elsif sub_keyword == "이번주"
+                    result = message_Manager.makeWeekWeatherMessage
+                else
+                     result = message_Manager.getTodayWeatherMessage
+                end
                 
             when "도움말"
                 
                 show_btn = true
                 
-                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 근처 치킨집, 중국집 번호 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
+                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 근처 치킨집 번호 확인\n6. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
  
                 result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
                 
@@ -202,11 +204,11 @@ class KakaoController < ApplicationController
         
         # 도움말 버튼에 따른 결과
         notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
-        menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
+        menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n\n- 정해진 형식 외에 자유롭게 물어봐도\n알려드립니다.\nex) 내일 참빛관 뭐나와?\n"
         delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집(기능 삭제)\n"
         major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
-        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
+        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
         
         case message_content
         when "나가기"
@@ -229,7 +231,10 @@ class KakaoController < ApplicationController
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
         when "버스, 버스정류장 확인 키워드"
             show_btn = true
-            result = "---\n@ 학교 주변 정거장 버스시간 확인\n\n알려줘 버스시간\n\n----\n@ 버스 검색\n\n알려줘 버스 [버스번호]\n\nex)\n알려줘 버스 385\n\n----\n@ 버스정류장 검색\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\n\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n----\n"
+            result = "\n<학교 주변 정거장 버스시간 확인>\n\n알려줘 버스시간\n\n\n<버스 검색>\n\n알려줘 버스 [버스번호]\nex)\n알려줘 버스 385\n\n\n<버스정류장 검색>\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n"
+        when "날씨 확인 키워드"
+            show_btn = true
+            result = "\n<날씨 확인>\n\n알려줘 날씨\n알려줘 내일날씨\n\n정해진 형식 외에 자유롭게 물어봐도\n알려드립니다.\n\nex) \n내일 날씨 알려줘\n오늘날씨?\n\n\n자료제공 : 기상청"
         when "전체 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
@@ -368,11 +373,11 @@ class KakaoController < ApplicationController
             when "전도사"
                 result = "\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆\n☆ 14 식영 ☆ 두유현주\n☆ 14 소공 ☆ 아뱅지현\n☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n"
             when "만든이" , "개발자"
-                result = "_CopyRight@ 소프트웨어공학과 mu"
+                result = "소프트웨어공학과 mu"
             when "남친" , "여친" , "남자친구" , "여자친구"
                 result = ["태어나지 않았습니다","태어날 예정입니다","존재하지 않습니다"].sample
             when "나래짓"
-                result = "전북대 유일의 중앙 댄스동아리\n나래짓의 정기공연이\n11월 12일 토요일에\n구정문 삼각지에서 있을 예정입니다!"
+                result = "전북대 유일의 중앙 댄스동아리\n나래짓의 정기공연이\n11월 19일 토요일에\n구정문 삼각지에서 있을 예정입니다!"
             else
                 result = _result
             end
@@ -385,6 +390,10 @@ class KakaoController < ApplicationController
     
     def converter(dialog)
         
+        if dialog.include?("키워드")
+            return dialog
+        end
+        
         convert = false
         
         main_keyword = ""
@@ -392,7 +401,7 @@ class KakaoController < ApplicationController
         
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
         food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화]
-        etc_keyword = %w[치킨집 버스시간]
+        etc_keyword = %w[치킨집 버스시간 날씨]
         sub_datas = %w[이번주 내일]
         
         # ect_keyword = %w[학식 기숙사]

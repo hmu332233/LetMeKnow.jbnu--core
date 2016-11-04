@@ -732,13 +732,15 @@ class Message_Manager
             tmn = weathers.first.tmn
             day_string = "오늘"
         elsif day.to_s == "1"
-            tmx = weathers.last.tmx
-            tmn = weathers.last.tmn
+            # tmx = weathers.find(day: 1).first.tmx
+            tomorrows = weathers.find {|s| s.day == "1" }
+            tmx = tomorrows.tmx
+            tmn = tomorrows.tmn
             day_string = "내일"
         end
         
         result = "\n"
-        result += "덕진구 "+ day_string +" 날씨입니다.\n"
+        result += "덕진구 " + day_string + " 날씨입니다.\n"
         result += "최고 : " + tmx + "\n"
         result += "최저 : " + tmn + "\n\n"
         
@@ -747,17 +749,71 @@ class Message_Manager
             if weather.day.to_s == day.to_s
             
                 # result += weather.day + "\n"
-                result += weather.hour + "시 - "
+                result += weather.hour + "시 : "
                 result += weather.temp + "도\n"
                 result += weather.wfKor
                 result += " (강수확률 : " + weather.pop + "% )\n"
-                # result += "\n"
+                result += "\n"
+               
             end
             
         end
         
-        return result
+        return result.chop!
+    end
+    
+    def makeWeekWeatherMessage
         
+        result = "\n"
+        result += "전주 10일 날씨입니다.\n\n"
+        
+        weathers = Weather_Parser.new.getWeekDayWeather
+  
+        result = ""
+        weathers.each do |weather|
+            
+            # 요일 계산 연산
+            if weather.day.split(" ")[1] == "00:00"
+                time = "오전"
+            else 
+                time = "오후"
+            end
+            
+            day_s = weather.day.split(" ")[0]
+            ymd = day_s.split("-")
+            dmy = Date.parse(ymd[2]+"/"+ymd[1]+"/"+ymd[0])
+            dayOfWeek = dmy.strftime('%A')
+          
+            result += day_s + " " + dayKor(dayOfWeek) + "(" + time + ")\n"
+            result += "최저/최고 : "
+            result += weather.tmn + "/" + weather.tmx + "\n"
+            result += weather.wfKor + "\n\n"
+            
+        end
+        
+        return result.chop!
+    end
+    
+    def dayKor(day)
+    
+        case day
+        when 'Monday'
+            result = "월"
+        when 'Tuesday'
+            result = "화"
+        when 'Wednesday'
+            result = "수"
+        when 'Thursday'
+            result = "목"
+        when 'Friday'
+            result = "금"
+        when 'Saturday'
+            result = "토"
+        when 'Sunday'
+            result = "일"
+        end
+        
+        return result
     end
     
 end
