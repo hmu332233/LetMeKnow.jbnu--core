@@ -172,7 +172,7 @@ class KakaoController < ApplicationController
                 
                 if sub_keyword == "내일"
                     result = message_Manager.getTomorrowWeatherMessage
-                elsif sub_keyword == "이번주"
+                elsif sub_keyword == "주간"
                     result = message_Manager.makeWeekWeatherMessage
                 else
                      result = message_Manager.getTodayWeatherMessage
@@ -208,7 +208,7 @@ class KakaoController < ApplicationController
         delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집(기능 삭제)\n"
         major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
-        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
+        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n알려줘 버스시간\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n\n알려줘 날씨\n알려줘 내일날씨\n알려줘 주간날씨\n\n알려줘 과사 [검색어]\n알려줘 치킨몇마리 [사람수]\n"
         
         case message_content
         when "나가기"
@@ -234,7 +234,7 @@ class KakaoController < ApplicationController
             result = "\n<학교 주변 정거장 버스시간 확인>\n\n알려줘 버스시간\n\n\n<버스 검색>\n\n알려줘 버스 [버스번호]\nex)\n알려줘 버스 385\n\n\n<버스정류장 검색>\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n"
         when "날씨 확인 키워드"
             show_btn = true
-            result = "\n<날씨 확인>\n\n알려줘 날씨\n알려줘 내일날씨\n\n정해진 형식 외에 자유롭게 물어봐도\n알려드립니다.\n\nex) \n내일 날씨 알려줘\n오늘날씨?\n\n\n자료제공 : 기상청"
+            result = "\n<날씨 확인>\n\n알려줘 날씨\n알려줘 내일날씨\n알려줘 주간날씨\n\n정해진 형식 외에 자유롭게 물어봐도\n알려드립니다.\n\nex) \n내일 날씨 알려줘\n오늘날씨?\n\n\n자료제공 : 기상청"
         when "전체 키워드"
             show_btn = true
             result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
@@ -402,7 +402,7 @@ class KakaoController < ApplicationController
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
         food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화]
         etc_keyword = %w[치킨집 버스시간 날씨]
-        sub_datas = %w[이번주 내일]
+        sub_datas = %w[이번주 내일 주간]
         
         # ect_keyword = %w[학식 기숙사]
         

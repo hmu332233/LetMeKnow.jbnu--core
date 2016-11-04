@@ -739,25 +739,46 @@ class Message_Manager
             day_string = "내일"
         end
         
-        result = "\n"
-        result += "덕진구 " + day_string + " 날씨입니다.\n"
-        result += "최고 : " + tmx + "\n"
-        result += "최저 : " + tmn + "\n\n"
+        result_head = "\n"
+        result_head += "덕진구 " + day_string + " 날씨입니다.\n"
+        result_head += "최고 : " + tmx + "\n"
+        result_head += "최저 : " + tmn + "\n\n"
+        
+        result_body = ""
         
         weathers.each do |weather|
             
             if weather.day.to_s == day.to_s
+                
+                wfKor = weather.wfKor
+
+                # 이모티콘
+                case wfKor
+                when "흐리고 비" , "흐리고비"
+                    wfKor = " (비)"
+                when "구름많음" , "구름 많음"
+                    wfKor = " (구름)"
+                when "구름조금" , "구름 조금"
+                    wfKor = " (해)"
+                end
+                
             
                 # result += weather.day + "\n"
-                result += weather.hour + "시 : "
-                result += weather.temp + "도\n"
-                result += weather.wfKor
-                result += " (강수확률 : " + weather.pop + "% )\n"
-                result += "\n"
+                result_body += weather.hour + "시 : "
+                result_body += weather.temp + "도\n"
+                result_body += wfKor
+                result_body += " (강수확률 : " + weather.pop + "% )\n"
+                result_body += "\n"
                
             end
             
         end
+        
+        if result_body == ""
+            result_body = "날짜 갱신 중입니다.\n내일 날씨 검색을 이용해주세요\n\n"
+        end
+        
+        result = result_head + result_body
         
         return result.chop!
     end
@@ -765,7 +786,7 @@ class Message_Manager
     def makeWeekWeatherMessage
         
         result = "\n"
-        result += "전주 10일 날씨입니다.\n\n"
+        result += "전주 주간 날씨입니다.\n\n"
         
         weathers = Weather_Parser.new.getWeekDayWeather
   
@@ -779,15 +800,35 @@ class Message_Manager
                 time = "오후"
             end
             
-            day_s = weather.day.split(" ")[0]
-            ymd = day_s.split("-")
-            dmy = Date.parse(ymd[2]+"/"+ymd[1]+"/"+ymd[0])
-            dayOfWeek = dmy.strftime('%A')
-          
-            result += day_s + " " + dayKor(dayOfWeek) + "(" + time + ")\n"
-            result += "최저/최고 : "
-            result += weather.tmn + "/" + weather.tmx + "\n"
-            result += weather.wfKor + "\n\n"
+            wfKor = weather.wfKor
+
+            # 이모티콘
+            case wfKor
+            when "흐리고 비" , "흐리고비"
+                wfKor = " (비)"
+            when "구름많음" , "구름 많음"
+                wfKor = " (구름)"
+            when "구름조금" , "구름 조금"
+                wfKor = " (해)"
+            end
+            
+            # if time == "오전"
+                day_s = weather.day.split(" ")[0]
+                ymd = day_s.split("-")
+                dmy = Date.parse(ymd[2]+"/"+ymd[1]+"/"+ymd[0])
+                dayOfWeek = dmy.strftime('%A')
+              
+                result += day_s + " " + dayKor(dayOfWeek) + "(" + time + ")\n"
+                result += "최저/최고 : "
+                result += weather.tmn + "/" + weather.tmx + "\n"
+                result += wfKor + "\n\n"
+            # elsif time == "오후"
+            #     result.chop!.chop!
+            #     result += " → " + wfKor
+            #     result += "\n\n"
+            # end
+            
+            # 지금군산까지 가져오고 있음
             
         end
         
