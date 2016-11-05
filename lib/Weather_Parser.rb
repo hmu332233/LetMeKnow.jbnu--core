@@ -35,7 +35,7 @@ class Weather_Parser
         
         weathers = []
         
-        for i in 0..days.length-1
+        for i in 0..12
             weather = Weather.new("",days[i].inner_text.to_s,"",tmx[i].inner_text.to_s,tmn[i].inner_text.to_s,wfKors[i+1].inner_text.to_s,"")
             weathers << weather
         end

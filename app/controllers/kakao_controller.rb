@@ -123,7 +123,7 @@ class KakaoController < ApplicationController
             #     result = message_Manager.getChinaMessage
             #     hit.chik_hits += 1
                 
-            when "치킨몇마리"
+            when "치킨몇마리" , "치킨"
                 result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
 
             when "과사"
@@ -182,7 +182,7 @@ class KakaoController < ApplicationController
                 
                 show_btn = true
                 
-                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 근처 치킨집 번호 확인\n6. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
+                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 버스 도착 시간 확인\n6. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
  
                 result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
                 
@@ -335,9 +335,9 @@ class KakaoController < ApplicationController
             when "고마워"
                 result = "저도 감사합니다!"
             
-            when "데이터1"
+            when "데이터ㅓ"
                 result = Message_Manager.new.makeMessageData(true)
-            when "데이터2"
+            when "데이터ㅏ"
                 result = Message_Manager.new.makeMessageData(false)
             when "데이터삭제"
                 result = "모든데이터가 삭제되었습니다"

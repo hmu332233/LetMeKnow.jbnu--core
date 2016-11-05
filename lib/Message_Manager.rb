@@ -695,7 +695,7 @@ class Message_Manager
 
     def makeMessageBusStop(id)
         
-        buses = Bus_Parser.new.getSelectedBusStop(id)
+        buses = Bus_Parser.new.getSelectedBusStop(id).reverse
         
         result = ""
         
@@ -753,15 +753,7 @@ class Message_Manager
                 wfKor = weather.wfKor
 
                 # 이모티콘
-                case wfKor
-                when "흐리고 비" , "흐리고비"
-                    wfKor = " (비)"
-                when "구름많음" , "구름 많음"
-                    wfKor = " (구름)"
-                when "구름조금" , "구름 조금"
-                    wfKor = " (해)"
-                end
-                
+          
             
                 # result += weather.day + "\n"
                 result_body += weather.hour + "시 : "
@@ -801,35 +793,23 @@ class Message_Manager
             end
             
             wfKor = weather.wfKor
-
-            # 이모티콘
-            case wfKor
-            when "흐리고 비" , "흐리고비"
-                wfKor = " (비)"
-            when "구름많음" , "구름 많음"
-                wfKor = " (구름)"
-            when "구름조금" , "구름 조금"
-                wfKor = " (해)"
-            end
             
-            # if time == "오전"
+            if time == "오전"
                 day_s = weather.day.split(" ")[0]
                 ymd = day_s.split("-")
                 dmy = Date.parse(ymd[2]+"/"+ymd[1]+"/"+ymd[0])
                 dayOfWeek = dmy.strftime('%A')
               
-                result += day_s + " " + dayKor(dayOfWeek) + "(" + time + ")\n"
+                result += day_s + " " + dayKor(dayOfWeek) + "\n"
                 result += "최저/최고 : "
                 result += weather.tmn + "/" + weather.tmx + "\n"
                 result += wfKor + "\n\n"
-            # elsif time == "오후"
-            #     result.chop!.chop!
-            #     result += " → " + wfKor
-            #     result += "\n\n"
-            # end
-            
-            # 지금군산까지 가져오고 있음
-            
+            elsif time == "오후"
+                result.chop!.chop!
+                result += " → " + wfKor
+                result += "\n\n"
+            end
+     
         end
         
         return result.chop!
@@ -839,19 +819,19 @@ class Message_Manager
     
         case day
         when 'Monday'
-            result = "월"
+            result = "( 월 )"
         when 'Tuesday'
-            result = "화"
+            result = "( 화 )"
         when 'Wednesday'
-            result = "수"
+            result = "( 수 )"
         when 'Thursday'
-            result = "목"
+            result = "( 목 )"
         when 'Friday'
-            result = "금"
+            result = "( 금 )"
         when 'Saturday'
-            result = "토"
+            result = "( 토 )"
         when 'Sunday'
-            result = "일"
+            result = "( 일 )"
         end
         
         return result
