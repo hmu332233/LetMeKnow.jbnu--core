@@ -17,10 +17,12 @@ class Weather
       @wfKor = " (비)"
     when "구름많음" , "구름 많음"
       @wfKor = " (구름)"
-    when "구름조금" , "구름 조금"
+    when "구름조금" , "구름 조금", "맑음"
       @wfKor = " (해)"
     when "흐림"
       @wfKor = " (구름)(구름)"
+    when "눈"
+      @wfKor = " (눈)"
     end
   end
 

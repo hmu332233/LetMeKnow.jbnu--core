@@ -740,10 +740,15 @@ class Message_Manager
         end
         
         result_head = "\n"
-        result_head += "덕진구 " + day_string + " 날씨입니다.\n"
-        result_head += "최고 : " + tmx + "\n"
-        result_head += "최저 : " + tmn + "\n\n"
+        result_head += "덕진구 " + day_string + " 날씨입니다.\n\n\n"
         
+        if day_string == "내일"
+            result_head.chop!
+            result_head += "최고 : " + tmx + "\n"
+            result_head += "최저 : " + tmn + "\n\n"
+        end
+        
+
         result_body = ""
         
         weathers.each do |weather|
@@ -753,8 +758,7 @@ class Message_Manager
                 wfKor = weather.wfKor
 
                 # 이모티콘
-          
-            
+
                 # result += weather.day + "\n"
                 result_body += weather.hour + "시 : "
                 result_body += weather.temp + "도\n"
