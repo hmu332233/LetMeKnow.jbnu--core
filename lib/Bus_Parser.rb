@@ -23,6 +23,8 @@ class Bus_Parser
         val = stop_name.encode('euc-kr')
         url = "http://m.jeonjuits.go.kr/traffic/bus_location2.jsp?search_nm="+val
         uri = URI(URI.encode(url))
+        
+        puts uri
    
         return uri.to_s
     end
