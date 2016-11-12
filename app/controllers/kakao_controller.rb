@@ -254,6 +254,7 @@ class KakaoController < ApplicationController
         # result = message_Manager.makeMessageBusStop(1)
         # render json: JsonMaker.new.getBusMenuJson(result)
         # return;
+        # result = message_Manager.makeMenuText_yeji_mobile(6)
         #---------------
         
          
@@ -300,8 +301,10 @@ class KakaoController < ApplicationController
             result = 3
         when 'Friday'
             result = 4
+        when 'Saturday'
+            result = 5
         else
-           result = 5
+           result = 6
         end
         
         return result

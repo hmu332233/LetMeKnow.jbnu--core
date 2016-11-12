@@ -34,7 +34,8 @@ class Message_Manager
         if sw == 0
             return makeMenuTextAll(0)
         else
-            return makeMenuTextDay(0,day)
+            return makeMenuText_jinsu_mobile(day+1)
+            # return makeMenuTextDay(0,day)
         end
        
     end
@@ -45,7 +46,8 @@ class Message_Manager
         if sw == 0
             return makeMenuTextAll(1)
         else
-            return makeMenuTextDay(1,day)
+            return makeMenuText_medi_mobile(day+1)
+            # return makeMenuTextDay(1,day)
         end
     end
     
@@ -55,7 +57,8 @@ class Message_Manager
         if sw == 0
             return makeMenuText_studentHall_all
         else
-            return makeMenuText_studentHall_day(day)
+            return makeMenuText_studentHall_mobile(day+1)
+            # return makeMenuText_studentHall_day(day)
         end
     end
     
@@ -64,7 +67,8 @@ class Message_Manager
         if sw == 0
             return makeMenuText_hu_all
         else
-            return makeMenuText_hu_day(day)
+            return makeMenuText_hu_mobile(day+1)
+            # return makeMenuText_hu_day(day)
         end
     end
     
@@ -91,7 +95,8 @@ class Message_Manager
         if sw == 0
             return getYejiMessage_all
         else
-            return getYejiMessage_day(day)
+            return makeMenuText_yeji_mobile(day+1)
+            # return getYejiMessage_day(day)
         end
         
     end
@@ -838,7 +843,159 @@ class Message_Manager
             result = "( 일 )"
         end
         
+        case day
+        when 1
+            result = "월"
+        when 2
+            result = "화"
+        when 3
+            result = "수"
+        when 4
+            result = "목"
+        when 5
+            result = "금"
+        when 6
+            result = "토"
+        end
+        
         return result
     end
     
+    
+    #학식 모바일
+    def makeMenuText_jinsu_mobile(day)
+        
+        if day > 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_jinsu_mobile(day)
+        
+        # head_text = menus[0].shop_name + "\n\n\n"
+        contents = ""
+    
+        menus.each do |menu|
+            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+        end
+        
+        return contents.to_s.chop!.chop!.chop!
+        
+    end
+    
+    
+    def makeMenuText_medi_mobile(day)
+        
+         if day > 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_medi_mobile(day)
+        
+        # head_text = menus[0].shop_name + "\n\n\n"
+        contents = ""
+    
+        menus.each do |menu|
+            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+        end
+        
+        return contents.to_s.chop!.chop!.chop!
+        
+    end
+    
+    def makeMenuText_studentHall_mobile(day)
+        
+        if day > 6
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_studentHall_mobile(day)
+        
+        # head_text = menus[0].shop_name + "\n\n\n"
+        contents = ""
+   
+        menus.each do |menu|
+            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+        end
+        
+        return contents.to_s.chop!.chop!.chop!
+    end
+    
+    def makeMenuText_hu_mobile(day)
+        
+        if day > 5
+            return "주말에는 운영하지 않습니다"
+        end
+        
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_hu_mobile(day)
+        
+        
+        contents = ""
+        
+        i = 0
+
+        contents += dayKor(menus[i].week) + "(" + menus[i].time + ")"+"\n\n"
+        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+        contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+        contents += menus[i+4].category + " : " + menus[i+4].contents[0] + "\n"
+        contents += "\n"
+        contents += menus[i+2].category + ":" + "\n\n"
+        menus[i+2].contents.each do |con|
+            contents += con + "\n"
+        end
+        
+        contents += "\n\n"
+        
+        contents += dayKor(menus[i+3].week) + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
+        menus[i+3].contents.each do |con|
+            contents += con + "\n"
+        end
+        
+        return contents.to_s.chop!
+        
+    end
+    
+    def makeMenuText_yeji_mobile(day)
+        
+        if day > 5
+            return "주말에는 운영하지 않습니다"
+        end
+       
+        parser = JBNU_Food_Parser.new
+        menus = parser.requestMenu_yeji_mobile(day)
+       
+        contents = ""
+        
+        menus.each do |menu|
+            
+            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+            menu.contents.each do |m|
+                text += m + "\n"
+            end
+            
+            contents += text + "\n\n"
+            
+        end
+        
+        return contents.chop!
+        
+    end
 end

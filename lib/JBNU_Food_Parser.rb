@@ -2,6 +2,52 @@ require 'Menu'
 require 'Menu_domitory'
 
 class JBNU_Food_Parser
+    
+    def requestHTML_Mobile(pageID,day)
+        
+        uri = URI(URI.encode("http://m.jbnu.ac.kr/include/subPage.php?pageID=" + pageID + "&yoil=" + day))
+       
+        req = Net::HTTP::Get.new(uri)
+    
+        res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+        doc = Nokogiri::HTML(res.body)
+    
+        return doc
+    end
+    
+    # 모바일 학식
+    def requestMenu_Mobile_Food(pageID_num,day)
+        
+        case pageID_num
+        when 0
+            pageID = "ID13367136031"; # 진수당
+        when 1
+            pageID = "ID13367136161"; # 의대
+        when 2
+            pageID = "ID13367136271"; # 학생회관
+        when 3
+            pageID = "ID13407623471"; # 후생관
+        when 4
+            pageID = "ID13367136711"; # 예지원
+        end
+        
+        doc = requestHTML_Mobile(pageID.to_s,day.to_s)
+        
+        menu = []
+        doc.css('.stxt').each do |rt|
+            rt.inner_text.strip.squish.split(" ").each do |menu_data|
+                menu << menu_data
+            end
+        end
+        
+        menu.each_with_index do |m,i|
+        
+            puts i.to_s + " : " + m
+        end
+        
+        return menu
+        
+    end
 
     def requestHTML
         
@@ -293,6 +339,92 @@ class JBNU_Food_Parser
             
         end
         
+        
+    end
+    
+    # 모바일
+    def requestMenu_hu_mobile(day)
+        
+        menu_datas = requestMenu_Mobile_Food(3,day)
+        
+        
+        place = "후생관"
+        
+        menus = [
+            Menu.new(place,day,"중식","특식",[menu_datas[0]]),
+            Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
+            Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
+            Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]]),
+            Menu.new(place,day,"중식","오므라이스",[menu_datas[63]])
+            ]
+        
+       return menus
+        
+    end
+    
+    def requestMenu_jinsu_mobile(day)
+        
+        menu_datas = requestMenu_Mobile_Food(0,day)
+        
+        
+        place = "진수당"
+        
+         menus = [
+            Menu.new(place,day,"중식","백반",[menu_datas[0],menu_datas[1],menu_datas[2],menu_datas[3]]),
+            Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6],menu_datas[7]])
+            ]
+        
+       return menus
+        
+    end
+    
+    def requestMenu_medi_mobile(day)
+        
+        menu_datas = requestMenu_Mobile_Food(1,day)
+        
+        
+        place = "의대"
+        
+         menus = [
+            Menu.new(place,day,"중식","백반",[menu_datas[0],menu_datas[1],menu_datas[2],menu_datas[3]]),
+            Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6],menu_datas[7]])
+            ]
+        
+       return menus
+        
+    end
+    
+    
+       
+    def requestMenu_studentHall_mobile(day)
+        
+        menu_datas = requestMenu_Mobile_Food(2,day)
+        
+        
+        place = "학생회관"
+        
+         menus = [
+            Menu.new(place,day,"중식","백반",[menu_datas[2],menu_datas[3],menu_datas[4],menu_datas[5]]),
+            Menu.new(place,day,"석식","백반",[menu_datas[6],menu_datas[7],menu_datas[8],menu_datas[9]])
+            ]
+        
+       return menus
+        
+    end
+    
+      def requestMenu_yeji_mobile(day)
+        
+        menu_datas = requestMenu_Mobile_Food(4,day)
+        
+        
+        place = "예지원"
+        
+        menus = [
+            Menu.new(place,day,"중식","일품",[menu_datas[0],menu_datas[1]]),
+            Menu.new(place,day,"중식","특식",[menu_datas[2]])
+            ]
+        
+       return menus
         
     end
 
