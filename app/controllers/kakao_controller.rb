@@ -62,7 +62,6 @@ class KakaoController < ApplicationController
                 day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
             end
             
-            
             case main_keyword
             when "학사공지"
                 result = message_Manager.getMessage_Notice(0)
