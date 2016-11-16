@@ -60,6 +60,8 @@ class KakaoController < ApplicationController
                 menu_all = 0
             elsif sub_keyword == "내일"
                 day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
+            elsif sub_keyword == "모레"
+                day = (Time.now + (9*60*60) + (2*(24*60*60))).strftime("%A").to_s
             end
             
             case main_keyword
@@ -173,6 +175,8 @@ class KakaoController < ApplicationController
                     result = message_Manager.getTomorrowWeatherMessage
                 elsif sub_keyword == "주간"
                     result = message_Manager.makeWeekWeatherMessage
+                elsif sub_keyword == "모레"
+                    result = "모레 날씨는 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
                 else
                      result = message_Manager.getTodayWeatherMessage
                 end
@@ -409,7 +413,7 @@ class KakaoController < ApplicationController
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
         food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화]
         etc_keyword = %w[치킨집 버스시간 날씨]
-        sub_datas = %w[이번주 내일 주간]
+        sub_datas = %w[이번주 내일 주간 모레]
         
         # ect_keyword = %w[학식 기숙사]
         
