@@ -176,7 +176,7 @@ class KakaoController < ApplicationController
                 elsif sub_keyword == "주간"
                     result = message_Manager.makeWeekWeatherMessage
                 elsif sub_keyword == "모레"
-                    result = "모레 날씨는 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
+                    result = "모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
                 else
                      result = message_Manager.getTodayWeatherMessage
                 end
