@@ -343,9 +343,16 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
-            when "고마워"
-                result = "저도 감사합니다!"
-            
+            when "투민"
+                start = Date.parse("23/11/2016")
+                today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+                
+                result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+                result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
+                result += "1년 : " + (today.mjd - Date.parse("23/11/2017").mjd + 1).to_s
+                
+            when "조민지"
+                 result = ["보고싶다","(하트뿅)","보고싶어","내여자친구(하하)","잠탱이(졸려)"].sample
             when "데이터ㅓ"
                 result = Message_Manager.new.makeMessageData(true)
             when "데이터ㅏ"
@@ -387,8 +394,6 @@ class KakaoController < ApplicationController
                 result = "소프트웨어공학과 mu"
             when "남친" , "여친" , "남자친구" , "여자친구"
                 result = ["태어나지 않았습니다","태어날 예정입니다","존재하지 않습니다"].sample
-            when "나래짓"
-                result = "전북대 유일의 중앙 댄스동아리\n나래짓의 정기공연이\n11월 19일 토요일에\n구정문 삼각지에서 있을 예정입니다!"
             else
                 result = _result
             end
