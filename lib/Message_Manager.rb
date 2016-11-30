@@ -641,8 +641,13 @@ class Message_Manager
             
             if i == 0
                 tmp = lunch_d.split(")")
-                content += tmp[0].strip + ")" + "\n"
-                content += tmp[1] + "\n"
+                
+                unless tmp.size == 1
+                    content += tmp[0].strip + ")" + "\n"
+                    content += tmp[1] + "\n"
+                else
+                    content += lunch_d + "\n"
+                end
             else
                 content += lunch_d + "\n"
             end
