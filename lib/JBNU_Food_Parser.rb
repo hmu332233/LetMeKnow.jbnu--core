@@ -5,7 +5,7 @@ class JBNU_Food_Parser
     
     def requestHTML_Mobile(pageID,day)
         
-        uri = URI(URI.encode("http://m.jbnu.ac.kr/include/subPage.php?pageID=" + pageID + "&yoil=" + day))
+        uri = URI(URI.encode("http://appdev.jbnu.ac.kr/include/subPage.php?pageID=" + pageID + "&yoil=" + day))
        
         req = Net::HTTP::Get.new(uri)
     
@@ -35,7 +35,8 @@ class JBNU_Food_Parser
         
         menu = []
         doc.css('.stxt').each do |rt|
-            rt.inner_text.strip.squish.split(" ").each do |menu_data|
+            # puts rt.inner_html.split(" ")
+            rt.inner_html.split("<br>").each do |menu_data|
                 menu << menu_data
             end
         end
@@ -355,7 +356,7 @@ class JBNU_Food_Parser
             Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
             Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
             Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]]),
-            Menu.new(place,day,"중식","오므라이스",[menu_datas[63]])
+            Menu.new(place,day,"중식","오므라이스",[menu_datas[13]])
             ]
         
        return menus
