@@ -34,8 +34,8 @@ class Message_Manager
         if sw == 0
             return makeMenuTextAll(0)
         else
-            return makeMenuText_jinsu_mobile(day+1)
-            # return makeMenuTextDay(0,day)
+            # return makeMenuText_jinsu_mobile(day+1)
+            return makeMenuTextDay(0,day)
         end
        
     end
@@ -46,8 +46,8 @@ class Message_Manager
         if sw == 0
             return makeMenuTextAll(1)
         else
-            return makeMenuText_medi_mobile(day+1)
-            # return makeMenuTextDay(1,day)
+            # return makeMenuText_medi_mobile(day+1)
+            return makeMenuTextDay(1,day)
         end
     end
     
@@ -57,8 +57,8 @@ class Message_Manager
         if sw == 0
             return makeMenuText_studentHall_all
         else
-            return makeMenuText_studentHall_mobile(day+1)
-            # return makeMenuText_studentHall_day(day)
+            # return makeMenuText_studentHall_mobile(day+1)
+            return makeMenuText_studentHall_day(day)
         end
     end
     
@@ -67,8 +67,8 @@ class Message_Manager
         if sw == 0
             return makeMenuText_hu_all
         else
-            return makeMenuText_hu_mobile(day+1)
-            # return makeMenuText_hu_day(day)
+            # return makeMenuText_hu_mobile(day+1)
+            return makeMenuText_hu_day(day)
         end
     end
     
@@ -95,8 +95,8 @@ class Message_Manager
         if sw == 0
             return getYejiMessage_all
         else
-            return makeMenuText_yeji_mobile(day+1)
-            # return getYejiMessage_day(day)
+            # return makeMenuText_yeji_mobile(day+1)
+            return getYejiMessage_day(day)
         end
         
     end
