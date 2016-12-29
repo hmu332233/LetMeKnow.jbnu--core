@@ -348,6 +348,11 @@ class JBNU_Food_Parser
         
         menu_datas = requestMenu_Mobile_Food(3,day)
         
+        for i in 0..13
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
+        end
         
         place = "후생관"
         
@@ -367,6 +372,11 @@ class JBNU_Food_Parser
         
         menu_datas = requestMenu_Mobile_Food(0,day)
         
+        for i in 0..7
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
+        end
         
         place = "진수당"
         
@@ -382,6 +392,12 @@ class JBNU_Food_Parser
     def requestMenu_medi_mobile(day)
         
         menu_datas = requestMenu_Mobile_Food(1,day)
+        
+        for i in 0..7
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
+        end
         
         
         place = "의대"
@@ -401,6 +417,12 @@ class JBNU_Food_Parser
         
         menu_datas = requestMenu_Mobile_Food(2,day)
         
+        for i in 0..9
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
+        end
+        
         
         place = "학생회관"
         
@@ -417,6 +439,11 @@ class JBNU_Food_Parser
         
         menu_datas = requestMenu_Mobile_Food(4,day)
         
+        for i in 0..2
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
+        end
         
         place = "예지원"
         
