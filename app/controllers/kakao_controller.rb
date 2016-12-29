@@ -216,7 +216,7 @@ class KakaoController < ApplicationController
         
         
         
-        case message_content
+        case converted_message
         when "나가기"
             result = "감사합니다"
         when "공지사항 확인 키워드"
@@ -343,16 +343,16 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
-            when "투민"
-                start = Date.parse("23/11/2016")
-                today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+            # when "투민"
+            #     start = Date.parse("23/11/2016")
+            #     today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
                 
-                result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-                result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
-                result += "1년 : " + (today.mjd - Date.parse("23/11/2017").mjd + 1).to_s
+            #     result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+            #     result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
+            #     result += "1년 : " + (today.mjd - Date.parse("23/11/2017").mjd + 1).to_s
                 
-            when "조민지"
-                 result = ["보고싶다","(하트뿅)","보고싶어","내여자친구(하하)","잠탱이(졸려)"].sample
+            # when "조민지"
+            #      result = ["보고싶다","(하트뿅)","보고싶어","내여자친구(하하)","잠탱이(졸려)"].sample
             when "데이터ㅓ"
                 result = Message_Manager.new.makeMessageData(true)
             when "데이터ㅏ"
@@ -406,6 +406,14 @@ class KakaoController < ApplicationController
     
     def converter(dialog)
         
+        ect_keyword = %w[학식 기숙사 긱사]
+        
+        ect_keyword.each do |ect_data|
+            if dialog.include?(ect_data)
+                dialog = "학식 메뉴 확인 키워드"
+            end
+        end
+        
         if dialog.include?("키워드")
             return dialog
         end
@@ -420,7 +428,7 @@ class KakaoController < ApplicationController
         etc_keyword = %w[치킨집 버스시간 날씨]
         sub_datas = %w[이번주 내일 주간 모레]
         
-        # ect_keyword = %w[학식 기숙사]
+        
         
         main_datas = notice_keyword + food_keyword + etc_keyword
         
@@ -440,7 +448,7 @@ class KakaoController < ApplicationController
             end
         end
         
-        # print "변환완료\n"
+        # # print "변환완료\n"
         # unless convert
         #     ect_keyword.each do |keyword|
                 
@@ -451,7 +459,7 @@ class KakaoController < ApplicationController
         #     end
         # end
         
-        
+        print dialog
         
         if convert
             return "알려줘 " + main_keyword + " " + sub_keyword
