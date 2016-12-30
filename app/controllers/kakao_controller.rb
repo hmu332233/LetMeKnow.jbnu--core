@@ -197,6 +197,14 @@ class KakaoController < ApplicationController
         
         hit.save
         
+        #선택해주세요 결과
+        case converted_message
+        when "학식 선택"
+            result = "\n@ 어느 학식 메뉴를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n참빛관\n새빛관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\n ex)내일 진수당"
+        when "기숙사 선택"
+            result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
+        end
+        
         
         # 버스 버튼에 따른 결과
         results = busMessage(message_content)
@@ -216,7 +224,7 @@ class KakaoController < ApplicationController
         
         
         
-        case converted_message
+        case message_content
         when "나가기"
             result = "감사합니다"
         when "공지사항 확인 키워드"
@@ -406,16 +414,23 @@ class KakaoController < ApplicationController
     
     def converter(dialog)
         
-        ect_keyword = %w[학식 기숙사 긱사]
+        #도움말 
+        if dialog.include?("키워드")
+            return dialog
+        end
+        
+        #학식
+        if dialog.include?("학식")
+            return "학식 선택"
+        end
+        
+        #기숙사
+        ect_keyword = %w[기숙사 긱사]
         
         ect_keyword.each do |ect_data|
             if dialog.include?(ect_data)
-                dialog = "학식 메뉴 확인 키워드"
+                return "기숙사 선택"
             end
-        end
-        
-        if dialog.include?("키워드")
-            return dialog
         end
         
         convert = false
@@ -459,7 +474,7 @@ class KakaoController < ApplicationController
         #     end
         # end
         
-        print dialog
+        # print dialog
         
         if convert
             return "알려줘 " + main_keyword + " " + sub_keyword
