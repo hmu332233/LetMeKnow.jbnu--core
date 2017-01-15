@@ -13,9 +13,9 @@
 >카카오톡 ID/플러스친구 검색에서 **알려줘전북대**를 검색하여 추가가 가능합니다
 
 >##스크린샷
-
-
+>>준비중입니다 <br/>
 >##오픈소스 라이센스
+
 >>###nokogiri<br/>
 >>>https://github.com/sparklemotion/nokogiri <br/>
 >>>Copyright (c) 2008 - 2016,<br/>
