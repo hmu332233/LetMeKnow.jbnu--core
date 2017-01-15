@@ -1,10 +1,7 @@
 require 'Message_Manager'
-require 'JBNU_Food_Parser'
 require 'Datas'
-require 'Parser'
 require 'date'
 require 'JsonMaker'
-require 'Bus_Parser'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -56,7 +53,7 @@ class KakaoController < ApplicationController
         if content[0] == "알려줘"
             
             menu_all = 1
-            if sub_keyword == "이번주"
+            if sub_keyword == "이번주" || sub_keyword == "주간"
                 menu_all = 0
             elsif sub_keyword == "내일"
                 day = (Time.now + (9*60*60) + (24*60*60)).strftime("%A").to_s
@@ -173,7 +170,7 @@ class KakaoController < ApplicationController
                 
                 if sub_keyword == "내일"
                     result = message_Manager.getTomorrowWeatherMessage
-                elsif sub_keyword == "주간"
+                elsif sub_keyword == "주간" || sub_keyword == "이번주"
                     result = message_Manager.makeWeekWeatherMessage
                 elsif sub_keyword == "모레"
                     result = "모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
@@ -351,16 +348,6 @@ class KakaoController < ApplicationController
         contents.each do |con|
             
             case con
-            # when "투민"
-            #     start = Date.parse("23/11/2016")
-            #     today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-                
-            #     result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-            #     result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
-            #     result += "1년 : " + (today.mjd - Date.parse("23/11/2017").mjd + 1).to_s
-                
-            # when "조민지"
-            #      result = ["보고싶다","(하트뿅)","보고싶어","내여자친구(하하)","잠탱이(졸려)"].sample
             when "데이터ㅓ"
                 result = Message_Manager.new.makeMessageData(true)
             when "데이터ㅏ"
@@ -463,19 +450,6 @@ class KakaoController < ApplicationController
             end
         end
         
-        # # print "변환완료\n"
-        # unless convert
-        #     ect_keyword.each do |keyword|
-                
-        #         if dialog.include?(keyword)
-        #             return "학식"
-        #         end
-                
-        #     end
-        # end
-        
-        # print dialog
-        
         if convert
             return "알려줘 " + main_keyword + " " + sub_keyword
         else
@@ -483,51 +457,6 @@ class KakaoController < ApplicationController
         end
         
     end
-    
-    # def helpMessage(message_content)
-        
-    #     notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
-    #     menu_message = "학식 메뉴 확인\n\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n- 뒤에 '이번주'를 붙이시면\n이번주 전체의 식단이 보입니다.\nex) 알려줘 진수당 이번주\n\n- 뒤에 '내일'을 붙이시면\n다음날의 식단을 확인 할 수 있습니다.\nex) 알려줘 진수당 내일\n"
-    #     delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집\n"
-    #     major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
-        
-        
-    #     all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n\n알려줘 치킨집\n알려줘 중국집\n\n\n알려줘 과사 [검색어]\n\n알려줘 치킨몇마리 [사람수]\n"
-        
-    #     show_btn = false
-        
-    #     case message_content
-    #     when "나가기"
-    #         result = "감사합니다"
-    #     when "공지사항 확인 키워드"
-    #         show_btn = true
-    #         result = "알려줘전북대의 사용방법 입니다\n\n\n" + notice_message
-    #         photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('notice.jpg')
-    #     when "학식 메뉴 확인 키워드"
-    #         show_btn = true
-    #         result = "알려줘전북대의 사용방법 입니다\n\n\n" + menu_message
-    #         photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('domi.jpg')
-    #     when "배달음식점 번호 확인 키워드"
-    #         show_btn = true
-    #         result = "알려줘전북대의 사용방법 입니다\n\n\n" + delivery_message
-    #         photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('chik.jpg')
-    #     when "학과사무실 정보 확인 키워드"
-    #         show_btn = true
-    #         result = "\n" + major_message
-    #         photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
-    #     when "전체 키워드"
-    #         show_btn = true
-    #         result = "알려줘전북대의 사용방법 입니다\n\n\n" + "각각의 키워드는 세부기능이 존재하며 하단의 버튼으로 사용법을 확인할 수 있습니다.\n\n\n" + all_message
-    #     when "기타 키워드"
-    #         show_btn = true
-    #         result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
-    #     else
-    #         result = message_content
-    #     end
-        
-    #     return result, show_btn
-        
-    # end
     
     def busMessage(message)
         
