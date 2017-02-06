@@ -15,9 +15,28 @@ http://plus.kakao.com/home/@알려줘전북대 <br/>
 카카오톡 ID/플러스친구 검색에서 **알려줘전북대**를 검색하여 추가가 가능합니다
 
 ##스크린샷
-준비중입니다 <br/>
-##오픈소스 라이센스
+<br/>
+###학식<br/>
+<img id="se_object_1486398907466" src="http://blogfiles.naver.net/MjAxNzAyMDdfMTgg/MDAxNDg2Mzk4NzE5NjI2.E5KkrAhd4weoEl1JTpEWJNr5aU6TErLcSnI5Seqj4Iwg.CpTWDis4XKnzVqS48axpEmFywLlGR2Rk8VDCd5D4txUg.JPEG.hmu332233/KakaoTalk_20170206_171100977.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:426px; rwidth:320px; rheight:426px;" width="320" height="426" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="426px">
+<img id="se_object_1486398836209" src="http://blogfiles.naver.net/MjAxNzAyMDdfMTc0/MDAxNDg2Mzk4NzE5ODUw.M5pyANbFHVI7QGpFj27vMIdETQ-cgGYwuRomTG8smIwg.FNxHTxjO_eDYRb-Uq2y4xeS0jtz6IPkBassNR0BqR8cg.JPEG.hmu332233/KakaoTalk_20170206_171100551.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style="width: 320px; height: 320px; border-color: rgb(0, 0, 0); rwidth:320px; rheight:320px;" width="320" height="320" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="320px">
 
+###학교게시물<br/>
+
+<img id="se_object_1486398843649" src="http://blogfiles.naver.net/MjAxNzAyMDdfMjEx/MDAxNDg2Mzk4NzE5MTE1.Ut-6oxcz7bN68T6Iv-AjpYZcRm9xJrDhg5Rdm_PZlHgg.wUTfetSVpmdTEfgisMkFDoaDZwEJzr6rC3BNZN9ChxAg.JPEG.hmu332233/KakaoTalk_20170206_171102148.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:320px; rwidth:320px; rheight:320px;" width="320" height="320" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="320px">
+<img id="se_object_1486398888704" src="http://blogfiles.naver.net/MjAxNzAyMDdfMjIg/MDAxNDg2Mzk4NzE5Mjg3.mgB5CpHNB6s6I7kuwHKVZcK-jmhCdb-vBbgR6Ziv1ZIg.0Ws0OtV0KhWb6Y50invNxSBZIlFmeb7CrsDRy2DaniIg.JPEG.hmu332233/KakaoTalk_20170206_171101730.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:320px; rwidth:320px; rheight:320px;" width="320" height="320" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="320px">
+
+###기타 기능<br/>
+
+<img id="se_object_1486398905999" src="http://blogfiles.naver.net/MjAxNzAyMDdfMTg2/MDAxNDg2Mzk4NzE4OTIw.WdWNoGl2-YHHKUVaCQoSmaL2fBZfypNr3Y-e1PQSUPsg.A2AyVCS_oUb3Y7ZITsHGEeXkE5MGUoc2L6_r5hY1Bggg.JPEG.hmu332233/KakaoTalk_20170206_171102479.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:426px; rwidth:320px; rheight:426px;" width="320" height="426" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="426px">
+<img src="http://blogfiles.naver.net/MjAxNzAyMDdfMSAg/MDAxNDg2Mzk4NzE5NDg1.EvtQYwP2Aih4c_5m36VBfQBbYpZBh6PPMtl3fCA6dRMg.0ZnyGEiwkkbSTYrcr3805l5GGK5RToKpNN0hAXY0xkkg.JPEG.hmu332233/KakaoTalk_20170206_171101277.jpg" style=" width:320px; height:426px; rwidth:320px; rheight:426px;" width="320" height="426" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="426px">
+<img id="se_object_1486398832945" src="http://blogfiles.naver.net/MjAxNzAyMDdfMjY1/MDAxNDg2Mzk4NzIwMDcz.hPnoN3gygbckZ4btK3f0JVSgp7oIZqSz-OYJiD95N6Qg.20k74JWuVswl_3go55LjwJo7NdU2dxKRtu6-U9X8xaMg.JPEG.hmu332233/KakaoTalk_20170206_171100216.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:320px; rwidth:320px; rheight:320px;" width="320" height="320" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="320px">
+
+###치킨 마리수 계산<br/>
+
+<img src="http://blogfiles.naver.net/MjAxNzAyMDdfMjE1/MDAxNDg2Mzk4NzE4NzM4.7tJvhabOHMBiWbNO8nuoFeS6vj-QCVAFbnwlUckzNogg.kwwRrWs3P5BlVRUhUz9xZHZp03wm36U1mfTOLRmmvSUg.JPEG.hmu332233/KakaoTalk_20170206_171102801.jpg" style=" width:320px; height:86px; rwidth:320px; rheight:86px;" width="320" height="86" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="86px">
+
+
+##오픈소스 라이센스
   
 ###nokogiri<br/>
 https://github.com/sparklemotion/nokogiri <br/>
