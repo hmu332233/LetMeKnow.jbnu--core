@@ -14,8 +14,6 @@ class KakaoController < ApplicationController
     
     def message
         
-        #test
-        
         message_content = params[:content]
         
         #사용량 측정
