@@ -14,6 +14,8 @@ class KakaoController < ApplicationController
     
     def message
         
+        #test
+        
         message_content = params[:content]
         
         #사용량 측정
@@ -109,7 +111,7 @@ class KakaoController < ApplicationController
             when "참빛"
                 result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
                 hit.domi_hits += 1
-            when "기존관" , "새빛" , "대동" , "평화"
+            when "기존관" , "새빛" , "대동" , "평화", "한빛"
                 result = message_Manager.getDomitory2(dayNumber(day),menu_all)
                 hit.domi_hits += 1
                 
@@ -426,7 +428,7 @@ class KakaoController < ApplicationController
         sub_keyword = ""
         
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
-        food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화]
+        food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화 한빛]
         etc_keyword = %w[치킨집 버스시간 날씨]
         sub_datas = %w[이번주 내일 주간 모레]
         
