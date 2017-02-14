@@ -131,40 +131,40 @@ class KakaoController < ApplicationController
                     result = message_Manager.getMajorMessage(sub_keyword)
                 end
                 hit.office_hits += 1
-            when "버스시간"
+            # when "버스시간"
                 
-                result = "\n학교 근처 정류장 버스시간을 알려드립니다.\n\n하단의 버스정류장을 선택해주세요.\n\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n를 이용하면 직접 검색도 가능합니다.\n\n"
+            #     result = "\n학교 근처 정류장 버스시간을 알려드립니다.\n\n하단의 버스정류장을 선택해주세요.\n\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n를 이용하면 직접 검색도 가능합니다.\n\n"
                 
-                render json: jsonMaker.getBusMenuJson(result)
-                return;
+            #     render json: jsonMaker.getBusMenuJson(result)
+            #     return;
                 
-            when "버스"
+            # when "버스"
 
-                unless sub_keyword == nil
+            #     unless sub_keyword == nil
                 
-                    result = "버스번호 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 확인을 눌러주세요"
-                    label = "버스 확인"
-                    url = Bus_Parser.new.getAddressBusNo(sub_keyword)
+            #         result = "버스번호 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 확인을 눌러주세요"
+            #         label = "버스 확인"
+            #         url = Bus_Parser.new.getAddressBusNo(sub_keyword)
                 
-                    render json: jsonMaker.getUrlBtnJson(result,label,url)
-                    return
-                else
-                    result = "\n검색할 버스번호를 입력해주세요\n\n알려줘 버스 [번호]\n\nex)\n알려줘 버스 385\n알려줘 버스 165\n"
-                end
+            #         render json: jsonMaker.getUrlBtnJson(result,label,url)
+            #         return
+            #     else
+            #         result = "\n검색할 버스번호를 입력해주세요\n\n알려줘 버스 [번호]\n\nex)\n알려줘 버스 385\n알려줘 버스 165\n"
+            #     end
                 
-            when "버스정류장" , "버정"
+            # when "버스정류장" , "버정"
 
-                unless sub_keyword == nil
+            #     unless sub_keyword == nil
                 
-                    result = "버스정류장 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 정류장 확인을 눌러주세요"
-                    label = "버스 정류장 확인"
-                    url = Bus_Parser.new.getAddressBusStop(sub_keyword)
+            #         result = "버스정류장 '" + sub_keyword + "'를 검색한 결과입니다\n\n하단의 버스 정류장 확인을 눌러주세요"
+            #         label = "버스 정류장 확인"
+            #         url = Bus_Parser.new.getAddressBusStop(sub_keyword)
                 
-                    render json: jsonMaker.getUrlBtnJson(result,label,url)
-                    return
-                else
-                    result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n알려줘 버정 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버정 동물원\n"
-                end
+            #         render json: jsonMaker.getUrlBtnJson(result,label,url)
+            #         return
+            #     else
+            #         result = "\n검색할 정류장을 입력해주세요\n이름의 일부만 들어가도 검색이 가능합니다\n\n알려줘 버스정류장 [검색어]\n알려줘 버정 [검색어]\n\nex)\n알려줘 버스정류장 전북대\n알려줘 버정 동물원\n"
+            #     end
                 
             when "날씨"
                 
@@ -182,7 +182,7 @@ class KakaoController < ApplicationController
                 
                 show_btn = true
                 
-                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 버스 도착 시간 확인\n6. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
+                help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
  
                 result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
                 
@@ -204,11 +204,11 @@ class KakaoController < ApplicationController
         
         
         # 버스 버튼에 따른 결과
-        results = busMessage(message_content)
-        if results[1]
-            render json: jsonMaker.getBusMenuJson(results[0])
-            return;
-        end
+        # results = busMessage(message_content)
+        # if results[1]
+        #     render json: jsonMaker.getBusMenuJson(results[0])
+        #     return;
+        # end
         
         # 도움말 버튼에 따른 결과
         notice_message = "공지사항 확인\n\n알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n"
@@ -216,7 +216,7 @@ class KakaoController < ApplicationController
         delivery_message = "배달음식점 번호 확인\n\n알려줘 치킨집\n알려줘 중국집(기능 삭제)\n"
         major_message = "학과사무실 정보 확인\n\n\n알려줘 과사 [검색어]\n\n\n[검색어]에 검색하고 싶은 학과의 이름을 입력하세요.\n이름의 일부만 입력해도 검색이 가능합니다.\n\nex)\n소프트웨어공학과를 검색하고자 할 때\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학\n알려줘 과사 소프\n\n등등 \n모두 가능합니다.\n"
         
-        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n알려줘 버스시간\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n\n알려줘 날씨\n알려줘 내일날씨\n알려줘 주간날씨\n\n알려줘 과사 [검색어]\n알려줘 치킨몇마리 [사람수]\n"
+        all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n알려줘 날씨\n알려줘 내일날씨\n알려줘 주간날씨\n\n알려줘 과사 [검색어]\n알려줘 치킨몇마리 [사람수]\n"
         # all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n알려줘 버스시간\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n\n알려줘 과사 [검색어]\n알려줘 치킨몇마리 [사람수]\n"
         
         
@@ -240,11 +240,7 @@ class KakaoController < ApplicationController
             show_btn = true
             result = "\n" + major_message
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('office.jpg')
-        when "버스, 버스정류장 확인 키워드"
-            show_btn = true
-            result = "\n<학교 주변 정거장 버스시간 확인>\n\n알려줘 버스시간\n\n\n<버스 검색>\n\n알려줘 버스 [버스번호]\nex)\n알려줘 버스 385\n\n\n<버스정류장 검색>\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n"
-            photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('bus.jpg')
-        when "날씨 확인 키워드"
+       when "날씨 확인 키워드"
             show_btn = true
             result = "\n<날씨 확인>\n\n알려줘 날씨\n알려줘 내일날씨\n알려줘 주간날씨\n\n정해진 형식 외에 자유롭게 물어봐도\n알려드립니다.\n\nex) \n내일 날씨 알려줘\n오늘날씨?\n\n\n자료제공 : 기상청"
             photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('weather.jpg')
@@ -254,6 +250,10 @@ class KakaoController < ApplicationController
         when "기타 키워드"
             show_btn = true
             result = "\n기타 키워드 모음입니다.\n\n----------------------------------\n\n알려줘 치킨몇마리 [사람수]\n\n인원수를 입력했을때 \n피보나치 수열과 제켄도르프정리를 이용하여\n최적의 치킨마리수를 알려드립니다.\n\n이게 무슨말이냐구요? 저도 잘 모르겠습니다.\n\nex) \n알려줘 치킨몇마리 8명\n알려줘 치킨몇마리 5\n\n----------------------------------\n" 
+        # when "버스, 버스정류장 확인 키워드"
+        #     show_btn = true
+        #     result = "\n<학교 주변 정거장 버스시간 확인>\n\n알려줘 버스시간\n\n\n<버스 검색>\n\n알려줘 버스 [버스번호]\nex)\n알려줘 버스 385\n\n\n<버스정류장 검색>\n\n알려줘 버정 [검색어]\n알려줘 버스정류장 [검색어]\nex)\n알려줘 버정 도청\n알려줘 버스정류장 도청\n"
+        #     photo_url = "#{request.protocol}#{request.host_with_port}" + ActionController::Base.helpers.asset_path('bus.jpg')
         end
         
         #----테스트하는곳
@@ -369,7 +369,7 @@ class KakaoController < ApplicationController
                 today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
                 
                 result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-                result += "600일 : " + (today.mjd - (start+600).mjd + 1).to_s + "\n"
+                result += "700일 : " + (today.mjd - (start+700).mjd + 1).to_s + "\n"
                 result += "2년 : " + (today.mjd - Date.parse("22/04/2017").mjd + 1).to_s
                 
             when "박도현"
@@ -378,7 +378,7 @@ class KakaoController < ApplicationController
                 today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
                 
                 result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-                result += "300일 : " + (today.mjd - (start+300).mjd + 1).to_s + "\n"
+                result += "500일 : " + (today.mjd - (start+500).mjd + 1).to_s + "\n"
                 result += "1년 : " + (today.mjd - Date.parse("24/03/2017").mjd + 1).to_s
                 
             when "쌍지은" , "허지은" , "신지은"
@@ -412,7 +412,7 @@ class KakaoController < ApplicationController
         end
         
         #기숙사
-        ect_keyword = %w[기숙사 긱사]
+        ect_keyword = %w[기숙사 긱사 생활관]
         
         ect_keyword.each do |ect_data|
             if dialog.include?(ect_data)
@@ -427,7 +427,7 @@ class KakaoController < ApplicationController
         
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
         food_keyword = %w[진수당 진수원 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화 한빛]
-        etc_keyword = %w[치킨집 버스시간 날씨]
+        etc_keyword = %w[치킨집 날씨]
         sub_datas = %w[이번주 내일 주간 모레]
         
         
@@ -458,34 +458,34 @@ class KakaoController < ApplicationController
         
     end
     
-    def busMessage(message)
+    # def busMessage(message)
         
-        id = -1
+    #     id = -1
         
-        case message
-            when "전북대학교(농협앞)"
-                id = 0
-            when "전북대학교(덕진성당앞)"
-                id = 3
-            when "전북대학교(일양병원앞)"
-                id = 4
-            when "전북대학교(한나여성병원)"
-                id = 5
-            when "소방서(시청방향)"
-                id = 2
-            when "전북은행본점"
-                id = 1
-        end
+    #     case message
+    #         when "전북대학교(농협앞)"
+    #             id = 0
+    #         when "전북대학교(덕진성당앞)"
+    #             id = 3
+    #         when "전북대학교(일양병원앞)"
+    #             id = 4
+    #         when "전북대학교(한나여성병원)"
+    #             id = 5
+    #         when "소방서(시청방향)"
+    #             id = 2
+    #         when "전북은행본점"
+    #             id = 1
+    #     end
         
-        if id == -1
-            result = message
-            busMessage_sw = false
-        else
-            result = Message_Manager.new.makeMessageBusStop(id)
-            busMessage_sw = true
-        end
+    #     if id == -1
+    #         result = message
+    #         busMessage_sw = false
+    #     else
+    #         result = Message_Manager.new.makeMessageBusStop(id)
+    #         busMessage_sw = true
+    #     end
         
-        return result,busMessage_sw
-    end
+    #     return result,busMessage_sw
+    # end
     
 end

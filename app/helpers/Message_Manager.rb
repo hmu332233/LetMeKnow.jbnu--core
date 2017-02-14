@@ -1,6 +1,7 @@
 require 'JBNU_Parser'
 require 'JBNU_Food_Parser'
 require 'Weather_Parser'
+require 'Bus_Parser'
 require 'Datas'
 
 class Message_Manager
