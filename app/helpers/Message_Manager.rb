@@ -205,6 +205,7 @@ class Message_Manager
         
         if day >= menus.size
             content = "등록된 식단이 없습니다."
+            return content
         else
             
             menu = menus[day]
@@ -509,7 +510,6 @@ class Message_Manager
             
         end
         
-        
         return contents.chop!
     end
     
@@ -704,26 +704,26 @@ class Message_Manager
             
     end
 
-    def makeMessageBusStop(id)
+    # def makeMessageBusStop(id)
         
-        buses = Bus_Parser.new.getSelectedBusStop(id).reverse
+    #     buses = Bus_Parser.new.getSelectedBusStop(id).reverse
         
-        result = ""
+    #     result = ""
         
-        if buses.length == 0
-            result += "도착예정 버스가 없습니다"
-        else
-            buses.each do |bus|
-                result += "\n"+bus.number + "\n"
-                result += "남은정거장 : " + bus.remain_busstop_num
-                result += "\t(" + bus.arrive_time.to_s + "분전)" + "\n"
-                result += "최근통과지점 : " + bus.lately_busstop + "\n"
-                result +=  "---\n"
-            end
-        end
+    #     if buses.length == 0
+    #         result += "도착예정 버스가 없습니다"
+    #     else
+    #         buses.each do |bus|
+    #             result += "\n"+bus.number + "\n"
+    #             result += "남은정거장 : " + bus.remain_busstop_num
+    #             result += "\t(" + bus.arrive_time.to_s + "분전)" + "\n"
+    #             result += "최근통과지점 : " + bus.lately_busstop + "\n"
+    #             result +=  "---\n"
+    #         end
+    #     end
         
-        return result
-    end
+    #     return result
+    # end
     
     #날씨
     def getTodayWeatherMessage
