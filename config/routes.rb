@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  #관리 페이지
+  get 'management/main'
+  get 'management/major'
+  get 'management/message'
+
+  #카카오
   get '/keyboard' => 'kakao#keyboard'
   post '/message' => 'kakao#message'
   post '/friend' => 'kakao#friend'
