@@ -23,10 +23,86 @@
 
 </head>
 <body>
-   
+  
+
+<div class="wrapper">
+  
+  
+  <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/management/main" class="simple-text">
+                    management
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="/management/main">
+                        <i class="ti-panel"></i>
+                        <p>사용자 통계</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/management/message">
+                        <i class="ti-user"></i>
+                        <p>메세지 관리</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/management/major">
+                        <i class="ti-view-list-alt"></i>
+                        <p>전공 관리</p>
+                    </a>
+                </li>
+				<li class="active-pro">
+                    <a href="http://plus.kakao.com/home/@%EC%95%8C%EB%A0%A4%EC%A4%98%EC%A0%84%EB%B6%81%EB%8C%80">
+                        <i class="ti-export"></i>
+                        <p>알려줘전북대 페이지</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+  
+
+
 <%= yield %>
-     
- 
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="pull-left">
+          <ul>
+              <li>
+                  <a href="http://www.creative-tim.com">
+                    Creative Tim
+                  </a>
+              </li>
+              <li>
+                <a href="http://blog.creative-tim.com">
+                    Blog
+                </a>
+              </li>
+              <li>
+                <a href="http://www.creative-tim.com/license">
+                  Licenses
+                </a>
+              </li>
+            </ul>
+          </nav>
+				<div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+        </div>
+      </div>
+    </footer>
+
+</div>
     
     
 <!-- Latest compiled and minified JavaScript -->

@@ -1,2 +1,85 @@
-<h1>Management#message</h1>
-<p>Find me in app/views/management/message.html.erb</p>
+<div class="main-panel">
+    
+    <%= render 'topNavi', title: "메세지 관리" %>
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-8 col-md-7">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">Add message</h4>
+						</div>
+						<div class="content">
+							<form>
+								
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>단어</label>
+											<input type="text" class="form-control border-input" placeholder="입력될 단어">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>등록자</label>
+											<input type="text" class="form-control border-input" placeholder="등록한 사람" value="관리자">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>메세지 내용</label>
+											<textarea rows="5" class="form-control border-input" placeholder="화면에 표시될 메세지의 내용" value="Mike"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-info btn-fill btn-wd">Add</button>
+								</div>
+								<div class="clearfix">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-5">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">List</h4>
+						</div>
+						<div class="content">
+							<ul class="list-unstyled team-members">
+								<li>
+								<div class="row">
+									<div class="col-xs-3">
+										 한민웅 <br/>
+										<span class="text-muted"><small>호출날짜</small></span>
+									</div>
+									<div class="col-xs-6">
+										개발자 입니다
+									</div>
+									
+									<div class="col-xs-3">
+										<a href="#edit">
+                                            <i class="ti-pencil"></i>    
+										</a>
+										
+										<a href="#delete">
+										    <i class="ti-trash"></i>   
+										</a>
+									</div>
+								</div>
+								</li>
+								
+								<!-- 여기에 등록된 메세지 반복문 들어가게 만들기 -->
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
