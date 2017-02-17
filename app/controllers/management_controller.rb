@@ -6,5 +6,6 @@ class ManagementController < ApplicationController
   end
 
   def message
+    @message_list = Message.all.reverse
   end
 end

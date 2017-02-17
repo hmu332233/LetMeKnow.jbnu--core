@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   
-  get 'message/create'
-
-  get 'message/update'
-
-  get 'message/delete'
+  resources 'message'
 
   #관리 페이지
   get 'management/main'
