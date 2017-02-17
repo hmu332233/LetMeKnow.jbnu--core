@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  resources 'message'
+  post '/messages' => 'message#create'
+  delete 'messages/:id' => 'message#delete'
 
   #관리 페이지
   get 'management/main'

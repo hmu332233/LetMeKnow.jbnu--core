@@ -42,6 +42,18 @@ class KakaoController < ApplicationController
         
         result = easterEgg(content,result)
         
+        #----- 추가된 메세지
+        addedMessage = Message.findMessageByKeyword( message_content )
+        unless addedMessage == nil 
+            render json: {
+                    "message":{
+                        "text": "#{addedMessage}"
+                    }
+                }
+            return;
+        end
+        #-----
+        
         if content[0] == "알려줘"
             main_keyword = content[1]
             sub_keyword = content[2]
