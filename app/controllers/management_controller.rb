@@ -3,6 +3,7 @@ class ManagementController < ApplicationController
   end
 
   def major
+    @major_list = Major.all
   end
 
   def message

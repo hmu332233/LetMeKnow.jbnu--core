@@ -1,4 +1,4 @@
-class Major
+class Majors
 
     attr_reader :name, :office, :tel, :fax
 
