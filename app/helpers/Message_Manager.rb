@@ -579,20 +579,8 @@ class Message_Manager
     
     
     def getMajorMessage(word)
-        
-        result_majors = []
-        
-        majors = Datas.new.getMajors
-        
-        majors.each do |major|
-            
-            if major.name.include?word
-                result_majors << major
-            end
-            
-        end
-        
-        
+
+        result_majors = Major.findByName(word)
         
         result = ""
         
