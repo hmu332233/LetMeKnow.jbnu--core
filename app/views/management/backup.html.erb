@@ -14,11 +14,11 @@
     							<h4 class="title">data</h4>
     						</div>
     						<div class="content">
-    							<%= form_tag({controller: "major", action: "create"}, method: "post") do %>
+    							<%= form_tag({controller: "management", action: "setDB"}, method: "post") do %>
     								<div class="row">
 									    <div class="col-md-12">
     										<div class="form-group">
-    										    <%= text_area(:message, :content ,size: "1x5",class: "form-control border-input", placeholder: "백업데이터") %>
+    										    <%= text_area_tag(:data,"" ,size: "1x5", class: "form-control border-input", placeholder: "백업데이터") %>
     										</div>
     									</div>
     								</div>
@@ -35,7 +35,7 @@
     							<h4 class="title">input</h4>
     						</div>
     						<div class="content">
-    				            <textarea rows="5" class ="form-control border-input" >test</textarea>
+    				            <textarea rows="5" class ="form-control border-input" ><%= @backup_data %></textarea>
     						</div>
     					</div>
     				</div>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/management/major'
   get '/management/message'
   get '/management/backup'
+  post '/management/setDB'
 
   #카카오
   get '/keyboard' => 'kakao#keyboard'

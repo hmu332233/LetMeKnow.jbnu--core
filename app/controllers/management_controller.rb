@@ -11,5 +11,15 @@ class ManagementController < ApplicationController
   end
   
   def backup
+    
+    @backup_data = ManagementHelper.getDB
+    
+  end
+  
+  def setDB
+    
+    ManagementHelper.setDB(params[:data])
+    redirect_to management_backup_path
+    
   end
 end
