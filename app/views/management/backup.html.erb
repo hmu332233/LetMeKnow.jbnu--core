@@ -1,0 +1,46 @@
+
+	
+
+    <div class="main-panel">
+		
+		<%= render 'topNavi', title: "데이터 백업" %>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+    				<div class="col-md-12">
+    					<div class="card">
+    						<div class="header">
+    							<h4 class="title">data</h4>
+    						</div>
+    						<div class="content">
+    							<%= form_tag({controller: "major", action: "create"}, method: "post") do %>
+    								<div class="row">
+									    <div class="col-md-12">
+    										<div class="form-group">
+    										    <%= text_area(:message, :content ,size: "1x5",class: "form-control border-input", placeholder: "백업데이터") %>
+    										</div>
+    									</div>
+    								</div>
+    								<div class="text-center">
+    									<button type="submit" class="btn btn-info btn-fill btn-wd">Add</button>
+    								</div>
+    								<div class="clearfix">
+    								</div>
+    							<% end %>
+    						</div>
+    					</div>
+    					<div class="card">
+    						<div class="header">
+    							<h4 class="title">input</h4>
+    						</div>
+    						<div class="content">
+    				            <textarea rows="5" class ="form-control border-input" >test</textarea>
+    						</div>
+    					</div>
+    				</div>
+				</div>
+            </div>
+        </div>
+    </div>
+

@@ -9,4 +9,7 @@ class ManagementController < ApplicationController
   def message
     @message_list = Message.all.reverse
   end
+  
+  def backup
+  end
 end

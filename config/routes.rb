@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/management/main'
   get '/management/major'
   get '/management/message'
+  get '/management/backup'
 
   #카카오
   get '/keyboard' => 'kakao#keyboard'
