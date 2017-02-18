@@ -1,5 +1,3 @@
-require 'Major'
-
 class Datas
     
     def getChick

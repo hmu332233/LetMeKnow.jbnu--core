@@ -3,6 +3,7 @@ require 'JBNU_Food_Parser'
 require 'Weather_Parser'
 require 'Bus_Parser'
 require 'Datas'
+require 'NilChecker'
 
 class Message_Manager
     
@@ -589,7 +590,7 @@ class Message_Manager
             result += major.name + "\n\n"
             result += major.office + "\n"
             result += major.tel + "\n"
-            result += major.fax + "\n\n\n"
+            result += NilChecker.checkNilAndReturnString(major.fax) + "\n\n\n"
             
         end
         
