@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20170218091451) do
 
   create_table "majors", force: :cascade do |t|
     t.string   "name"
-    t.string   "office"
-    t.string   "tel"
-    t.string   "fax"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "office",     default: ""
+    t.string   "tel",        default: ""
+    t.string   "fax",        default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "messages", force: :cascade do |t|

@@ -175,6 +175,15 @@ class Datas
         
         # majors =  Major.new("IT응용시스템공학과/공대 1호관 142호/Tel (063)270-4773,4778 /Fax (063)270-4542")
         
+            # majors.each do |major_data|
+            #     major = Major.new
+            #     major.name = major_data.name
+            #     major.office = major_data.office
+            #     major.tel = major_data.tel
+            #     major.fax = major_data.fax
+            #     major.save
+            # end
+        
         return majors
     end
     

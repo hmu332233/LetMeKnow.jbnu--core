@@ -75,15 +75,14 @@ module ManagementHelper
         majors.each do |major|
             attrs = major.attributes
             
-            puts attrs
             major_string = ""
-            major_string += attrs['name']
+            major_string += checkNilAndReturn(attrs['name'])
             major_string += "sp/"
-            major_string += attrs['office']
+            major_string += checkNilAndReturn(attrs['office'])
             major_string += "sp/"
-            major_string += attrs['tel']
+            major_string += checkNilAndReturn(attrs['tel'])
             major_string += "sp/"
-            major_string +=attrs['fax']
+            major_string += checkNilAndReturn(attrs['fax']) 
             
             major_string_arr << major_string
         end
@@ -91,12 +90,11 @@ module ManagementHelper
         message_string_arr = []
         messages.each do |message|
             attrs = message.attributes
-            
-            puts attrs
+      
             message_string = ""
-            message_string += attrs['keyword']
+            message_string += checkNilAndReturn(attrs['keyword'])
             message_string += "sp/"
-            message_string += attrs['content']
+            message_string += checkNilAndReturn(attrs['content'])
             
             message_string_arr << message_string
         end
@@ -118,6 +116,14 @@ module ManagementHelper
         return major_data_string.chop!.chop!.chop! + "sp+" + message_data_string.chop!.chop!.chop!
     end
 
+    def self.checkNilAndReturn(data)
+        
+        if data == nil
+            return ""
+        else
+            return data
+        end
+    end
   
 
 end
