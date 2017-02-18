@@ -1,9 +1,9 @@
 class MajorController < ApplicationController
   def create
     
-     Message.create(message_params)
+     Major.create(major_params)
     
-     redirect_to management_major
+     redirect_to management_major_path
     
   end
 
