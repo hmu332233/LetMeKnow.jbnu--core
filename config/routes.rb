@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  #major
+  post '/major' => 'major#create'
+  put '/major/:id' => 'major#update'
+  delete '/major/:id' => 'major#delete'
+
+  #post
   post '/messages' => 'message#create'
   delete 'messages/:id' => 'message#delete'
 

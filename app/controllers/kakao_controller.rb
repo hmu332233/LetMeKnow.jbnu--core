@@ -2,6 +2,7 @@ require 'Message_Manager'
 require 'Datas'
 require 'date'
 require 'JsonMaker'
+require 'kakao_helper'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -25,7 +26,6 @@ class KakaoController < ApplicationController
         word = words.find_or_create_by(content: message_content)
         word.count += 1
         word.save
-        
         
         day = (Time.now + (9*60*60)).strftime("%A").to_s
      
