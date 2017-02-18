@@ -11,6 +11,8 @@ class MessageController < ApplicationController
   end
 
   def delete
+    Message.destroy(params[:id])
+    redirect_to management_message_path
   end
   
   def message_params

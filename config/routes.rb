@@ -7,12 +7,12 @@ Rails.application.routes.draw do
 
   #post
   post '/messages' => 'message#create'
-  delete 'messages/:id' => 'message#delete'
+  delete '/messages/:id' => 'message#delete'
 
   #관리 페이지
-  get 'management/main'
-  get 'management/major'
-  get 'management/message'
+  get '/management/main'
+  get '/management/major'
+  get '/management/message'
 
   #카카오
   get '/keyboard' => 'kakao#keyboard'

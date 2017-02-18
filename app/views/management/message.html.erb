@@ -63,14 +63,8 @@
     										<%= message.content %>
     									</div>
     									
-    									<div class="col-xs-3 icon-mid">
-    										<a href="#edit">
-                                                <i class="ti-pencil"> </i>    
-    										</a>
-    										
-    										<a href="#delete">
-    										    <i class="ti-trash"></i>   
-    										</a>
+    									<div class="col-xs-3">
+    										<%= link_to "삭제", "/messages/#{message.id}",:method => "delete" %>
     									</div>
     								</div>
     								</li>

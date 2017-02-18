@@ -62,27 +62,20 @@
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
                                     <thead>
-                                        <th>ID</th>
                                     	<th>Name</th>
                                     	<th>Office</th>
                                     	<th>Tel</th>
                                     	<th>Fax</th>
+                                    	<th>Btn</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>Dakota Rice</td>
-                                        	<td>$36,738</td>
-                                        	<td>Niger</td>
-                                        	<td>Oud-Turnhout</td>
-                                        </tr>
                                         <% @major_list.each do |major| %>
                                         <tr>
-                                        	<td><%= major.id %></td>
                                         	<td><%= major.name %></td>
                                         	<td><%= major.office %></td>
                                         	<td><%= major.tel %></td>
                                         	<td><%= major.fax %></td>
+                                        	<td><%= link_to "수정", "/major/#{major.id}",:method => "put" %> <%= link_to "삭제", "/major/#{major.id}",:method => "delete" %></td>
                                         </tr>
                                         <% end %>
                                         

@@ -11,6 +11,8 @@ class MajorController < ApplicationController
   end
 
   def delete
+    Major.destroy(params[:id])
+    redirect_to management_major_path
   end
   
    
