@@ -5,7 +5,7 @@ class Message < ActiveRecord::Base
         message = Message.where("keyword like ?", "%" + keyword + "%").first
         
         unless message == nil
-            return message.content
+            return message.content.split("/").sample
         else
             return nil
         end

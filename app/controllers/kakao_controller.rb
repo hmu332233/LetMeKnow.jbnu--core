@@ -40,7 +40,7 @@ class KakaoController < ApplicationController
         converted_message = converter(message_content)
         content = converted_message.split(" ")
         
-        result = easterEgg(content,result)
+        result = easterEgg(message_content,result)
         
         #----- 추가된 메세지
         addedMessage = Message.findMessageByKeyword( message_content )
@@ -232,7 +232,6 @@ class KakaoController < ApplicationController
         # all_message = "알려줘 학사공지\n알려줘 일반공지\n알려줘 교내채용\n알려줘 특강\n알려줘 스터디\n알려줘 알바\n알려줘 판매구매\n알려줘 자취\n알려줘 분실물\n\n\n[추가 키워드 :  내일/이번주]\n알려줘 진수당(또는 진수원)\n알려줘 예지원\n알려줘 의대\n알려줘 학생회관\n알려줘 후생관\n알려줘 참빛관\n알려줘 새빛관(또는 기존관,대동관,평화관)\n\n알려줘 치킨집\n알려줘 중국집(기능삭제)\n\n알려줘 버스시간\n알려줘 버스 [버스번호]\n알려줘 버정 [검색어]\n\n알려줘 과사 [검색어]\n알려줘 치킨몇마리 [사람수]\n"
         
         
-        
         case message_content
         when "나가기"
             result = "감사합니다"
@@ -353,61 +352,51 @@ class KakaoController < ApplicationController
         return result
     end
     
-    def easterEgg(contents,_result)
+    def easterEgg(word,_result)
         
         result = ""
         
-        contents.each do |con|
-            
-            case con
-            when "데이터ㅓ"
-                result = Message_Manager.new.makeMessageData(true)
-            when "데이터ㅏ"
-                result = Message_Manager.new.makeMessageData(false)
-            when "데이터삭제"
-                result = "모든데이터가 삭제되었습니다"
-                Word.delete_all
-            when "사용량삭제"
-                result = "사용량이 초기화되었습니다"
-                Hit.delete_all
-            when "과사노예"
-                result = "이정철"
-            
-            when "사용량"
-                result = Message_Manager.new.getHitsMessage
-                
-            when "반상민"
-                start = Date.parse("22/04/2015")
-                today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-                
-                result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-                result += "700일 : " + (today.mjd - (start+700).mjd + 1).to_s + "\n"
-                result += "2년 : " + (today.mjd - Date.parse("22/04/2017").mjd + 1).to_s
-                
-            when "박도현"
-                
-                start = Date.parse("24/03/2016")
-                today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-                
-                result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-                result += "500일 : " + (today.mjd - (start+500).mjd + 1).to_s + "\n"
-                result += "1년 : " + (today.mjd - Date.parse("24/03/2017").mjd + 1).to_s
-                
-            when "쌍지은" , "허지은" , "신지은"
-                result = "\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆\n☆   댄 ☆ 싱\n☆   머 ☆ 신\n☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆\n"
-            when "전도사"
-                result = "\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆\n☆ 14 식영 ☆ 두유현주\n☆ 14 소공 ☆ 아뱅지현\n☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n☆☆☆☆☆☆☆☆☆☆\n"
-            when "만든이" , "개발자"
-                result = "소프트웨어공학과 mu"
-            when "남친" , "여친" , "남자친구" , "여자친구"
-                result = ["태어나지 않았습니다","태어날 예정입니다","존재하지 않습니다"].sample
-            else
-                result = _result
-            end
-            
-            
-        end
+        alone_words = ["남친","여친","남자친구","여자친구"]
         
+        alone_words.each do |alone_word|
+            if word.include?alone_word
+                return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다','그래도 결혼은 하겠죠?'].sample
+            end
+        end
+       
+        case word
+        when "데이터ㅓ"
+            result = Message_Manager.new.makeMessageData(true)
+        when "데이터ㅏ"
+            result = Message_Manager.new.makeMessageData(false)
+        when "데이터삭제"
+            result = "모든데이터가 삭제되었습니다"
+            Word.delete_all
+        when "사용량삭제"
+            result = "사용량이 초기화되었습니다"
+            Hit.delete_all
+        when "사용량"
+            result = Message_Manager.new.getHitsMessage
+        when "반상민"
+            start = Date.parse("22/04/2015")
+            today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+            
+            result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+            result += "700일 : " + (today.mjd - (start+700).mjd + 1).to_s + "\n"
+            result += "2년 : " + (today.mjd - Date.parse("22/04/2017").mjd + 1).to_s
+            
+        when "박도현"
+            
+            start = Date.parse("24/03/2016")
+            today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+            
+            result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+            result += "500일 : " + (today.mjd - (start+500).mjd + 1).to_s + "\n"
+            result += "1년 : " + (today.mjd - Date.parse("24/03/2017").mjd + 1).to_s
+        else
+            result = _result
+        end
+       
         return result
     end
     
