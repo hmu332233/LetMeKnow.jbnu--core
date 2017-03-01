@@ -59,6 +59,8 @@ class JBNU_Dormitory_Parser
             
         end
         
+        menus.shift
+        
         return menus
         
     end
