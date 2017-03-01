@@ -34,25 +34,25 @@ class JBNU_Dormitory_Parser
         tables_new = doc.css(".tbline1//tr")
         tables_new.each_with_index do |tr,i|
             
-            puts ""
-            puts i.to_s
+            # puts ""
+            # puts i.to_s
             
             tds = tr.css(".tbline2")
             
             dayOfWeek = tds[0].inner_text
             date = tds[1].inner_text.strip
             
-            puts "요일 : #{dayOfWeek}"
-            puts "날짜 : #{date}"
+            # puts "요일 : #{dayOfWeek}"
+            # puts "날짜 : #{date}"
             
             menu_data = []
             as = tds[2].css("a").each do |a|
                 menu_data << a.inner_text.strip.split("//")
             end
             
-            puts "아침 : #{menu_data[0]}"
-            puts "점심 : #{menu_data[1]}"
-            puts "저녁 : #{menu_data[2]}"
+            # puts "아침 : #{menu_data[0]}"
+            # puts "점심 : #{menu_data[1]}"
+            # puts "저녁 : #{menu_data[2]}"
             
             menu = Menu_domitory.new(dayOfWeek,menu_data[0],menu_data[1],menu_data[2])
             menus << menu
