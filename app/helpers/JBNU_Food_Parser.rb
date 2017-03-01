@@ -281,7 +281,7 @@ class JBNU_Food_Parser
             index += 3
 
         end
-
+        
         print menus
         
         return menus
