@@ -3,6 +3,7 @@ require 'Datas'
 require 'date'
 require 'JsonMaker'
 require 'kakao_helper'
+require 'MessageFactory'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -14,6 +15,8 @@ class KakaoController < ApplicationController
     end
     
     def message
+        
+        messageFactory = MessageFactory.new
         
         message_content = params[:content]
         
@@ -119,13 +122,19 @@ class KakaoController < ApplicationController
                 result = message_Manager.getYejiMessage(dayNumber(day),menu_all)
                 hit.domi_hits += 1
             when "참빛"
-                result = message_Manager.getDomitory(dayNumber_domitory(day),menu_all)
+                if menu_all == 1
+                    result = messageFactory.makeMessage_Cham_day(dayNumber_domitory(day))
+                else
+                    result = messageFactory.makeMessage_Cham_all
+                end
                 hit.domi_hits += 1
             when "기존관" , "새빛" , "대동" , "평화", "한빛"
-                result = message_Manager.getDomitory2(dayNumber(day),menu_all)
+                if menu_all == 1
+                    result = messageFactory.makeMessage_Basic_day(dayNumber_domitory(day))
+                else
+                    result = messageFactory.makeMessage_Basic_all
+                end
                 hit.domi_hits += 1
-                
-                
             when "치킨집"
                 result = message_Manager.getChikMessage
                 hit.chik_hits += 1
