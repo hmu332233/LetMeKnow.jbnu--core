@@ -109,7 +109,7 @@ module M_Dormitory
     def makeMessage_Basic_all
         
         parser = JBNU_Dormitory_Parser.new
-        menus = parser.requestMenu_Cham
+        menus = parser.requestMenu_Basic
         
         message = ""
         
