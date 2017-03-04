@@ -12,4 +12,19 @@ class Message < ActiveRecord::Base
         
     end
     
+    def self.findMessageBySentence( sentence )
+        
+        message_list = Message.all
+        
+        message_list.each do |message|
+            
+            if sentence.include? message.keyword
+                return message.content.split("/").sample
+            end
+        
+        end
+        
+        return nil
+    end
+    
 end
