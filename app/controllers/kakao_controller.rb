@@ -48,6 +48,7 @@ class KakaoController < ApplicationController
         #----- 추가된 메세지
         addedMessage = Message.findMessageByKeyword( message_content )
         unless addedMessage == nil 
+            addedMessage = addedMessage.split("/").sample
             render json: {
                     "message":{
                         "text": "#{addedMessage}"
