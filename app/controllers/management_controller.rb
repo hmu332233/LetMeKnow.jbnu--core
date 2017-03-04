@@ -1,5 +1,6 @@
 class ManagementController < ApplicationController
   def main
+    @word_list = Word.order(count: :desc)
   end
 
   def major
