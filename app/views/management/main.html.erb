@@ -39,31 +39,6 @@
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>공지</p>
-                                            <%= @hit.notice_hits %>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
                                         <div class="icon-big icon-danger text-center">
                                             <i class="ti-pulse"></i>
                                         </div>
@@ -79,6 +54,31 @@
                                     <hr />
                                     <div class="stats">
                                         <i class="ti-timer"></i> In the last hour
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-wallet"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>공지</p>
+                                            <%= @hit.notice_hits %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-calendar"></i> Last day
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Message list</h4>
-                                <p class="category">메세지 : 사용량</p>
+                                <p class="category"><%="메세지 : #{@call_size}"%></p>
                             </div>
                             <div class="content">
                                 <div class="footer">
