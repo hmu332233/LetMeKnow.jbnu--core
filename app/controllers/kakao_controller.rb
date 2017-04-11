@@ -4,6 +4,7 @@ require 'date'
 require 'JsonMaker'
 require 'kakao_helper'
 require 'MessageFactory'
+require 'util/TimeHelper'
 class KakaoController < ApplicationController
     
     def keyboard

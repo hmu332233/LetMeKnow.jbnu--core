@@ -165,4 +165,11 @@ module M_Dormitory
         
         return message.chop!
     end
+    
+    #db 저장여부 판별
+    def checkDB_Cham
+    end
+    
+    def checkDB_Basic
+    end
 end
