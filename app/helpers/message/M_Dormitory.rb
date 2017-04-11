@@ -1,4 +1,5 @@
 require 'JBNU_Dormitory_Parser'
+require 'util/TimeHelper'
 
 module M_Dormitory
     
@@ -164,5 +165,26 @@ module M_Dormitory
         end
         
         return message.chop!
+    end
+    
+    #db 저장여부 판별
+    def checkDB_Cham_and_return_menu(day)
+        
+        today = TimeHelper.new.today
+        
+        menu = DbMenuDomitory.find_or_create_by(id: day)
+        if today == menu.week
+            return menu
+        else
+            parser = JBNU_Dormitory_Parser.new
+            menus = parser.requestMenu_Cham
+            menu = menus[day]
+            
+            return menu
+        end
+    end
+    
+    def checkDB_Basic(day)
+        
     end
 end

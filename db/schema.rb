@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218091451) do
+ActiveRecord::Schema.define(version: 20170411020505) do
+
+  create_table "db_menu_domitories", force: :cascade do |t|
+    t.string   "week"
+    t.string   "breakfast"
+    t.string   "lunch"
+    t.string   "dinner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "hits", force: :cascade do |t|
     t.string   "name"

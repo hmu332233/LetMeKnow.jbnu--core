@@ -4,6 +4,7 @@ require 'date'
 require 'JsonMaker'
 require 'kakao_helper'
 require 'MessageFactory'
+require 'util/TimeHelper'
 class KakaoController < ApplicationController
     
     def keyboard
@@ -122,18 +123,20 @@ class KakaoController < ApplicationController
                 result = message_Manager.getYejiMessage(dayNumber(day),menu_all)
                 hit.domi_hits += 1
             when "참빛"
-                if menu_all == 1
-                    result = messageFactory.makeMessage_Cham_day(dayNumber_domitory(day))
-                else
-                    result = messageFactory.makeMessage_Cham_all
-                end
+                # if menu_all == 1
+                #     result = messageFactory.makeMessage_Cham_day(dayNumber_domitory(day))
+                # else
+                #     result = messageFactory.makeMessage_Cham_all
+                # end
+                result = "전북대학교 기숙사 홈페이지 오류로 인해\n 현재 이용이 불가능합니다.\n이슈가 해결되는대로 복구하도록 하겠습니다."
                 hit.domi_hits += 1
             when "기존관" , "새빛" , "대동" , "평화", "한빛"
-                if menu_all == 1
-                    result = messageFactory.makeMessage_Basic_day(dayNumber_domitory(day))
-                else
-                    result = messageFactory.makeMessage_Basic_all
-                end
+                # if menu_all == 1
+                #     result = messageFactory.makeMessage_Basic_day(dayNumber_domitory(day))
+                # else
+                #     result = messageFactory.makeMessage_Basic_all
+                # end
+                result = "전북대학교 기숙사 홈페이지 오류로 인해\n 현재 이용이 불가능합니다.\n이슈가 해결되는대로 복구하도록 하겠습니다."
                 hit.domi_hits += 1
             when "치킨집"
                 result = message_Manager.getChikMessage
