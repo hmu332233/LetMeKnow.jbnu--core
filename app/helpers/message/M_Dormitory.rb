@@ -180,6 +180,8 @@ module M_Dormitory
             menus = parser.requestMenu_Cham
             menu = menus[day]
             
+            DbMenuDomitory.addMemu(menu)
+            
             return menu
         end
     end
