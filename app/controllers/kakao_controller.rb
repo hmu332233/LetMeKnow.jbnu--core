@@ -146,7 +146,12 @@ class KakaoController < ApplicationController
             #     hit.chik_hits += 1
                 
             when "치킨몇마리" , "치킨"
-                result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
+                
+                if sub_keyword.nil?
+                    result = "치킨집 번호를 원하시면\n치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
+                else
+                    result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
+                end
 
             when "과사"
                 if content.size == 2
