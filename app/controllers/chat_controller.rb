@@ -83,7 +83,7 @@ class ChatController < ApplicationController
     case main_keyword
     when "치킨몇마리" , "치킨"
       if sub_keyword.nil?
-        result = "치킨집 번호를 원하시면\n치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
+        result = "치킨집 번호를 원하시면\n'치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
         render json: jsonMaker.getMessageJson(result)
         return; 
       else
@@ -419,6 +419,7 @@ class ChatController < ApplicationController
         end
        
         return result
+        
     end
   
 end
