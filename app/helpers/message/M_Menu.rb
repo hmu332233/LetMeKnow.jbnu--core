@@ -221,7 +221,7 @@ module M_Menu
     end
     
     def makeMessage_medi_all
-        retirm makeMessage_all(1)
+        return makeMessage_all(1)
     end
     
     #진수 : 0
