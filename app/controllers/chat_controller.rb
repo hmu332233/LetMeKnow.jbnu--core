@@ -212,19 +212,24 @@ class ChatController < ApplicationController
       #hit.domi_hits += 1
       
     when "치킨집"
-      result = message_Manager.getChikMessage
+      render json: jsonMaker.getMessageJson(message_Manager.getChikMessage)
+      return;
       #hit.chik_hits += 1
-
     when "날씨"
-          
-      if sub_keyword == "내일"
-        result = message_Manager.getTomorrowWeatherMessage
-      elsif sub_keyword == "주간" || sub_keyword == "이번주"
-        result = message_Manager.makeWeekWeatherMessage
-      elsif sub_keyword == "모레"
-        result = "모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
+      
+      case subIntent
+      when "내일"
+        render json: jsonMaker.getMessageJson(message_Manager.getTomorrowWeatherMessage)
+        return;
+      when "모레"
+        render json: jsonMaker.getMessageJson("모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요.")
+        return;
+      when "주간","이번주"
+        render json: jsonMaker.getMessageJson(message_Manager.makeWeekWeatherMessage)
+        return;
       else
-        result = message_Manager.getTodayWeatherMessage
+        render json: jsonMaker.getMessageJson(message_Manager.getTodayWeatherMessage)
+        return;
       end
               
     when "도움말"
