@@ -123,8 +123,8 @@ class ChatController < ApplicationController
       day = timeHelper.dayOfWeek_Today
     end
     
-    puts day
-    puts "#{entry} : #{intent} : #{subIntent}"
+    # puts day
+    # puts "#{entry} : #{intent} : #{subIntent}"
     
   
     #의도 별 메세지 출력
@@ -135,14 +135,20 @@ class ChatController < ApplicationController
         result = "\n@ 어느 학식 메뉴를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n참빛관\n새빛관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\n ex)내일 진수당"
         render json: jsonMaker.getMessageJson(result)
         return;
-      when "기숙사"
-        result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
-        render json: jsonMaker.getMessageJson(result)
-        return; 
       when "시간"
         result = "\n@ 어느 곳의 시간 정보를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n기숙사\n\nex)\n후생관 이용시간\n기숙사 통금시간"
         render json: jsonMaker.getMessageJson(result)
         return; 
+      end
+    when "기숙사","긱사","생활관"
+      case intent
+      when "시간"
+        render json: jsonMaker.getMessageJson("준비중입니다!")
+        return;
+      else
+        result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
+        render json: jsonMaker.getMessageJson(result)
+        return;
       end
     when "학사공지"
       result = message_Manager.getMessage_Notice(0)

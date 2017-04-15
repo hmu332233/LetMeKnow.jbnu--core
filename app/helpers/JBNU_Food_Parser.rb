@@ -41,10 +41,10 @@ class JBNU_Food_Parser
             end
         end
         
-        menu.each_with_index do |m,i|
+        # menu.each_with_index do |m,i|
         
-            puts i.to_s + " : " + m
-        end
+        #     puts i.to_s + " : " + m
+        # end
         
         return menu
         
@@ -98,7 +98,7 @@ class JBNU_Food_Parser
         
         rt = []
         t.each_with_index do |a,i|
-            print i.to_s + " : " +a.inner_text + "\n"
+            # print i.to_s + " : " +a.inner_text + "\n"
             rt << a.inner_text.to_s.squish
         end
         
@@ -139,7 +139,7 @@ class JBNU_Food_Parser
         
         rt = []
         t.each_with_index do |a,i|
-            print i.to_s + " : " +a.inner_text + "\n"
+            # print i.to_s + " : " +a.inner_text + "\n"
             rt << a.inner_text.to_s.squish
         end
         
@@ -181,7 +181,7 @@ class JBNU_Food_Parser
         
         menu = []
         menu_data.each_with_index do |td,i|
-            print i.to_s + " : " + td.inner_text.strip + "\n"
+            # print i.to_s + " : " + td.inner_text.strip + "\n"
             menu << td.inner_text.strip
         end
         
@@ -225,7 +225,7 @@ class JBNU_Food_Parser
         
         menu = []
         menu_data.each_with_index do |td,i|
-            print i.to_s + " : " + td.inner_text.strip + "\n"
+            # print i.to_s + " : " + td.inner_text.strip + "\n"
             menu << td.inner_text.strip
         end
         
@@ -282,7 +282,7 @@ class JBNU_Food_Parser
 
         end
         
-        print menus
+        # print menus
         
         return menus
         
@@ -322,7 +322,7 @@ class JBNU_Food_Parser
 
         end
 
-        print menus
+        # print menus
         
         return menus
         
@@ -334,11 +334,11 @@ class JBNU_Food_Parser
         
         tables = doc.css("#sub_right//table")
         
-        tables.each_with_index do |table,i|
+        # tables.each_with_index do |table,i|
             
-            print "\n" +i.to_s + "\n" +table.inner_text
+        #     print "\n" +i.to_s + "\n" +table.inner_text
             
-        end
+        # end
         
         
     end
