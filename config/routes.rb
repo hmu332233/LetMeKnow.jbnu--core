@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
   
+  #카카오
+  get '/keyboard' => 'chat#keyboard'
+  post '/message' => 'chat#message'
+  post '/friend' => 'chat#add_friend'
+  delete '/friend/:user_key' => 'chat#delete_friend'
+  delete '/chat_room/:user_key' => 'chat#chat_room'
+  
+  #기존 카카오
+  # get '/keyboard' => 'kakao#keyboard'
+  # post '/message' => 'kakao#message'
+  # post '/friend' => 'kakao#friend'
+  # delete '/friend/:user_key' => 'kakao#friend2'
+  # delete '/chat_room/:user_key' => 'kakao#chat_room'
+  
+
   #major
   post '/major' => 'major#create'
   put '/major/:id' => 'major#update'
@@ -16,12 +31,7 @@ Rails.application.routes.draw do
   get '/management/backup'
   post '/management/setDB'
 
-  #카카오
-  get '/keyboard' => 'kakao#keyboard'
-  post '/message' => 'kakao#message'
-  post '/friend' => 'kakao#friend'
-  delete '/friend/:user_key' => 'kakao#friend2'
-  delete '/chat_room/:user_key' => 'kakao#chat_room'
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

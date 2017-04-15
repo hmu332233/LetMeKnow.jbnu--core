@@ -1,5 +1,16 @@
 class JsonMaker
     
+    def getMessageJson(text)
+    
+        json = {
+            "message":{
+                "text": "#{text}"
+            }
+        }
+    
+        return json
+    end
+    
     def getUrlBtnJson(text,label,url)
         
         json = {

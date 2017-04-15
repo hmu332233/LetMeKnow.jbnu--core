@@ -2,7 +2,6 @@ require 'Message_Manager'
 require 'Datas'
 require 'date'
 require 'JsonMaker'
-require 'kakao_helper'
 require 'MessageFactory'
 require 'util/TimeHelper'
 class KakaoController < ApplicationController
@@ -399,7 +398,7 @@ class KakaoController < ApplicationController
             today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
             
             result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-            result += "700일 : " + (today.mjd - (start+700).mjd + 1).to_s + "\n"
+            result += "800일 : " + (today.mjd - (start+800).mjd + 1).to_s + "\n"
             result += "2년 : " + (today.mjd - Date.parse("22/04/2017").mjd + 1).to_s
             
         when "박도현"
@@ -409,7 +408,7 @@ class KakaoController < ApplicationController
             
             result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
             result += "500일 : " + (today.mjd - (start+500).mjd + 1).to_s + "\n"
-            result += "1년 : " + (today.mjd - Date.parse("24/03/2017").mjd + 1).to_s
+            result += "2년 : " + (today.mjd - Date.parse("24/03/2018").mjd + 1).to_s
         else
             result = _result
         end
