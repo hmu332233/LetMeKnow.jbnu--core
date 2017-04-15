@@ -21,6 +21,36 @@ class ChatController < ApplicationController
     
     message_content = params[:content]
     
+    #도움말 메세지
+    case message_content
+    when "나가기"
+      render json: jsonMaker.getMessageJson("감사합니다")
+      return;
+    when "전체 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_all)
+      return;
+    when "학식 메뉴 확인 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_menu)
+      return;
+    when "공지사항 확인 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_notice)
+      return;
+    when "학과사무실 정보 확인 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_major)
+      return;
+    when "배달음식점 번호 확인 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_delivery)
+      return;
+    when "날씨 확인 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_weather)
+      return;
+    when "기타 키워드"
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_etc)
+      return;
+    end
+    
+    #------------------------------------------------------------------------------------------------------------
+    
     #문장 요소 추출
     extract_list = extractor.extract(message_content)
     
@@ -233,16 +263,12 @@ class ChatController < ApplicationController
       end
               
     when "도움말"
-                
-      show_btn = true
-      help_message = "알려줘전북대는 키워드 입력방식으로 운영되고 있으며\n\n현재\n\n1. 학교 공지사항 확인\n2. 건지커뮤니티 글 확인\n3. 학식 메뉴 확인\n4. 학과사무실 정보 확인\n5. 날씨 확인\n\n등의 기능을 제공하고 있습니다\n하단의 버튼으로\n상세 키워드를 알려드립니다\n\n"
-
-      result = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
-               
+      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_basic)
+      return;
       #hit.help_hits += 1
-                
     end
-    
+  
+  
     render json: {
       "message":{
         "text": "이 문구가 출력되면 안됩니다."
