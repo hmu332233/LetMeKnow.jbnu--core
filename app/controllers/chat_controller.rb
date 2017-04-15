@@ -2,6 +2,7 @@ require 'extractor'
 require 'JsonMaker'
 require 'MessageFactory'
 require 'Message_Manager'
+require 'util/TimeHelper'
 
 class ChatController < ApplicationController
   def keyboard
@@ -12,82 +13,204 @@ class ChatController < ApplicationController
 
   def message
     
+    timeHelper = TimeHelper.new
     messageFactory = MessageFactory.new
     message_Manager = Message_Manager.new
     jsonMaker = JsonMaker.new
+    extractor = Extractor.new
     
     message_content = params[:content]
     
-    extractor = Extractor.new
-    
+    #문장 요소 추출
     extract_list = extractor.extract(message_content)
     
     entry = extract_list[0]
     intent = extract_list[1]
     subIntent = extract_list[2]
   
+    #subIntent 처리
+    case subIntent
+    when "내일"
+      day = timeHelper.dayOfWeek_Tomorrow
+    when "모레"
+      day = timeHelper.dayOfWeek_AfterTomprrow
+    else
+      day = timeHelper.dayOfWeek_Today
+    end
+    
+    puts day
+    puts "#{entry} : #{intent} : #{subIntent}"
+    
+  
+    #의도 별 메세지 출력
     case entry
     when "학사공지"
       result = message_Manager.getMessage_Notice(0)
-      render json: jsonMaker.getMessageJson("테스트입니다")
+      render json: jsonMaker.getMessageJson(result)
       return;
       #hit.notice_hits += 1
     when "일반공지"
       result = message_Manager.getMessage_Notice(1)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "교내채용"
       result = message_Manager.getMessage_Notice(2)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "특강"
       result = message_Manager.getMessage_Notice(3)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "스터디"
       result = message_Manager.getMessage_Notice(4)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "알바"
       result = message_Manager.getMessage_Notice(5)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "판매구매"
       result = message_Manager.getMessage_Notice(6)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "자취"
       result = message_Manager.getMessage_Notice(7)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
     when "분실물"
       result = message_Manager.getMessage_Notice(8)
+      render json: jsonMaker.getMessageJson(result)
+      return;
       #hit.notice_hits += 1
                 
     when "진수"
-      result = message_Manager.getJinsuMenu(dayNumber(day),menu_all)
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
+      end
       #hit.domi_hits += 1
     when "의대"
-      result = message_Manager.getMediMenu(dayNumber(day),menu_all)
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
+      end
       #hit.domi_hits += 1
     when "학생회관"
-      result = message_Manager.getStudentHallMenu(dayNumber(day),menu_all)
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
+      end
       #hit.domi_hits += 1
     when "후생관"
-      result = message_Manager.getHu(dayNumber(day),menu_all)
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
+      end
       #hit.domi_hits += 1
     when "예지원"
-      result = message_Manager.getYejiMessage(dayNumber(day),menu_all)
-      #hit.domi_hits += 1
-    when "참빛"
-      if menu_all == 1
-        result = messageFactory.makeMessage_Cham_day(dayNumber_domitory(day))
-      else
-        result = messageFactory.makeMessage_Cham_all
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_yeji_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_yeji_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
       end
-      # result = "전북대학교 기숙사 홈페이지 오류로 인해\n 현재 이용이 불가능합니다.\n이슈가 해결되는대로 복구하도록 하겠습니다."
+      #hit.domi_hits += 1
+      
+    when "참빛"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
+      end
       #hit.domi_hits += 1
     when "기존관" , "새빛" , "대동" , "평화", "한빛"
-      if menu_all == 1
-        result = messageFactory.makeMessage_Basic_day(dayNumber_domitory(day))
-      else
-        result = messageFactory.makeMessage_Basic_all
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_day(dayNumber(day)))
+          return;
+        end
+      when "시간"
+          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          return;
       end
-      # result = "전북대학교 기숙사 홈페이지 오류로 인해\n 현재 이용이 불가능합니다.\n이슈가 해결되는대로 복구하도록 하겠습니다."
       #hit.domi_hits += 1
+      
     when "치킨집"
       result = message_Manager.getChikMessage
       #hit.chik_hits += 1
@@ -101,7 +224,7 @@ class ChatController < ApplicationController
       elsif sub_keyword == "모레"
         result = "모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요."
       else
-         result = message_Manager.getTodayWeatherMessage
+        result = message_Manager.getTodayWeatherMessage
       end
               
     when "도움말"
@@ -114,13 +237,10 @@ class ChatController < ApplicationController
       #hit.help_hits += 1
                 
     end
-      
-  
-    # result = "#{entry} : #{intent} : #{subIntent}"
     
     render json: {
       "message":{
-        "text": "#{result}"
+        "text": "이 문구가 출력되면 안됩니다."
       }
     }
     
@@ -139,4 +259,27 @@ class ChatController < ApplicationController
   end
 
 
+  def dayNumber(day)
+    
+    case day
+    when 'Sunday'
+      result = 0
+    when 'Monday'
+      result = 1
+    when 'Tuesday'
+      result = 2
+    when 'Wednesday'
+      result = 3
+    when 'Thursday'
+      result = 4
+    when 'Friday'
+      result = 5
+    when 'Saturday'
+      result = 6
+    else
+     result = 7
+    end
+        
+    return result
+  end
 end
