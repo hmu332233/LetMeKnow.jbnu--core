@@ -22,7 +22,7 @@ class Extractor
         end
         
         #intent 추출
-        intent_keyword = %w[학생식당 학식 시간 통금]
+        intent_keyword = %w[학생식당 학식 언제 시간]
         
         intent_list = intent_keyword
         

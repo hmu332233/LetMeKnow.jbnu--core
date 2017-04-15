@@ -202,7 +202,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -219,7 +219,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -236,7 +236,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -253,7 +253,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -270,7 +270,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_yeji_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -288,7 +288,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
@@ -305,7 +305,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_day(dayNumber(day)))
           return;
         end
-      when "시간"
+      when "시간","언제"
           render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end

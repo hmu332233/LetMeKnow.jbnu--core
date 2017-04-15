@@ -1,7 +1,7 @@
 class ManagementController < ApplicationController
   def main
     @word_list = Word.order(count: :desc)
-    @hit = Hit.all.first
+    # @hit = Hit.all.first
     
     @call_size = 0
     @word_list.each do |word|
