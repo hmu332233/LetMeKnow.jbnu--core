@@ -51,6 +51,38 @@ class ChatController < ApplicationController
     
     #------------------------------------------------------------------------------------------------------------
     
+    
+    #검색 -바꿀방법 찾기
+    messages = message_content.split(" ")
+    main_keyword = messages[1]
+    sub_keyword = messages[2]
+    
+    case main_keyword
+    when "치킨몇마리" , "치킨"
+      if sub_keyword.nil?
+        result = "치킨집 번호를 원하시면\n치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      else
+        result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      end
+
+    when "과사"
+      if sub_keyword.nil?
+        result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      else
+        result = message_Manager.getMajorMessage(sub_keyword)
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      end
+    end
+        
+    #------------------------------------------------------------------------------------------------------------
+    
     #문장 요소 추출
     extract_list = extractor.extract(message_content)
     
@@ -74,6 +106,21 @@ class ChatController < ApplicationController
   
     #의도 별 메세지 출력
     case entry
+    when nil
+      case intent
+      when "학식", "학생식당"
+        result = "\n@ 어느 학식 메뉴를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n참빛관\n새빛관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\n ex)내일 진수당"
+        render json: jsonMaker.getMessageJson(result)
+        return;
+      when "기숙사"
+        result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      when "시간"
+        result = "\n@ 어느 곳의 시간 정보를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n기숙사\n\nex)\n후생관 이용시간\n기숙사 통금시간"
+        render json: jsonMaker.getMessageJson(result)
+        return; 
+      end
     when "학사공지"
       result = message_Manager.getMessage_Notice(0)
       render json: jsonMaker.getMessageJson(result)
@@ -133,7 +180,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -150,7 +197,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -167,7 +214,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -184,7 +231,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -201,7 +248,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -219,7 +266,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -236,7 +283,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간"
-          render json: jsonMaker.getMessageJson("여기에 시간 정보를 추가해 줄거야!")
+          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
           return;
       end
       #hit.domi_hits += 1
@@ -271,7 +318,7 @@ class ChatController < ApplicationController
   
     render json: {
       "message":{
-        "text": "이 문구가 출력되면 안됩니다."
+        "text": "아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (눈물)\n\n'도움말'이라고 입력하시면\n자세한 사용방법을 알려드립니다."
       }
     }
     
