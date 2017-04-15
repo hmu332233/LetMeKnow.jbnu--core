@@ -9,7 +9,7 @@ class Extractor
         #entry 추출
         notice_keyword = %w[학사공지 일반공지 교내채용 특강 스터디 알바 판매구매 자취 분실물]
         food_keyword = %w[진수 의대 학생회관 후생관 예지원 기존관 참빛 새빛 대동 평화 한빛]
-        etc_keyword = %w[치킨집 날씨]
+        etc_keyword = %w[치킨집 날씨 도움말]
         
         entry_list = notice_keyword + food_keyword + etc_keyword
         
@@ -35,7 +35,7 @@ class Extractor
         end
         
         #subIntent 추출
-        date_keyword = %w[내일 모레 이번주]
+        date_keyword = %w[내일 모레 주간 이번주]
         
         subIntent_list = date_keyword
         
