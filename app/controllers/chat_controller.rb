@@ -55,7 +55,24 @@ class ChatController < ApplicationController
       return;
     end
     
-#-----------------------------------------------------------------------------------------------------
+    #---------------------------------------------------------------------------------------------------------
+    
+    #이스터 에그와 디비 추가 키워드
+    
+    egg_message = easterEgg(message_content)
+    
+    unless egg_message.nil?
+      render json: jsonMaker.getMessageJson(egg_message)
+      return; 
+    end
+    
+    addedMessage = Message.findMessageBySentence( message_content )
+    unless addedMessage.nil? 
+      render json: jsonMaker.getMessageJson(addedMessage)
+      return;
+    end
+    
+    #------------------------------------------------------------------------------------------------------------
     
     #검색 -바꿀방법 찾기
     messages = message_content.split(" ")
@@ -325,25 +342,6 @@ class ChatController < ApplicationController
       return;
       #hit.help_hits += 1
     end
-    
-    #---------------------------------------------------------------------------------------------------------
-    
-    #이스터 에그와 디비 추가 키워드
-    
-    egg_message = easterEgg(message_content)
-    
-    unless egg_message.nil?
-      render json: jsonMaker.getMessageJson(egg_message)
-      return; 
-    end
-    
-    addedMessage = Message.findMessageBySentence( message_content )
-    unless addedMessage.nil? 
-      render json: jsonMaker.getMessageJson(addedMessage)
-      return;
-    end
-    
-    #------------------------------------------------------------------------------------------------------------
   
   
     render json: {
