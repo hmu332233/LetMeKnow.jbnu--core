@@ -55,25 +55,7 @@ class ChatController < ApplicationController
       return;
     end
     
-    #---------------------------------------------------------------------------------------------------------
-    
-    #이스터 에그와 디비 추가 키워드
-    
-    egg_message = easterEgg(message_content)
-    
-    unless egg_message.nil?
-      render json: jsonMaker.getMessageJson(egg_message)
-      return; 
-    end
-    
-    addedMessage = Message.findMessageBySentence( message_content )
-    unless addedMessage.nil? 
-      render json: jsonMaker.getMessageJson(addedMessage)
-      return;
-    end
-    
-    #------------------------------------------------------------------------------------------------------------
-    
+#-----------------------------------------------------------------------------------------------------
     
     #검색 -바꿀방법 찾기
     messages = message_content.split(" ")
@@ -143,7 +125,7 @@ class ChatController < ApplicationController
     when "기숙사","긱사","생활관"
       case intent
       when "시간"
-        render json: jsonMaker.getMessageJson("준비중입니다!")
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
         return;
       else
         result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
@@ -209,7 +191,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_jinsu)
           return;
       end
       #hit.domi_hits += 1
@@ -226,7 +208,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_medi)
           return;
       end
       #hit.domi_hits += 1
@@ -243,7 +225,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_studentHall)
           return;
       end
       #hit.domi_hits += 1
@@ -260,7 +242,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_hu)
           return;
       end
       #hit.domi_hits += 1
@@ -277,7 +259,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
           return;
       end
       #hit.domi_hits += 1
@@ -295,7 +277,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
           return;
       end
       #hit.domi_hits += 1
@@ -312,7 +294,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson("시간 정보는 준비되는 중입니다.\n곧 사용 가능합니다!")
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
           return;
       end
       #hit.domi_hits += 1
@@ -343,6 +325,25 @@ class ChatController < ApplicationController
       return;
       #hit.help_hits += 1
     end
+    
+    #---------------------------------------------------------------------------------------------------------
+    
+    #이스터 에그와 디비 추가 키워드
+    
+    egg_message = easterEgg(message_content)
+    
+    unless egg_message.nil?
+      render json: jsonMaker.getMessageJson(egg_message)
+      return; 
+    end
+    
+    addedMessage = Message.findMessageBySentence( message_content )
+    unless addedMessage.nil? 
+      render json: jsonMaker.getMessageJson(addedMessage)
+      return;
+    end
+    
+    #------------------------------------------------------------------------------------------------------------
   
   
     render json: {
