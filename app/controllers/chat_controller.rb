@@ -204,7 +204,8 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
+          render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(0,dayNumber(day)-1))          
+          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
           return;
         end
       when "시간","언제"
@@ -221,7 +222,8 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
+          render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(1,dayNumber(day)-1))
+          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
           return;
         end
       when "시간","언제"
@@ -238,7 +240,8 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
+          render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_studentHall_day(dayNumber(day)-1))
+          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
           return;
         end
       when "시간","언제"
@@ -255,7 +258,8 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
+          render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_hu_day(dayNumber(day)-1))
+          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
           return;
         end
       when "시간","언제"
