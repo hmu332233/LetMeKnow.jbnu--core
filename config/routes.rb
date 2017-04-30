@@ -6,14 +6,6 @@ Rails.application.routes.draw do
   post '/friend' => 'chat#add_friend'
   delete '/friend/:user_key' => 'chat#delete_friend'
   delete '/chat_room/:user_key' => 'chat#chat_room'
-  
-  #기존 카카오
-  # get '/keyboard' => 'kakao#keyboard'
-  # post '/message' => 'kakao#message'
-  # post '/friend' => 'kakao#friend'
-  # delete '/friend/:user_key' => 'kakao#friend2'
-  # delete '/chat_room/:user_key' => 'kakao#chat_room'
-  
 
   #major
   post '/major' => 'major#create'
