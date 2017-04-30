@@ -7,6 +7,7 @@ class ManagementController < ApplicationController
     @word_list.each do |word|
       @call_size += word.count
     end
+
   end
 
   def major
@@ -29,4 +30,22 @@ class ManagementController < ApplicationController
     redirect_to management_backup_path
     
   end
+  
+  def sw_menu
+    @sw = Sw.find(1)
+    
+    puts @sw.menu
+    
+    if @sw.menu == 0
+      @sw.menu = 1
+      @val = "모바일홈페이지"
+    elsif @sw.menu == 1
+      @sw.menu = 0
+      @val = "학교홈페이지"
+    end 
+    
+    @sw.save
+  end
+    
 end
+

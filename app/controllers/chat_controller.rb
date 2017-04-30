@@ -105,6 +105,13 @@ class ChatController < ApplicationController
         
     #------------------------------------------------------------------------------------------------------------
     
+    # 메뉴 스위치
+    begin
+      sw = Sw.find(1).menu
+    rescue
+      sw = Sw.create.menu
+    end
+    
     #문장 요소 추출
     extract_list = extractor.extract(message_content)
     
@@ -204,8 +211,11 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(0,dayNumber(day)-1))          
-          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
+          if sw == 0
+            render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(0,dayNumber(day)-1)) 
+          elsif sw == 1
+            render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
+          end
           return;
         end
       when "시간","언제"
@@ -222,8 +232,11 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(1,dayNumber(day)-1))
-          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
+          if sw == 0
+            render json: jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(1,dayNumber(day)-1))  
+          elsif sw == 1
+            render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
+          end
           return;
         end
       when "시간","언제"
@@ -240,8 +253,11 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_studentHall_day(dayNumber(day)-1))
-          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
+          if sw == 0
+            render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_studentHall_day(dayNumber(day)-1))
+          elsif sw == 1
+            render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
+          end
           return;
         end
       when "시간","언제"
@@ -258,8 +274,11 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
           return;
         else
-          render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_hu_day(dayNumber(day)-1))
-          # render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
+          if sw == 0
+            render json: jsonMaker.getMessageJson(message_Manager.makeMenuText_hu_day(dayNumber(day)-1))
+          elsif sw == 1
+            render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
+          end
           return;
         end
       when "시간","언제"
@@ -270,15 +289,7 @@ class ChatController < ApplicationController
     when "예지원"
       case intent
       when nil , "학식"
-        
-        case subIntent
-        when "이번주"
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_yeji_all)
-          return;
-        else
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_yeji_day(dayNumber(day)))
-          return;
-        end
+          render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
       when "시간","언제"
           render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
           return;
