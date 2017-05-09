@@ -349,6 +349,24 @@ class ChatController < ApplicationController
       end
       #hit.domi_hits += 1
       
+    when "특성화"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_special_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_special_day(dayNumber(day)))
+          return;
+        end
+      when "시간","언제"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
+          return;
+      end
+      #hit.domi_hits += 1
+      
     when "치킨집"
       render json: jsonMaker.getMessageJson(message_Manager.getChikMessage)
       return;

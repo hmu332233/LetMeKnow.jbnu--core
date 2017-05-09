@@ -27,6 +27,18 @@ class JBNU_Dormitory_Parser
         return doc
     end
     
+    def requestHTML_special
+        
+        uri = URI(URI.encode("http://likehome.jbnu.ac.kr/board/bbs/board.php?dk_table=cbnu2_7_2_k"))
+       
+        req = Net::HTTP::Get.new(uri)
+    
+        res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+        doc = Nokogiri::HTML(res.body)
+    
+        return doc
+    end
+    
     def parseData(doc)
         
         menus = []
@@ -77,6 +89,15 @@ class JBNU_Dormitory_Parser
     def requestMenu_Basic
         
         doc = requestHTML_Basic
+        menus = parseData(doc)
+       
+        return menus
+        
+    end
+    
+    def requestMenu_special
+        
+        doc = requestHTML_special
         menus = parseData(doc)
        
         return menus
