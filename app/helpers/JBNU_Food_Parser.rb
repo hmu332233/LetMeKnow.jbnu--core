@@ -226,7 +226,7 @@ class JBNU_Food_Parser
 
         menu = []
         menu_data.each_with_index do |td,i|
-            print i.to_s + " : " + td.inner_text.strip + "\n"
+            # print i.to_s + " : " + td.inner_text.strip + "\n"
             menu << td.inner_text.strip
         end
         
