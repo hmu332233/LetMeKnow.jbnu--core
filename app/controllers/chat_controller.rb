@@ -290,11 +290,29 @@ class ChatController < ApplicationController
       case intent
       when nil , "학식"
           render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
+          return;
       when "시간","언제"
           render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
           return;
       end
       #hit.domi_hits += 1
+      
+    when "정담원"
+      case intent
+      when nil, "학식"
+        
+        case subIntent
+        when "이번주"
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_all)
+          return;
+        else
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_day(dayNumber(day)-1))
+          return;
+        end
+      when "시간", "언제"
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_jungdam)
+        return;
+      end
       
     when "참빛"
       case intent

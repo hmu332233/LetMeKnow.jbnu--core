@@ -78,6 +78,21 @@ module M_Time
     
     end
     
+    def makeMessage_time_jungdam
+        
+        message = 
+"
+@ 정담원 이용시간입니다.
+
+중식
+오전 11:30 ~ 오후 2:00
+
+"
+        return message   
+        
+    end
+    
+    
     #--------기숙사----------
     def makeMessage_time_dormitory_food
     
@@ -113,5 +128,6 @@ module M_Time
         
     end
     
+
     
 end
