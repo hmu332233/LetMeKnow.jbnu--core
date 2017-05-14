@@ -139,8 +139,8 @@ module M_Menu
     end
     
     def makeMessage_jungdam_day(day)
-        
-        if day > 5 or day == 0
+        print day
+        if day >= 5
             return "주말에는 운영하지 않습니다"
         end
        
