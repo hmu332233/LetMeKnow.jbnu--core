@@ -191,12 +191,29 @@ module M_Dormitory
         
         message = ""
         
-        menu_data.split(",").each_with_index do |lunch_d,i|
+        # menu_data.split(",").each_with_index do |lunch_d,i|
+        #     if i == 0
+        #         tmp = lunch_d.split(")")
+        #         puts tmp
+        #         unless tmp.size == 1
+        #             message += tmp[0].strip + ")" + "\n"
+        #             message += tmp[1] + "\n"
+        #         else
+        #             message += lunch_d + "\n"
+        #         end
+        #     else
+        #         message += lunch_d + "\n"
+        #     end
+        # end
+ 
+        menu_data.split(" ").each_with_index do |lunch_d,i|
             
-            if i == 0
+            if i == 0 or i == 6
                 tmp = lunch_d.split(")")
-                
                 unless tmp.size == 1
+                    if i == 6
+                        message += "\n"
+                    end
                     message += tmp[0].strip + ")" + "\n"
                     message += tmp[1] + "\n"
                 else
@@ -205,8 +222,6 @@ module M_Dormitory
             else
                 message += lunch_d + "\n"
             end
-            
-
         end
         
         return message.chop!
