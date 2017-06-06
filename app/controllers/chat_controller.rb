@@ -3,6 +3,7 @@ require 'JsonMaker'
 require 'MessageFactory'
 require 'Message_Manager'
 require 'util/TimeHelper'
+require 'timeout'
 
 class ChatController < ApplicationController
   def keyboard
@@ -12,6 +13,12 @@ class ChatController < ApplicationController
   end
 
   def message
+    
+    #시간 제한
+    begin
+      complete_results = Timeout.timeout(4.5) do      
+       
+
     
     timeHelper = TimeHelper.new
     messageFactory = MessageFactory.new
@@ -400,6 +407,19 @@ class ChatController < ApplicationController
         "text": "아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n'도움말'이라고 입력하시면\n자세한 사용방법을 알려드립니다."
       }
     }
+    
+    
+    #시간제한
+          end
+    rescue Timeout::Error
+      render json: {
+      "message":{
+        "text": "전북대학교 서버가 불안정하여\n정보를 가져오지 못하고 있습니다(흑흑)"
+      }
+    }
+    return;
+    end
+  
     
   end
 
