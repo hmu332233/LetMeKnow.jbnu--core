@@ -128,16 +128,16 @@ class ChatController < ApplicationController
   
     #subIntent 처리
     case subIntent
-    when "내일"
+    when "내일", "ㄴㅇ"
       day = timeHelper.dayOfWeek_Tomorrow
-    when "모레"
+    when "모레", "ㅁㄹ"
       day = timeHelper.dayOfWeek_AfterTomprrow
     else
       day = timeHelper.dayOfWeek_Today
     end
     
-    # puts day
-    # puts "#{entry} : #{intent} : #{subIntent}"
+    puts day
+    puts "#{entry} : #{intent} : #{subIntent}"
     
   
     #의도 별 메세지 출력
@@ -209,12 +209,12 @@ class ChatController < ApplicationController
       return;
       #hit.notice_hits += 1
                 
-    when "진수"
+    when "진수", "ㅈㅅ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
           return;
         else
@@ -230,12 +230,12 @@ class ChatController < ApplicationController
           return;
       end
       #hit.domi_hits += 1
-    when "의대"
+    when "의대", "ㅇㄷ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
           return;
         else
@@ -251,12 +251,12 @@ class ChatController < ApplicationController
           return;
       end
       #hit.domi_hits += 1
-    when "학생회관"
+    when "학생회관", "ㅎㅅㅎㄱ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
           return;
         else
@@ -272,12 +272,12 @@ class ChatController < ApplicationController
           return;
       end
       #hit.domi_hits += 1
-    when "후생관"
+    when "후생관", "ㅎㅅㄱ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
           return;
         else
@@ -304,12 +304,12 @@ class ChatController < ApplicationController
       end
       #hit.domi_hits += 1
       
-    when "정담원"
+    when "정담원", "ㅈㄷㅇ"
       case intent
       when nil, "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_all)
           return;
         else
@@ -321,12 +321,12 @@ class ChatController < ApplicationController
         return;
       end
       
-    when "참빛"
+    when "참빛" ,"ㅊㅂ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_all)
           return;
         else
@@ -338,12 +338,12 @@ class ChatController < ApplicationController
           return;
       end
       #hit.domi_hits += 1
-    when "기존관" , "새빛" , "대동" , "평화", "한빛"
+    when "기존관" , "새빛" , "대동" , "평화", "한빛" , "ㄱㅈㄱ", "ㅅㅂ", "ㄷㄷ", "ㅍㅎ", "ㅎㅂ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_all)
           return;
         else
@@ -356,12 +356,12 @@ class ChatController < ApplicationController
       end
       #hit.domi_hits += 1
       
-    when "특성화"
+    when "특성화", "ㅌㅅㅎ"
       case intent
       when nil , "학식"
         
         case subIntent
-        when "이번주"
+        when "이번주", "ㅇㅂㅈ"
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_special_all)
           return;
         else
