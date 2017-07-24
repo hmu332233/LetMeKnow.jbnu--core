@@ -221,7 +221,7 @@ class JBNU_Food_Parser
         
         tables = doc.css("#sub_right//table")
         
-        menu_data = tables[4].css("tr//td")
+        menu_data = tables[3].css("tr//td")
         
 
         menu = []
