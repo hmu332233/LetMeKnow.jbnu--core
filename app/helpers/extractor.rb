@@ -11,7 +11,7 @@ class Extractor
         food_keyword = %w[진수 의대 학생회관 후생관 예지원 정담원 기존관 참빛 새빛 대동 평화 한빛 특성화]
         etc_keyword = %w[치킨집 날씨 도움말 기숙사 긱사 생활관]
         
-        food_initial_keyword = %w[ㅈㅅ ㅇㄷ ㅎㅅㅇㄱ ㅎㅅㄱ ㅇㅈㅇ ㅈㄷㅇ ㄱㅈㄱ ㅊㅂ ㅅㅂ ㄷㄷ ㅍㅎ ㅎㅂ ㅌㅅㅎ]
+        food_initial_keyword = %w[ㅈㅅ ㅇㄷ ㅎㅅㅎㄱ ㅎㅅㄱ ㅇㅈㅇ ㅈㄷㅇ ㄱㅈㄱ ㅊㅂ ㅅㅂ ㄷㄷ ㅍㅎ ㅎㅂ ㅌㅅㅎ]
         
         entry_list = notice_keyword + food_keyword + etc_keyword + food_initial_keyword
         
