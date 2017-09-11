@@ -11,7 +11,9 @@ class Extractor
         food_keyword = %w[진수 의대 학생회관 후생관 예지원 정담원 기존관 참빛 새빛 대동 평화 한빛 특성화]
         etc_keyword = %w[치킨집 날씨 도움말 기숙사 긱사 생활관]
         
-        entry_list = notice_keyword + food_keyword + etc_keyword
+        food_initial_keyword = %w[ㅈㅅ ㅇㄷ ㅎㅅㅎㄱ ㅎㅅㄱ ㅇㅈㅇ ㅈㄷㅇ ㄱㅈㄱ ㅊㅂ ㅅㅂ ㄷㄷ ㅍㅎ ㅎㅂ ㅌㅅㅎ]
+        
+        entry_list = notice_keyword + food_keyword + etc_keyword + food_initial_keyword
         
         entry_list.each do |entry_candidate|
             
@@ -37,8 +39,9 @@ class Extractor
         
         #subIntent 추출
         date_keyword = %w[내일 모레 주간 이번주]
+        date_initial_keyword = %w[ㄴㅇ ㅁㄹ ㅈㄱ ㅇㅂㅈ]
         
-        subIntent_list = date_keyword
+        subIntent_list = date_keyword + date_initial_keyword
         
         subIntent_list.each do |subIntent_candidate|
             
