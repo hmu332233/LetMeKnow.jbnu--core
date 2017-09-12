@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   #카카오
   get '/keyboard' => 'chat#keyboard'
+  get '/message' => 'chat#message'
   post '/message' => 'chat#message'
   post '/friend' => 'chat#add_friend'
   delete '/friend/:user_key' => 'chat#delete_friend'

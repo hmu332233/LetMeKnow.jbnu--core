@@ -28,7 +28,7 @@ class JBNU_Food_Parser
         when 3
             pageID = "ID13407623471"; # 후생관
         when 4
-            pageID = "ID13367136711"; # 예지원
+            pageID = "ID13367136711"; # 정담원
         end
         
         doc = requestHTML_Mobile(pageID.to_s,day.to_s)
