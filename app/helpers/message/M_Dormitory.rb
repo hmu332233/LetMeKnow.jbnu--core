@@ -137,8 +137,11 @@ module M_Dormitory
 
         message += "아침" + "\n\n"
         message += makeMessageDomiSplit_Basic(menu.breakfast[0].split(": ")[1]) + "\n\n"
-        message += "점심"
+        message += "점심" + "\n\n"
         makeMessageDomiSplit_Basic(menu.lunch[0].split(": ")[1]).split("(").each do |m|
+          message += m
+        end
+        makeMessageDomiSplit_Basic(menu.lunch[1]).split("(").each do |m|
           message += m + "\n\n"  
         end
         message += "저녁" + "\n\n"

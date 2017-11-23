@@ -1,5 +1,6 @@
 require 'Menu'
 require 'Menu_domitory'
+require 'net/http'
 
 class JBNU_Food_Parser
     
