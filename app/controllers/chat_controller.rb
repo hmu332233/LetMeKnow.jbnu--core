@@ -470,7 +470,7 @@ class ChatController < ApplicationController
         
         alone_words.each do |alone_word|
             if word.include?alone_word
-                return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다','그래도 결혼은 하겠죠?'].sample
+                return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다'].sample
             end
         end
        
