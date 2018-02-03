@@ -163,7 +163,7 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(result)
         return;
       end
-    when "학사공지"
+    when "학사공지", "교내공지"
       result = message_Manager.getMessage_Notice(0)
       render json: jsonMaker.getMessageJson(result)
       return;
