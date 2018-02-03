@@ -394,7 +394,9 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(message_Manager.getTodayWeatherMessage)
         return;
       end
-              
+    when "편의점", "시유", "씨유" , "cu", "CU"
+      render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_convenience_store)
+      return;
     when "도움말"
       render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_basic)
       return;
