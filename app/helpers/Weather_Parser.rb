@@ -15,13 +15,13 @@ class Weather_Parser
     end
     
     def requestXML_week
-        uri = URI(URI.encode("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=146"))
+        uri = URI(URI.encode("http://www.weather.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=146"))
        
         req = Net::HTTP::Get.new(uri)
     
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
         doc = Nokogiri::XML(res.body)
-    
+
         return doc
     end
     

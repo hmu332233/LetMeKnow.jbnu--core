@@ -3,25 +3,23 @@ module M_Help
     def makeMessage_help_basic
         
         help_message = 
-"알려줘전북대는 키워드 입력방식으로 운영되고 있으며
-        
-현재
-        
+"알려줘전북대에서 제공하는 기능들입니다.
+  
 1. 학교 공지사항 확인
 2. 건지커뮤니티 글 확인
 3. 학식 메뉴 확인
 4. 학과사무실 정보 확인
 5. 날씨 확인
         
-등의 기능을 제공하고 있습니다
 하단의 버튼으로
-상세 키워드를 알려드립니다
-    
+상세 키워드를 알려드립니다.
+
+또는
+아래 링크를 이용해 상세 키워드를 알아볼 수 있습니다.
+http://pf.kakao.com/_LffxoM/1738089
 "
 
-        message = "알려줘전북대의 사용방법 입니다\n\n\n" + help_message
-        
-        return message
+        return help_message
     end
     
     def makeMessage_help_notice
@@ -29,8 +27,7 @@ module M_Help
         notice_message = 
 "@ 공지사항 확인
 
-학사공지
-일반공지
+교내공지
 교내채용
 특강
 스터디
@@ -108,8 +105,7 @@ ex)
         all_message = 
 "@ 공지사항 확인
 
-학사공지
-일반공지
+교내공지
 교내채용
 특강
 스터디
