@@ -394,7 +394,9 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(message_Manager.getTodayWeatherMessage)
         return;
       end
-              
+    when "편의점", "시유", "씨유" , "cu", "CU"
+      render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_convenience_store)
+      return;
     when "도움말"
       render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_basic)
       return;
@@ -468,7 +470,7 @@ class ChatController < ApplicationController
         
         alone_words.each do |alone_word|
             if word.include?alone_word
-                return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다','그래도 결혼은 하겠죠?'].sample
+                return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다'].sample
             end
         end
        
@@ -481,8 +483,8 @@ class ChatController < ApplicationController
             today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
             
             result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-            result += "800일 : " + (today.mjd - (start+800).mjd + 1).to_s + "\n"
-            result += "2년 : " + (today.mjd - Date.parse("22/04/2017").mjd + 1).to_s
+            result += "1500일 : " + (today.mjd - (start+1500).mjd + 1).to_s + "\n"
+            result += "3년 : " + (today.mjd - Date.parse("22/04/2018").mjd + 1).to_s
             
         when "박도현"
             
@@ -490,7 +492,7 @@ class ChatController < ApplicationController
             today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
             
             result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-            result += "500일 : " + (today.mjd - (start+500).mjd + 1).to_s + "\n"
+            result += "800일 : " + (today.mjd - (start+800).mjd + 1).to_s + "\n"
             result += "2년 : " + (today.mjd - Date.parse("24/03/2018").mjd + 1).to_s
         end
        
