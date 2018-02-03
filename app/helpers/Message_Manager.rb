@@ -24,11 +24,10 @@ class Message_Manager
             titles += post.number + "\n"
             titles += post.title.to_s.strip + "\n"
             titles += post.period + "\n"
-            titles += ("http://www.chonbuk.ac.kr/bb/board.php?action=view&boardID="+post.category+"&SEQ="+ post.number.to_s.strip).to_s + "\n\n"
-            titles.to_s
+            titles += ("https://www.jbnu.ac.kr/kor/" + post.link).to_s + "\n\n"
         end
         
-        return titles
+        return titles.to_s
     end
     
     def getJinsuMenu(day,sw)
