@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/management/backup'
   post '/management/setDB'
   get '/management/sw_menu'
+  get '/management/monitoring'
 
 
   
