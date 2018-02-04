@@ -1,12 +1,6 @@
-require 'management/Tester'
-
 class ManagementController < ApplicationController
   
   def monitoring
-    
-    tester = Tester.new("#{request.protocol}#{request.host_with_port}")
-    tester.getTestResult
-
   end
   
   def main
