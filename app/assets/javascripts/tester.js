@@ -21,8 +21,12 @@ tester.prototype.testAll = function (testcases, callback) {
   });
   
   requests.forEach(function (request) {
-    request.done(function (response) {
-      callback(response.message.text);
+    request.done(function (data, textStatus, xhr) {
+      callback({
+        status: xhr.status,
+        textStatus: textStatus,
+        message: data.message.text,
+      });
     });
   });
 };
