@@ -13,6 +13,14 @@ tester = function () {
 };
 
 
+/*
+*  테스트케이스들을 받아 결과값을 callback으로 돌려준다.
+*  NOTE: 비동기이기때문에 순서를 보장하지는 않으나
+*  map으로 promise를 분리했는데 이것이 순서를 보장하는데 도움이 주는지는 잘 모르겠다.
+*
+*  testcases {Array[String]}: 테스트케이스들의 목록
+*  callback {function}: 결과값을 불러왔을때마다 호출될 함수
+*/
 tester.prototype.testAll = function (testcases, callback) {
   var self = this;  
   
