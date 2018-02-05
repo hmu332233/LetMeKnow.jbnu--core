@@ -11,6 +11,8 @@
     <script>
         
         tester = new tester();
-        tester.requestMessage('이번주 참빛');
+        tester.testAll(['참빛', '새빛'], function (message) {
+            console.log(message);
+        });
         
     </script>
