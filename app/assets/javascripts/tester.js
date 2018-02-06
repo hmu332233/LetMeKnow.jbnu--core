@@ -25,12 +25,16 @@ tester.prototype.testAll = function (testcases, callback) {
   var self = this;  
   
   var requests = testcases.map(function(testcase) {
-    return self.requestMessage(testcase);
+    return {
+      sendMessage: testcase,
+      response: self.requestMessage(testcase)
+    }
   });
   
   requests.forEach(function (request) {
-    request.done(function (data, textStatus, xhr) {
+    request.response.done(function (data, textStatus, xhr) {
       callback({
+        sendMessage: request.sendMessage,
         status: xhr.status,
         textStatus: textStatus,
         message: data.message.text,
