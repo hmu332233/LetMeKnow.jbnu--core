@@ -49,7 +49,7 @@
         td(data.sendMessage),
         td(data.status),
         td(data.textStatus),
-        td(data.message),
+        td(data.message.replace(/\n/g, "<br />")),
       '</tr>'
     ].join('');
   };
