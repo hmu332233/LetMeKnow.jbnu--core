@@ -1,6 +1,12 @@
 
       
- 
+ <style>
+   .main-panel .header {
+     display: flex;
+     justify-content: space-between
+   }
+   
+ </style>
 
 <div class="main-panel">
     
@@ -12,9 +18,19 @@
         <div class="col-md-12">
           <div class="card">
             <div class="header">
-              <h4 class="title">Monotoring</h4>
-              <p class="category">모니터링 결과</p>
+              <div class="header__left">
+                <h4 class="title">Monotoring</h4>
+                <p class="category">모니터링 결과</p>  
+              </div>
+              <div class="header__right">
+                <button class="btn">전체</button>
+                <button class="btn">학식</button>
+                <button class="btn">학식 이번주</button>
+                <button class="btn">그 외</button>
+                <button class="btn" onClick="toggleAllResult();">결과 펼치기</button>
+              </div>
             </div>
+            
             <div class="content table-responsive table-full-width">
               <table class="table table-striped">
                 <thead>
@@ -35,18 +51,19 @@
 
 </div>
 <script>
+  function toggleAllResult() {
+    var $last_tr_list = $('#table-body .td__result').show();
+  
+  }
 
-  // TODO:: result 접기 펼치기 기능
-  // TODO:: result 모두 펼치기 모두 접기 기능
   // TODO:: 모두 테스트, 학식 테스트, 학식 이번주 테스트, 등등 추가
-  
-  
   var makeTrObject = function (data) {
-    
     template = function (data) {
-      var td = function (text) {
+      var td = function (text, className) {
+        
+        var className = className || '';
         return [
-          '<td>',
+          '<td class='+className+'>',
             text,
           '</td>'
         ].join('');
@@ -56,7 +73,7 @@
           td(data.sendMessage),
           td(data.status),
           td(data.textStatus),
-          td(data.message.replace(/\n/g, "<br/>")),
+          td(data.message.replace(/\n/g, "<br/>"), 'td__result'),
         '</tr>'
       ].join('');
     };
@@ -81,12 +98,11 @@
   }
     
   tester = new tester();
-
+  var testcases = ['', ''];
+  // var testcases = tester.testcases;
   var $table_body = $('#table-body');
-  tester.testAll(tester.testcases, function (data) {
+  tester.testAll(testcases, function (data) {
     var $tr = makeTrObject(data);
     $table_body.append($tr);
   });
-    
-    
 </script>
