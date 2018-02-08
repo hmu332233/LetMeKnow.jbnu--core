@@ -36,6 +36,9 @@
 </div>
 <script>
 
+  // TODO:: result 접기 펼치기 기능
+  // TODO:: result 모두 펼치기 모두 접기 기능
+  // TODO:: 모두 테스트, 학식 테스트, 학식 이번주 테스트, 등등 추가
   var template = function (data) {
     var td = function (text) {
       return [
@@ -49,14 +52,33 @@
         td(data.sendMessage),
         td(data.status),
         td(data.textStatus),
-        td(data.message.replace(/\n/g, "<br />")),
+        td(data.message.replace(/\n/g, "<br/>")),
       '</tr>'
     ].join('');
   };
     
   tester = new tester();
-  tester.testAll(['참빛'], function (data) {
-      $('#table-body').append(template(data));
+  // tester.testAll(tester.testcases, function (data) {
+  //     $('#table-body').append(template(data));
+  // });
+  
+    var $table_body = $('#table-body');
+    tester.testAll(['참빛', '새빛'], function (data) {
+      var $tr = $($.parseHTML(template(data)));
+      $tr.isShowing = false;
+      var $result_tr = $tr.find('td:last');
+      $result_tr.hide();
+      $tr.click(function () {
+        if ($tr.isShowing) {
+          $result_tr.hide();
+          $tr.isShowing = false;
+        } else {
+          $result_tr.show();
+          $tr.isShowing = true;
+        }
+      });
+      $table_body.append($tr);
   });
+    
     
 </script>
