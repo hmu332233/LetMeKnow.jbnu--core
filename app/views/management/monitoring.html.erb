@@ -52,8 +52,15 @@
 
 </div>
 <script>
+  var isClosed = false;
   function toggleAllResult() {
-    var $last_tr_list = $('#table-body .td__result').show();
+    if (isClosed) {
+      var $last_tr_list = $('#table-body .td__result').hide();
+      isClosed = false;
+    } else {
+      var $last_tr_list = $('#table-body .td__result').show();
+      isClosed = true;
+    }
   }
   
   function testByWords(words) {
@@ -90,7 +97,6 @@
     testEtc();
   }
 
-  // TODO:: 모두 테스트, 학식 테스트, 학식 이번주 테스트, 등등 추가
   var makeTrObject = function (data) {
     template = function (data) {
       var td = function (text, className) {
