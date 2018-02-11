@@ -6,6 +6,19 @@
      justify-content: space-between
    }
    
+   @media (max-width: 600px) {
+    .main-panel .header {
+      margin-bottom: 10px;
+    }
+    .main-panel .header .header__right {
+      display: flex;
+      flex-direction: column;
+    }
+    .main-panel .header .header__right .btn {
+      margin-bottom: 4px;
+    }
+  }
+   
  </style>
 
 <div class="main-panel">
@@ -136,6 +149,4 @@
     
     return $tr;
   }
-    
-  
 </script>
