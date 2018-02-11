@@ -23,10 +23,11 @@
                 <p class="category">모니터링 결과</p>  
               </div>
               <div class="header__right">
-                <button class="btn">전체</button>
-                <button class="btn">학식</button>
-                <button class="btn">학식 이번주</button>
-                <button class="btn">그 외</button>
+                <button class="btn" onClick="testAll();">전체</button>
+                <button class="btn" onClick="testNotice();">공지</button>
+                <button class="btn" onClick="testFood();">학식</button>
+                <button class="btn" onClick="testFoodAWeek();">학식 이번주</button>
+                <button class="btn" onClick="testEtc();">그 외</button>
                 <button class="btn" onClick="toggleAllResult();">결과 펼치기</button>
               </div>
             </div>
@@ -53,7 +54,40 @@
 <script>
   function toggleAllResult() {
     var $last_tr_list = $('#table-body .td__result').show();
+  }
   
+  function testByWords(words) {
+    _tester = new tester();
+    var testcases = ['', ''];
+    // var testcases = tester.testcases;
+    var $table_body = $('#table-body');
+    _tester.testAll(words, function (data) {
+      var $tr = makeTrObject(data);
+      $table_body.append($tr);
+    });
+  }
+  
+  testcases = new tester().testcases;
+  function testFood() {
+    testByWords(testcases.food);
+  }
+  function testFoodAWeek() {
+    var foodAWeek = testcases.food.map(function (food) {
+      return food + ' 이번주';
+    });
+    testByWords(testcases.food);
+  }
+  function testNotice() {
+    testByWords(testcases.notice);
+  }
+  function testEtc() {
+    testByWords(testcases.etc);
+  }
+  function testAll() {
+    testFood();
+    testFoodAWeek();
+    testNotice();
+    testEtc();
   }
 
   // TODO:: 모두 테스트, 학식 테스트, 학식 이번주 테스트, 등등 추가
@@ -97,12 +131,5 @@
     return $tr;
   }
     
-  tester = new tester();
-  var testcases = ['', ''];
-  // var testcases = tester.testcases;
-  var $table_body = $('#table-body');
-  tester.testAll(testcases, function (data) {
-    var $tr = makeTrObject(data);
-    $table_body.append($tr);
-  });
+  
 </script>
