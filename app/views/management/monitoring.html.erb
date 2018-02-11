@@ -1,0 +1,152 @@
+
+      
+ <style>
+   .main-panel .header {
+     display: flex;
+     justify-content: space-between
+   }
+   
+   @media (max-width: 600px) {
+    .main-panel .header {
+      margin-bottom: 10px;
+    }
+    .main-panel .header .header__right {
+      display: flex;
+      flex-direction: column;
+    }
+    .main-panel .header .header__right .btn {
+      margin-bottom: 4px;
+    }
+  }
+   
+ </style>
+
+<div class="main-panel">
+    
+  <%= render 'topNavi', title: "모니터링" %>
+  
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <div class="header__left">
+                <h4 class="title">Monotoring</h4>
+                <p class="category">모니터링 결과</p>  
+              </div>
+              <div class="header__right">
+                <button class="btn" onClick="testAll();">전체</button>
+                <button class="btn" onClick="testNotice();">공지</button>
+                <button class="btn" onClick="testFood();">학식</button>
+                <button class="btn" onClick="testFoodAWeek();">학식 이번주</button>
+                <button class="btn" onClick="testEtc();">그 외</button>
+                <button class="btn" onClick="toggleAllResult();">결과 펼치기</button>
+              </div>
+            </div>
+            
+            <div class="content table-responsive table-full-width">
+              <table class="table table-striped">
+                <thead>
+                	<th>Message</th>
+                	<th>Status</th>
+                	<th>Status Message</th>
+                	<th>Result</th>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+<script>
+  var isClosed = false;
+  function toggleAllResult() {
+    if (isClosed) {
+      var $last_tr_list = $('#table-body .td__result').hide();
+      isClosed = false;
+    } else {
+      var $last_tr_list = $('#table-body .td__result').show();
+      isClosed = true;
+    }
+  }
+  
+  function testByWords(words) {
+    _tester = new tester();
+    var testcases = ['', ''];
+    // var testcases = tester.testcases;
+    var $table_body = $('#table-body');
+    _tester.testAll(words, function (data) {
+      var $tr = makeTrObject(data);
+      $table_body.append($tr);
+    });
+  }
+  
+  testcases = new tester().testcases;
+  function testFood() {
+    testByWords(testcases.food);
+  }
+  function testFoodAWeek() {
+    var foodAWeek = testcases.food.map(function (food) {
+      return food + ' 이번주';
+    });
+    testByWords(testcases.food);
+  }
+  function testNotice() {
+    testByWords(testcases.notice);
+  }
+  function testEtc() {
+    testByWords(testcases.etc);
+  }
+  function testAll() {
+    testFood();
+    testFoodAWeek();
+    testNotice();
+    testEtc();
+  }
+
+  var makeTrObject = function (data) {
+    template = function (data) {
+      var td = function (text, className) {
+        
+        var className = className || '';
+        return [
+          '<td class='+className+'>',
+            text,
+          '</td>'
+        ].join('');
+      }
+      return [
+        '<tr>',
+          td(data.sendMessage),
+          td(data.status),
+          td(data.textStatus),
+          td(data.message.replace(/\n/g, "<br/>"), 'td__result'),
+        '</tr>'
+      ].join('');
+    };
+    
+    var $tr = $($.parseHTML(template(data)));
+    var $result_tr = $tr.find('td:last');
+    
+    $tr.isShowing = false;
+    $result_tr.hide();
+    
+    $tr.click(function () {
+      if ($tr.isShowing) {
+        $result_tr.hide();
+        $tr.isShowing = false;
+      } else {
+        $result_tr.show();
+        $tr.isShowing = true;
+      }
+    });
+    
+    return $tr;
+  }
+</script>

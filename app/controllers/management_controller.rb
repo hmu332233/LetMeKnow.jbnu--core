@@ -1,4 +1,8 @@
 class ManagementController < ApplicationController
+  
+  def monitoring
+  end
+  
   def main
     @word_list = Word.order(count: :desc)
     # @hit = Hit.all.first
