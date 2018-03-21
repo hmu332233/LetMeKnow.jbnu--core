@@ -1,5 +1,9 @@
 class TimeHelper
     
+    def now
+        time = (Time.now + (9*60*60))
+        return time
+    end
     
     def today
         
