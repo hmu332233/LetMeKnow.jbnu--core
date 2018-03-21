@@ -1,7 +1,14 @@
+require 'BusTracer'
+
 module M_Bus
     
     def makeMessage_bus_location
-        return '버스위치'
+        
+        busTracer = BusTracer.new
+        
+       return busTracer.trace()
+        
+        # return '버스위치'
     end
     
     def makeMessage_bus_time
