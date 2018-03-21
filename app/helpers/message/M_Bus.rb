@@ -6,9 +6,13 @@ module M_Bus
         
         busTracer = BusTracer.new
         
-       return busTracer.trace()
+        bus_location = busTracer.trace(0)
         
-        # return '버스위치'
+        past_stop_name = busTracer.getNameData(0, bus_location[:past_stop])
+        current_stop = busTracer.getNameData(0, bus_location[:current_stop])
+        next_stop = busTracer.getNameData(0, bus_location[:next_stop])
+        
+        return "#{past_stop_name}\n#{current_stop}\n#{next_stop}"
     end
     
     def makeMessage_bus_time

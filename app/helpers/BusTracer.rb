@@ -1,8 +1,57 @@
 require 'util/TimeHelper'
 
 class BusTracer
+  
+  def getNameData(bus_no, index) 
+    no1 = [
+      '생활관(대동관)',
+      '2학생회관 측면',
+      '진수당 건너편',
+      '생활대 입구',
+      '상대 2호관 측면',
+      '학습도서관 전면',
+      '농생대본관 전면',
+      '예체능관 측면',
+      '생활관(대동관)'
+    ]
+    
+    no2 = [
+      '생활관(대동관)',
+      '2학생회관 측면',
+      '대학본부 측면',
+      '정보전산원 후면(1)',
+      '치의학전문대학입구(1)',
+      '의대 학생회관',
+      '정보전산원 후면(2)',
+      '진수당 입구',
+      '예체능관 측면',
+      '생활관[대동관]'
+    ]
+    
+    
+    
+    if bus_no == 0
+      
+      if index > no1.size - 1
+        index = 0
+      elsif index < 0
+        index = no1.size - 1
+      end
+      
+      return no1[index]
+    else
+      
+      if index > no2.size - 1
+        index = 0
+      elsif index < 0
+        index = no2.size - 1
+      end
+      
+      return no2[index]
+    end
+  end
    
-  def data(type, index)
+  def getTimeData(type, index)
      
     no1 = [
       ["10:30", "11:00", "11:30", "13:00", "13:30", "14:00"],
@@ -54,15 +103,28 @@ class BusTracer
     end
   end
   
-  def trace
+  def trace(no)
     now = TimeHelper.new.now
     puts now
-    print getNearestTime(0)
-    return 'a'
+    nearestTimeData = getNearestTime(no)
+    puts nearestTimeData[:time]
+    
+    course_index = nearestTimeData[:index][0]
+    arriving_index = nearestTimeData[:index][1]
+    puts '오차범위: ' + getNameData(no, arriving_index-2)
+    puts '현재위치: ' + getNameData(no, arriving_index-1)
+    puts '오차범위: ' + getNameData(no, arriving_index)
+     
+    return {
+      course_index: course_index,
+      past_stop: arriving_index-2,
+      current_stop: arriving_index-1,
+      next_stop: arriving_index
+    }
   end
   
   def getNearestTime(no)
-    bus_times = data('reverse', no)
+    bus_times = getTimeData('reverse', no)
     result = nil
     bus_times.each_with_index do |course_times, i|
       course_times.each_with_index do |course_time, j|
@@ -77,7 +139,6 @@ class BusTracer
   end
   
   def isPast(target_time)
-    puts target_time
     now = TimeHelper.new.now
     
     splited_time1 = [now.hour, now.min]
