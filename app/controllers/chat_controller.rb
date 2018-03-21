@@ -397,6 +397,18 @@ class ChatController < ApplicationController
     when "편의점", "시유", "씨유" , "cu", "CU"
       render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_convenience_store)
       return;
+    when "버스"
+      case intent
+      when "위치"
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_bus_location)
+        return;
+      when "시간"
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_bus_time)
+        return;
+      else
+        render json: jsonMaker.getMessageJson('test')
+        return;
+      end
     when "도움말"
       render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_basic)
       return;
