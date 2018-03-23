@@ -80,7 +80,8 @@ class BusTracer
     if arriving_index > timeData.size - 1
       arriving_index = 0
     elsif arriving_index < 0
-      arriving_index = timeData.size - 1
+      # arriving_index = timeData.size - 1
+      arriving_index = 0
     end
     
     return arriving_index

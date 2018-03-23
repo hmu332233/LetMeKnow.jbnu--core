@@ -35,12 +35,12 @@ module M_Bus
         text = ""
         
         course_name_list.each_with_index do |name, i|
-            if i == bus_location[:current_stop]
-                text += "◎  #{name}\n▼  #{course_time_list[i]}\n▼\n"
-            elsif i == bus_location[:next_stop]
+            if i == bus_location[:next_stop]
                 text += "○  #{name}\n      #{course_time_list[i]}\n\n"
+            elsif i == bus_location[:current_stop]
+                text += "◎  #{name}\n▼  #{course_time_list[i]}\n▼\n"
             else
-                text += "     #{name}\n     #{course_time_list[i]}\n\n"
+                text += "      #{name}\n      #{course_time_list[i]}\n\n"
             end
         end
         
