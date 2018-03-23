@@ -21,6 +21,10 @@ module M_Bus
         busTracer = BusTracer.new
         bus_location = busTracer.trace(bus_no)
         
+        if bus_location.nil?
+            return "     운행 종료\n\n"
+        end
+        
         past_stop_name = busTracer.getNameData(bus_no, bus_location[:past_stop])
         current_stop = busTracer.getNameData(bus_no, bus_location[:current_stop])
         next_stop = busTracer.getNameData(bus_no, bus_location[:next_stop])
@@ -32,11 +36,11 @@ module M_Bus
         
         course_name_list.each_with_index do |name, i|
             if i == bus_location[:current_stop]
-                text += "◎ #{name}\n    #{course_time_list[i]}\n\n"
-            elsif i == bus_location[:past_stop] || i == bus_location[:next_stop]
-                text += "○ #{name}\n    #{course_time_list[i]}\n\n"
+                text += "◎  #{name}\n▼  #{course_time_list[i]}\n▼\n"
+            elsif i == bus_location[:next_stop]
+                text += "○  #{name}\n      #{course_time_list[i]}\n\n"
             else
-                text += "    #{name}\n    #{course_time_list[i]}\n\n"
+                text += "     #{name}\n     #{course_time_list[i]}\n\n"
             end
         end
         

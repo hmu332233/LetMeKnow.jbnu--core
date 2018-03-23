@@ -141,6 +141,10 @@ class BusTracer
   def trace(no)
 
     nearestTimeData = getNearestTime(no)
+    if nearestTimeData.nil?
+      return nil
+    end
+    
     course_index = nearestTimeData[:index][0]
     arriving_index = nearestTimeData[:index][1]
 
@@ -165,6 +169,8 @@ class BusTracer
         end
       end
     end
+    
+    return nil
   end
   
   def isPast(target_time)
