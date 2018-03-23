@@ -139,17 +139,11 @@ class BusTracer
   end
   
   def trace(no)
-    now = TimeHelper.new.now
-    puts now
+
     nearestTimeData = getNearestTime(no)
-    puts nearestTimeData[:time]
-    
     course_index = nearestTimeData[:index][0]
     arriving_index = nearestTimeData[:index][1]
-    puts '오차범위: ' + getNameData(no, arriving_index-2)
-    puts '현재위치: ' + getNameData(no, arriving_index-1)
-    puts '오차범위: ' + getNameData(no, arriving_index)
-     
+
     return {
       course_index: course_index,
       past_stop: convertArrivingIndex(no, arriving_index-2),
