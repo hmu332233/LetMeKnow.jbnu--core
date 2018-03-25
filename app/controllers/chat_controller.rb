@@ -156,7 +156,7 @@ class ChatController < ApplicationController
     when "기숙사","긱사","생활관"
       case intent
       when "시간"
-        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water)
         return;
       else
         result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관"
@@ -334,7 +334,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water)
           return;
       end
       #hit.domi_hits += 1
@@ -351,7 +351,7 @@ class ChatController < ApplicationController
           return;
         end
       when "시간","언제"
-          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
+          render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water)
           return;
       end
       #hit.domi_hits += 1
