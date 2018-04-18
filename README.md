@@ -6,6 +6,18 @@
 학교 공지사항, 학식, 학교 날씨, 학교 버스 등의 정보를 제공하고 있습니다 <br/>
 치킨을 자주 시켜먹는 대학생의 특성을 반영한 치킨마리수 계산과 같이 재밌는 기능도 제공하고 있습니다 <br/>
 
+## deploy
+
+- `nginx` + `unicorn`
+```bash
+# 이미지 생성
+$ docker build -t [이미지 이름] .
+
+# 이미지 실행
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름] /bin/bash -c "bundle exec rake assets:precompile && rake db:migrate && foreman start -f Procfile"
+```
+- 추가적으로 환경변수로 지도검색을 위한 네이버 키가 필요하다  
+  `-e naver_id=[naver_key] -e naver_sc=[naver_sc]`
 
 
 ## 친구 추가 방법
@@ -34,12 +46,3 @@ http://plus.kakao.com/home/@알려줘전북대 <br/>
 ### 치킨 마리수 계산<br/>
 
 <img src="http://blogfiles.naver.net/MjAxNzAyMDdfMjE1/MDAxNDg2Mzk4NzE4NzM4.7tJvhabOHMBiWbNO8nuoFeS6vj-QCVAFbnwlUckzNogg.kwwRrWs3P5BlVRUhUz9xZHZp03wm36U1mfTOLRmmvSUg.JPEG.hmu332233/KakaoTalk_20170206_171102801.jpg" style=" width:320px; height:86px; rwidth:320px; rheight:86px;" width="320" height="86" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="86px">
-
-
-## 오픈소스 라이센스
-  
-### nokogiri<br/>
-https://github.com/sparklemotion/nokogiri <br/>
-Copyright (c) 2008 - 2016,<br/>
-The MIT License
-  
