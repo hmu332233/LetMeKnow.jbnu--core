@@ -14,7 +14,7 @@
 $ docker build -t [이미지 이름] .
 
 # 이미지 실행
-$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름] /bin/bash -c "bundle exec rake assets:precompile && rake db:migrate && foreman start -f Procfile"
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름]
 ```
 - 추가적으로 환경변수로 지도검색을 위한 네이버 키가 필요하다  
   `-e naver_id=[naver_key] -e naver_sc=[naver_sc]`
