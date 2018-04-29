@@ -1,4 +1,4 @@
-require 'extractor'
+require 'Extractor'
 require 'JsonMaker'
 require 'MessageFactory'
 require 'Message_Manager'
