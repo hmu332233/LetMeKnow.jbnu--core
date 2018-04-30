@@ -6,7 +6,23 @@
 학교 공지사항, 학식, 학교 날씨, 학교 버스 등의 정보를 제공하고 있습니다 <br/>
 치킨을 자주 시켜먹는 대학생의 특성을 반영한 치킨마리수 계산과 같이 재밌는 기능도 제공하고 있습니다 <br/>
 
+## deploy
 
+- `nginx` + `unicorn`
+```bash
+# 이미지 생성
+$ docker build -t [이미지 이름] .
+
+# 이미지 실행
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름]
+```
+- 추가적으로 환경변수로 지도검색을 위한 네이버 키가 필요하다  
+  `-e naver_id=[naver_key] -e naver_sc=[naver_sc]`
+
+- 동작하는 worker_processes의 수를 조절하고 싶다면 아래와 같이 환경변수를 추가한다.
+```bash
+-e WEB_CONCURRENCY=[number] // default 3
+```
 
 ## 친구 추가 방법
 
@@ -16,7 +32,9 @@ http://plus.kakao.com/home/@알려줘전북대 <br/>
 
 ## 스크린샷
 <br/>
+
 ### 학식<br/>
+
 <img id="se_object_1486398907466" src="http://blogfiles.naver.net/MjAxNzAyMDdfMTgg/MDAxNDg2Mzk4NzE5NjI2.E5KkrAhd4weoEl1JTpEWJNr5aU6TErLcSnI5Seqj4Iwg.CpTWDis4XKnzVqS48axpEmFywLlGR2Rk8VDCd5D4txUg.JPEG.hmu332233/KakaoTalk_20170206_171100977.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style=" width:320px; height:426px; rwidth:320px; rheight:426px;" width="320" height="426" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="426px">
 <img id="se_object_1486398836209" src="http://blogfiles.naver.net/MjAxNzAyMDdfMTc0/MDAxNDg2Mzk4NzE5ODUw.M5pyANbFHVI7QGpFj27vMIdETQ-cgGYwuRomTG8smIwg.FNxHTxjO_eDYRb-Uq2y4xeS0jtz6IPkBassNR0BqR8cg.JPEG.hmu332233/KakaoTalk_20170206_171100551.jpg" class="__se_object" s_type="attachment" s_subtype="photo" style="width: 320px; height: 320px; border-color: rgb(0, 0, 0); rwidth:320px; rheight:320px;" width="320" height="320" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="320px">
 
@@ -34,12 +52,3 @@ http://plus.kakao.com/home/@알려줘전북대 <br/>
 ### 치킨 마리수 계산<br/>
 
 <img src="http://blogfiles.naver.net/MjAxNzAyMDdfMjE1/MDAxNDg2Mzk4NzE4NzM4.7tJvhabOHMBiWbNO8nuoFeS6vj-QCVAFbnwlUckzNogg.kwwRrWs3P5BlVRUhUz9xZHZp03wm36U1mfTOLRmmvSUg.JPEG.hmu332233/KakaoTalk_20170206_171102801.jpg" style=" width:320px; height:86px; rwidth:320px; rheight:86px;" width="320" height="86" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="86px">
-
-
-## 오픈소스 라이센스
-  
-### nokogiri<br/>
-https://github.com/sparklemotion/nokogiri <br/>
-Copyright (c) 2008 - 2016,<br/>
-The MIT License
-  
