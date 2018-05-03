@@ -427,10 +427,13 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson("교내 셔틀버스 정보를 제공하고 있습니다.\n\n  버스 위치 - 실시간 셔틀버스 위치\n  버스 시간 - 셔틀버스 시간")
         return;
       end
-    when "중도"
+    when "중도", "도서관"
       case intent
       when "자리", "좌석"
         render json: jsonMaker.getMessageJson(messageFactory.makeMessage_library_empty_seat)
+        return;
+      when "시간"
+        render json: jsonMaker.getMessageJson(messageFactory.makeMessage_library_time)
         return;
       else
         render json: jsonMaker.getMessageJson("중도 나머지")
