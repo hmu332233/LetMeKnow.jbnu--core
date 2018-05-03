@@ -436,7 +436,7 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(messageFactory.makeMessage_library_time)
         return;
       else
-        render json: jsonMaker.getMessageJson("중도 나머지")
+        render json: jsonMaker.getMessageJson("도서관 정보를 제공하고 있습니다.\n\중도 자리\n- 열람실 실시간 좌석수\n\n중도 시간\n- 자료실, 열람실, 편의점 이용시간")
         return;
       end
     when "도움말"
