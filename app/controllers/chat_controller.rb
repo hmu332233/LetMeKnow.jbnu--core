@@ -440,7 +440,7 @@ class ChatController < ApplicationController
         return;
       end
     when "도움말"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_basic)
+      render json: jsonMaker.getMessageJson(messageFactory.makeMessage_help_basic)
       return;
       #hit.help_hits += 1
     end
