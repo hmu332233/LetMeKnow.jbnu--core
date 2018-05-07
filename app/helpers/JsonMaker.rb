@@ -26,6 +26,22 @@ class JsonMaker
         return json
         
     end
+  
+    # button을 포함한 메세지의 json양식을 리턴한다.
+    # @param {string} text              사용자에게 보여질 텍스트
+    # @param {array{string}} btns       사용자에게 보여질 버튼 목록
+    def getBtnsJson(text, btns)
+        json = {
+          "message": {
+            "text": text,
+          },
+            "keyboard": {
+              "type": "buttons",
+              "buttons": btns
+          }
+        }
+        return json
+    end
     
     # def getBusMenuJson(text)
         
