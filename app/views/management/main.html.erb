@@ -48,7 +48,12 @@
                                 <div class="footer">
                                     <div class="chart-legend">
                                          <% @word_list.each do |word| %>
-                                            <%= "#{word.content} : #{word.count}"%><br/>
+                                            <% if word.content.include?('http') %>
+                                              <%= link_to "#{word.content} : #{word.count}", word.content %>
+                                            <% else %>
+                                              <%= "#{word.content} : #{word.count}"%>
+                                            <% end %>
+                                            <br/>
                                         <% end %>
                                     </div>
                                     <hr>
