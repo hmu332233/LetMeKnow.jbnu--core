@@ -26,6 +26,7 @@ class ChatController < ApplicationController
     jsonMaker = JsonMaker.new
     extractor = Extractor.new
     
+    user_key = params[:user_key]
     message_content = params[:content]
     
     #사용량 측정
@@ -33,6 +34,9 @@ class ChatController < ApplicationController
     word = words.find_or_create_by(content: message_content)
     word.count += 1
     word.save
+    
+    # new 사용량 측정용
+    userWord = UserWord.create(user_key: user_key, content: message_content)
     
     #도움말 메세지
     case message_content
