@@ -49,7 +49,7 @@
                                     <div class="chart-legend">
                                          <% @word_list.each do |word| %>
                                             <% if word.content.include?('http') %>
-                                              <%= link_to "#{word.content} : #{word.count}", word.content %>
+                                              <%= link_to "#{word.content} : #{word.count}", word.content, target: "_blank" %>
                                             <% else %>
                                               <%= "#{word.content} : #{word.count}"%>
                                             <% end %>
