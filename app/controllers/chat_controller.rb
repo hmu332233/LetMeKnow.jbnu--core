@@ -28,13 +28,7 @@ class ChatController < ApplicationController
     
     user_key = params[:user_key]
     message_content = params[:content]
-    
-    #사용량 측정
-    words = Word.all
-    word = words.find_or_create_by(content: message_content)
-    word.count += 1
-    word.save
-    
+
     # new 사용량 측정용
     userWord = UserWord.create(user_key: user_key, content: message_content)
     
@@ -177,47 +171,47 @@ class ChatController < ApplicationController
       result = message_Manager.getMessage_Notice(0)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "일반공지"
       result = message_Manager.getMessage_Notice(1)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "교내채용"
       result = message_Manager.getMessage_Notice(2)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "특강"
       result = message_Manager.getMessage_Notice(3)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "스터디"
       result = message_Manager.getMessage_Notice(4)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "알바"
       result = message_Manager.getMessage_Notice(5)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "판매구매"
       result = message_Manager.getMessage_Notice(6)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "자취"
       result = message_Manager.getMessage_Notice(7)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
     when "분실물"
       result = message_Manager.getMessage_Notice(8)
       render json: jsonMaker.getMessageJson(result)
       return;
-      #hit.notice_hits += 1
+       
                 
     when "진수", "ㅈㅅ"
       case intent
@@ -239,7 +233,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_jinsu)
           return;
       end
-      #hit.domi_hits += 1
+       
     when "의대", "ㅇㄷ"
       case intent
       when nil , "학식"
@@ -260,7 +254,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_medi)
           return;
       end
-      #hit.domi_hits += 1
+       
     when "학생회관", "ㅎㅅㅎㄱ"
       case intent
       when nil , "학식"
@@ -281,7 +275,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_studentHall)
           return;
       end
-      #hit.domi_hits += 1
+       
     when "후생관", "ㅎㅅㄱ"
       case intent
       when nil , "학식"
@@ -302,7 +296,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_hu)
           return;
       end
-      #hit.domi_hits += 1
+       
     when "예지원"
       case intent
       when nil , "학식"
@@ -312,7 +306,7 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
           return;
       end
-      #hit.domi_hits += 1
+       
       
     when "정담원", "ㅈㄷㅇ"
       case intent
@@ -353,7 +347,7 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_water)
         return;
       end
-      #hit.domi_hits += 1
+       
     when "기존관" , "새빛" , "대동" , "평화", "한빛" , "ㄱㅈㄱ", "ㅅㅂ", "ㄷㄷ", "ㅍㅎ", "ㅎㅂ"
       case intent
       when nil , "학식"
@@ -376,7 +370,7 @@ class ChatController < ApplicationController
         render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_water)
         return;
       end
-      #hit.domi_hits += 1
+       
       
     when "특성화", "ㅌㅅㅎ"
       case intent
@@ -394,12 +388,12 @@ class ChatController < ApplicationController
           render json: jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
           return;
       end
-      #hit.domi_hits += 1
+       
       
     when "치킨집"
       render json: jsonMaker.getMessageJson(message_Manager.getChikMessage)
       return;
-      #hit.chik_hits += 1
+       
     when "날씨"
       
       case subIntent
@@ -446,7 +440,7 @@ class ChatController < ApplicationController
     when "도움말"
       render json: jsonMaker.getMessageJson(messageFactory.makeMessage_help_basic)
       return;
-      #hit.help_hits += 1
+       
     end
   
   
