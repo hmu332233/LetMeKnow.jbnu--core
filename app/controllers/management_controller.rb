@@ -11,7 +11,11 @@ class ManagementController < ApplicationController
     @word_list.each do |word|
       @call_size += word.count
     end
-
+  end
+  
+  def user
+    @user_list = UserWord.all
+    
   end
 
   def major
