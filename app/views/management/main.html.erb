@@ -21,14 +21,14 @@
                                     <div class="col-xs-7">
                                         <div class="numbers">
                                             <p>총 사용량</p>
-                                            <%= @call_size %>
+                                            <%= @allRequestCount %>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-reload"></i> <%= @word_list.first.updated_at %>
+                                        <i class="ti-reload"></i> 
                                     </div>
                                 </div>
                             </div>
@@ -42,16 +42,16 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Message list</h4>
-                                <p class="category"><%="메세지 : #{@call_size}"%></p>
+                                <p class="category"><%="메세지 : #{@allRequestCount}"%></p>
                             </div>
                             <div class="content">
                                 <div class="footer">
                                     <div class="chart-legend">
-                                         <% @word_list.each do |word| %>
-                                            <% if word.content.include?('http') %>
-                                              <%= link_to "#{word.content} : #{word.count}", word.content, target: "_blank" %>
+                                         <% @groupedWordsByContent.each do |content, count| %>
+                                            <% if content.include?('http') %>
+                                              <%= link_to "#{content} : #{count}", content, target: "_blank" %>
                                             <% else %>
-                                              <%= "#{word.content} : #{word.count}"%>
+                                              <%= "#{content} : #{count}"%>
                                             <% end %>
                                             <br/>
                                         <% end %>

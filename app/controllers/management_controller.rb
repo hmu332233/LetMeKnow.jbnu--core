@@ -3,27 +3,13 @@ class ManagementController < ApplicationController
   def monitoring
   end
   
-  def main
-    @word_list = Word.order(count: :desc)
-    # @hit = Hit.all.first
-    
-    @call_size = 0
-    @word_list.each do |word|
-      @call_size += word.count
-    end
+  def main    
+    @groupedWordsByContent = UserWord.group(:content).order('count_id desc', 'max(created_at) asc').count('id')
+    @allRequestCount = @groupedWordsByContent.values.sum
   end
   
   def user
-    @user_list = UserWord.all
-
-    @groupedWordsByUserKey = UserWord.group(:user_key).count()
-    groupedWordsByContent = UserWord.group(:content).count()
-
-    groupedWordsByContent.each do |key, value|
-      puts "#{key} #{value}"
-    end
-
-
+    @groupedWordsByUserKey = UserWord.group(:user_key).order('count_id desc', 'max(created_at) asc').count('id')
   end
 
   def major
