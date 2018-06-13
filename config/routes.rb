@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post '/friend' => 'chat#add_friend'
   delete '/friend/:user_key' => 'chat#delete_friend'
   delete '/chat_room/:user_key' => 'chat#chat_room'
+  
+  #api
+  get '/api/user_words/user_key/:user_key' => 'api#getUserWordsByUserKey'
 
   #major
   post '/major' => 'major#create'
