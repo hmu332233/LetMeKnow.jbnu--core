@@ -15,7 +15,15 @@ class ManagementController < ApplicationController
   
   def user
     @user_list = UserWord.all
-    
+
+    @groupedWordsByUserKey = UserWord.group(:user_key).count()
+    groupedWordsByContent = UserWord.group(:content).count()
+
+    groupedWordsByContent.each do |key, value|
+      puts "#{key} #{value}"
+    end
+
+
   end
 
   def major
