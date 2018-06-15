@@ -42,7 +42,7 @@
               <div class="footer">
                 <div class="chart-legend">
                   <% @groupedWordsByUserKey.each do |userKey, count| %>
-                    <%= "#{userKey} : #{count}" %><br/>
+                    <%= link_to "#{userKey} : #{count}", "/management/users/#{userKey}" %><br/>
                   <% end %>
                 </div>
                 <hr>

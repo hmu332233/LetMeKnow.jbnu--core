@@ -42,7 +42,7 @@
               <div class="footer">
                 <div class="chart-legend">
                   <% @userWords.each do |userWord| %>
-                    <%= "#{userWord.created_at} : #{userWord.content}" %><br/>
+                    <%= "#{userWord.created_at.strftime("%FT%T")} : #{userWord.content}" %><br/>
                   <% end %>
                 </div>
                 <hr>
