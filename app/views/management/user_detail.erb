@@ -1,0 +1,59 @@
+<div class="main-panel">
+  <%= render 'topNavi', title: "사용자 통계" %>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6">
+          <div class="card">
+            <div class="content">
+              <div class="row">
+                <div class="col-xs-5">
+                  <div class="icon-big icon-warning text-center">
+                    <i class="ti-server"></i>
+                  </div>
+                </div>
+                <div class="col-xs-7">
+                  <div class="numbers">
+                    <p>메세지 수</p>
+                    <%= @userWords.count %>
+                  </div>
+                </div>
+              </div>
+              <div class="footer">
+                <hr />
+                <div class="stats">
+                  <i class="ti-reload"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">Message list</h4>
+              <p class="category">
+                <%="메세지 : #{@userWords.count}"%>
+              </p>
+            </div>
+            <div class="content">
+              <div class="footer">
+                <div class="chart-legend">
+                  <% @userWords.each do |userWord| %>
+                    <%= "#{userWord.created_at} : #{userWord.content}" %><br/>
+                  <% end %>
+                </div>
+                <hr>
+                <div class="stats">
+                  <i class="ti-reload"></i> Updated 3 minutes ago
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

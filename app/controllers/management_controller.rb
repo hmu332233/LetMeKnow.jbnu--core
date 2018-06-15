@@ -11,6 +11,11 @@ class ManagementController < ApplicationController
   def user
     @groupedWordsByUserKey = UserWord.group(:user_key).order('count_id desc', 'max(created_at) asc').count('id')
   end
+  
+  def user_detail
+    user_key = params[:user_key]
+    @userWords = UserWord.where({ user_key: user_key })
+  end
 
   def major
     @major_list = Major.all
