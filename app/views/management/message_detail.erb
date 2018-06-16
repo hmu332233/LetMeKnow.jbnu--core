@@ -1,0 +1,32 @@
+<div class="main-panel">
+  <%= render 'topNavi', title: "사용자 통계" %>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">Message list</h4>
+              <p class="category">
+               
+              </p>
+            </div>
+            <div class="content">
+              <div class="footer">
+                <div class="chart-legend">
+                  <% @userWordJson.each do |key, value| %>
+                    <%= "#{key} : #{value}" %><br/>
+                  <% end %>
+                </div>
+                <hr>
+                <div class="stats">
+                  <i class="ti-reload"></i> Updated 3 minutes ago
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,11 @@ class ManagementController < ApplicationController
     @allRequestCount = @groupedWordsByContent.values.sum
   end
   
+  def message_detail
+    word_id = params[:word_id]
+    @userWordJson = JSON.parse(UserWord.find_by(id: word_id).to_json)
+  end
+  
   def user
     @groupedWordsByUserKey = UserWord.group(:user_key).order('count_id desc', 'max(created_at) asc').count('id')
   end
