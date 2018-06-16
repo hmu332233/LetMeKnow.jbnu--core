@@ -22,8 +22,9 @@ Rails.application.routes.draw do
 
   #관리 페이지
   get '/management/main'
-  get '/management/users/:user_key' => 'management#user_detail'
+  get 'management/main/:content' => 'management#message_detail'
   get '/management/users' => 'management#user'
+  get '/management/users/:user_key' => 'management#user_detail'
   get '/management/major'
   get '/management/message'
   get '/management/backup'

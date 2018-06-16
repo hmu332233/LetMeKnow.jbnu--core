@@ -1,6 +1,9 @@
 
-          
-     
+    <style>
+      a:not(.image_link) {
+        color: #252422;
+      }
+    </style>
 
     <div class="main-panel">
       
@@ -49,9 +52,9 @@
                                     <div class="chart-legend">
                                          <% @groupedWordsByContent.each do |content, count| %>
                                             <% if content.include?('http') %>
-                                              <%= link_to "#{content} : #{count}", content, target: "_blank" %>
+                                              <%= link_to "#{content} : #{count}", content, target: "_blank", class: 'image_link' %>
                                             <% else %>
-                                              <%= "#{content} : #{count}"%>
+                                              <%= link_to "#{content} : #{count}", "/management/main/#{content}" %>
                                             <% end %>
                                             <br/>
                                         <% end %>

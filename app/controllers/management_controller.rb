@@ -9,8 +9,8 @@ class ManagementController < ApplicationController
   end
   
   def message_detail
-    word_id = params[:word_id]
-    @userWordJson = JSON.parse(UserWord.find_by(id: word_id).to_json)
+    content = params[:content]
+    @userWords = UserWord.where({content: content})
   end
   
   def user
