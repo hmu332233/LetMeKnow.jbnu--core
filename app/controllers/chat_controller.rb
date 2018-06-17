@@ -517,7 +517,7 @@ class ChatController < ApplicationController
         case word
         when "데이터삭제"
             result = "모든데이터가 삭제되었습니다"
-            Word.delete_all
+            UserWord.delete_all
         when "반상민"
             start = Date.parse("22/04/2015")
             today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
