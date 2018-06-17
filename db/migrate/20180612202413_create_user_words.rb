@@ -1,4 +1,4 @@
-class CreateUserWords < ActiveRecord::Migration[5.0]
+class CreateUserWords < ActiveRecord::Migration
   def change
     create_table :user_words do |t|
 
