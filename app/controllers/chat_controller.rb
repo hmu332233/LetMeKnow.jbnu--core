@@ -534,6 +534,15 @@ class ChatController < ApplicationController
             result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
             result += "800일 : " + (today.mjd - (start+800).mjd + 1).to_s + "\n"
             result += "2년 : " + (today.mjd - Date.parse("24/03/2018").mjd + 1).to_s
+          
+         when "연이웅이"
+            start = Date.parse("01/05/2018")
+            today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
+            
+            result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
+            result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
+            result += "1년 : " + (today.mjd - Date.parse("01/05/2019").mjd + 1).to_s
+          
         end
        
         return result
