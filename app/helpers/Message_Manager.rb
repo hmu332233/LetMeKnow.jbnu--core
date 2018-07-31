@@ -1,6 +1,6 @@
 require 'JBNU_Parser'
 require 'JBNU_Food_Parser'
-require 'Weather_Parser'
+require 'parser/WeatherParser'
 require 'Bus_Parser'
 require 'Datas'
 require 'NilChecker'
@@ -724,7 +724,7 @@ class Message_Manager
     
     def makeWeatherMessage(day)
         
-        weathers = Weather_Parser.new.getTodayWeather
+        weathers = WeatherParser.new.getTodayWeather
         
         if day.to_s == "0"
             tmx = weathers.first.tmx
@@ -783,7 +783,7 @@ class Message_Manager
         result = "\n"
         result += "전주 주간 날씨입니다.\n\n"
         
-        weathers = Weather_Parser.new.getWeekDayWeather
+        weathers = WeatherParser.new.getWeekDayWeather
   
         result = ""
         weathers.each do |weather|
