@@ -81,6 +81,7 @@
     var testcases = ['', ''];
     // var testcases = tester.testcases;
     var $table_body = $('#table-body');
+    $table_body.html('');
     _tester.testAll(words, function (data) {
       var $tr = makeTrObject(data);
       $table_body.append($tr);
