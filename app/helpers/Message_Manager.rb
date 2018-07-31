@@ -1,4 +1,4 @@
-require 'JBNU_Parser'
+require 'parser/JBNUParser'
 require 'JBNU_Food_Parser'
 require 'parser/WeatherParser'
 require 'parser/BusParser'
@@ -13,7 +13,7 @@ class Message_Manager
     
     def getMessage_Notice_Search(board_id,word)
     
-        parser = JBNU_Parser.new
+        parser = JBNUParser.new
             
         posts = parser.getPosts(board_id,word)
         
