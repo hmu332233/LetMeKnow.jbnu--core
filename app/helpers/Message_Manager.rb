@@ -3,7 +3,7 @@ require 'parser/JBNUFoodParser'
 require 'parser/WeatherParser'
 require 'parser/BusParser'
 require 'Datas'
-require 'NilChecker'
+require 'util/NilChecker'
 
 class Message_Manager
     
