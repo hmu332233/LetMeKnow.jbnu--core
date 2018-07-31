@@ -1,4 +1,4 @@
-require 'JBNU_Food_Parser'
+require 'parser/JBNUFoodParser'
 
 module M_Menu
     
@@ -9,7 +9,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_jinsu_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -34,7 +34,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_medi_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -59,7 +59,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_studentHall_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -83,7 +83,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_hu_mobile(day)
         
         
@@ -118,7 +118,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
        
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_yeji_mobile(day)
        
         contents = ""
@@ -144,7 +144,7 @@ module M_Menu
             return "주말에는 운영하지 않습니다"
         end
        
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requesJungdam
         menu = menus[day]
         
@@ -166,7 +166,7 @@ module M_Menu
     #이번주 메뉴
     def makeMessage_jungdam_all
     
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requesJungdam
         
         contents = ""
@@ -186,7 +186,7 @@ module M_Menu
     
     def makeMessage_studentHall_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestStudentHall
         
          # head_text = menus[0].shop_name + "\n\n\n"
@@ -207,7 +207,7 @@ module M_Menu
     
     def makeMessage_hu_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_hu
         
         contents = ""
@@ -242,7 +242,7 @@ module M_Menu
     
     def makeMessage_yeji_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestYeji
         
         contents = ""
@@ -273,7 +273,7 @@ module M_Menu
     #의대 : 1
     def makeMessage_all(id)
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu(id)
         
         # head_text = menus[0].shop_name + "\n\n\n"

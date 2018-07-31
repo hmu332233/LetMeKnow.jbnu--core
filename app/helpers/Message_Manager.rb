@@ -1,5 +1,5 @@
 require 'parser/JBNUParser'
-require 'JBNU_Food_Parser'
+require 'parser/JBNUFoodParser'
 require 'parser/WeatherParser'
 require 'parser/BusParser'
 require 'Datas'
@@ -104,7 +104,7 @@ class Message_Manager
     
     def makeMenuText_studentHall_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestStudentHall
         
          # head_text = menus[0].shop_name + "\n\n\n"
@@ -129,7 +129,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestStudentHall
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -152,7 +152,7 @@ class Message_Manager
 
     def makeMenuTextAll(id)
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu(id)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -176,7 +176,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu(id)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -198,7 +198,7 @@ class Message_Manager
     
     def makeMenuText_domitory_day(day)
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_domitory
         
         days = %w[일 월 화 수 목 금 토]
@@ -270,7 +270,7 @@ class Message_Manager
     
     def makeMenuText_domitory_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_domitory
         
         days = %w[일 월 화 수 목 금 토]
@@ -346,7 +346,7 @@ class Message_Manager
     
     def makeMenuText_domitory2_day(day)
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_domitory2
         
         days = %w[월 화 수 목 금]
@@ -378,7 +378,7 @@ class Message_Manager
     
     def makeMenuText_domitory2_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_domitory2
         
         days = %w[월 화 수 목 금]
@@ -407,7 +407,7 @@ class Message_Manager
     
      def makeMenuText_hu_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_hu
         
         
@@ -455,7 +455,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_hu
         
         
@@ -494,7 +494,7 @@ class Message_Manager
     
     def getYejiMessage_all
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestYeji
         
         contents = ""
@@ -521,7 +521,7 @@ class Message_Manager
         
         i = day*2
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestYeji
         menus_m = [menus[i],menus[i+1]]
             
@@ -863,7 +863,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_jinsu_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -889,7 +889,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_medi_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -914,7 +914,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_studentHall_mobile(day)
         
         # head_text = menus[0].shop_name + "\n\n\n"
@@ -938,7 +938,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
         
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_hu_mobile(day)
         
         
@@ -973,7 +973,7 @@ class Message_Manager
             return "주말에는 운영하지 않습니다"
         end
        
-        parser = JBNU_Food_Parser.new
+        parser = JBNUFoodParser.new
         menus = parser.requestMenu_yeji_mobile(day)
        
         contents = ""
