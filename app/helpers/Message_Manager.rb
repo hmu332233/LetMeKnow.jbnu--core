@@ -1,7 +1,7 @@
 require 'JBNU_Parser'
 require 'JBNU_Food_Parser'
 require 'parser/WeatherParser'
-require 'Bus_Parser'
+require 'parser/BusParser'
 require 'Datas'
 require 'NilChecker'
 
@@ -694,7 +694,7 @@ class Message_Manager
 
     # def makeMessageBusStop(id)
         
-    #     buses = Bus_Parser.new.getSelectedBusStop(id).reverse
+    #     buses = BusParser.new.getSelectedBusStop(id).reverse
         
     #     result = ""
         
