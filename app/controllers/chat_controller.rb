@@ -33,7 +33,7 @@ class ChatController < ApplicationController
     # new 사용량 측정용
     userWord = UserWord.create(user_key: user_key, content: message_content)
     
-    #도움말 메세지
+    #메세지 의도에 따른 결과
     resultJson = thinker.think(message_content)
     unless resultJson.nil?
       render json: resultJson
@@ -43,18 +43,18 @@ class ChatController < ApplicationController
     
     #이스터 에그와 디비 추가 키워드
     
-    egg_message = easterEgg(message_content)
+    # egg_message = easterEgg(message_content)
     
-    unless egg_message.nil?
-      render json: jsonMaker.getMessageJson(egg_message)
-      return; 
-    end
+    # unless egg_message.nil?
+    #   render json: jsonMaker.getMessageJson(egg_message)
+    #   return; 
+    # end
     
-    addedMessage = Message.findMessageBySentence( message_content )
-    unless addedMessage.nil? 
-      render json: jsonMaker.getMessageJson(addedMessage)
-      return;
-    end
+    # addedMessage = Message.findMessageBySentence( message_content )
+    # unless addedMessage.nil? 
+    #   render json: jsonMaker.getMessageJson(addedMessage)
+    #   return;
+    # end
     
     #------------------------------------------------------------------------------------------------------------
     
