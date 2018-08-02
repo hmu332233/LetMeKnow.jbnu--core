@@ -59,33 +59,33 @@ class ChatController < ApplicationController
     #------------------------------------------------------------------------------------------------------------
     
     #검색 -바꿀방법 찾기
-    messages = message_content.split(" ")
-    main_keyword = messages[1]
-    sub_keyword = messages[2]
+    # messages = message_content.split(" ")
+    # main_keyword = messages[1]
+    # sub_keyword = messages[2]
     
-    case main_keyword
-    when "치킨몇마리" , "치킨"
-      if sub_keyword.nil?
-        result = "치킨집 번호를 원하시면\n'치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
-        render json: jsonMaker.getMessageJson(result)
-        return; 
-      else
-        result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
-        render json: jsonMaker.getMessageJson(result)
-        return; 
-      end
+    # case main_keyword
+    # when "치킨몇마리" , "치킨"
+    #   if sub_keyword.nil?
+    #     result = "치킨집 번호를 원하시면\n'치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
+    #     render json: jsonMaker.getMessageJson(result)
+    #     return; 
+    #   else
+    #     result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
+    #     render json: jsonMaker.getMessageJson(result)
+    #     return; 
+    #   end
 
-    when "과사"
-      if sub_keyword.nil?
-        result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
-        render json: jsonMaker.getMessageJson(result)
-        return; 
-      else
-        result = message_Manager.getMajorMessage(sub_keyword)
-        render json: jsonMaker.getMessageJson(result)
-        return; 
-      end
-    end
+    # when "과사"
+    #   if sub_keyword.nil?
+    #     result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
+    #     render json: jsonMaker.getMessageJson(result)
+    #     return; 
+    #   else
+    #     result = message_Manager.getMajorMessage(sub_keyword)
+    #     render json: jsonMaker.getMessageJson(result)
+    #     return; 
+    #   end
+    # end
         
     #------------------------------------------------------------------------------------------------------------
     

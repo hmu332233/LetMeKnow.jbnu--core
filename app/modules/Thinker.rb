@@ -27,6 +27,12 @@ class Thinker
       return addedMessageResult
     end
     
+    # 검색 - 바꿀방법 찾기
+    searchedMessageResult = thinkSearchMessage(message)
+    unless searchedMessageResult.nil?
+      return searchedMessageResult
+    end
+    
     
   end
 
@@ -52,6 +58,38 @@ class Thinker
       return jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_etc)
     else
       return nil;
+    end
+  end
+  
+  def thinkSearchMessage(message)
+    jsonMaker = JsonMaker.new
+    message_Manager = Message_Manager.new
+    
+    messages = message.split(" ")
+    main_keyword = messages[1]
+    sub_keyword = messages[2]
+    
+    case main_keyword
+    when "치킨몇마리" , "치킨"
+      if sub_keyword.nil?
+        result = "치킨집 번호를 원하시면\n'치킨집'이라고 입력해주세요!\n\n 치킨몇마리를 원하시면\n'알려줘 치킨몇마리 x명'이라고 입력해주세요!"
+        return jsonMaker.getMessageJson(result)
+
+      else
+        result = message_Manager.makeMessageChiknum(sub_keyword.to_i)
+        return jsonMaker.getMessageJson(result)
+      end
+
+    when "과사"
+      if sub_keyword.nil?
+        result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
+        return jsonMaker.getMessageJson(result)
+      else
+        result = message_Manager.getMajorMessage(sub_keyword)
+        return jsonMaker.getMessageJson(result)
+      end
+    else
+      return nil
     end
   end
   
