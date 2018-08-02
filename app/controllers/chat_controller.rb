@@ -40,15 +40,24 @@ class ChatController < ApplicationController
           }
         }
 
-      #시간제한
       end
     rescue Timeout::Error
+      # 시간제한 에러
       render json: {
-      "message":{
-        "text": "전북대학교 서버가 불안정하여\n정보를 가져오지 못하고 있습니다(흑흑)"
+        "message":{
+          "text": "전북대학교 서버가 불안정하여\n정보를 가져오지 못하고 있습니다(흑흑)"
+        }
       }
-    }
-    return;
+      return;
+    rescue
+      # 그 외 에러
+      # TODO:: 에러 내용과 키워드가 알람으로 가도록
+      render json: {
+        "message":{
+          "text": "(절규)(절규)\n예기치 못한 에러가 발생했습니다\n\n해당 에러는 리포팅 되었으며\n빠른 시일 내에 고치도록 하겠습니다.\n\n감사합니다."
+        }
+      }
+      return;
     end
   
     

@@ -1,7 +1,7 @@
 require 'JsonMaker'
 
 class Thinker
-  
+
   # def initialize
   #   @jsonMaker = JsonMaker.new
   #   @messageFactory = MessageFactory.new
