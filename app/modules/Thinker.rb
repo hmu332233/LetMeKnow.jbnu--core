@@ -33,7 +33,11 @@ class Thinker
       return searchedMessageResult
     end
     
-    
+    # 메인 분기 with extractor
+    mainMessageResult = thinkWithExtractor(message)
+    unless mainMessageResult.nil?
+      return mainMessageResult
+    end
   end
 
   def thinkHelpMessage(message)
@@ -151,5 +155,369 @@ class Thinker
     else
       return nil
     end
+  end
+  
+  def thinkWithExtractor(message)
+    timeHelper = TimeHelper.new
+    messageFactory = MessageFactory.new
+    message_Manager = Message_Manager.new
+    jsonMaker = JsonMaker.new
+    extractor = Extractor.new
+    
+    # 메뉴 스위치
+    begin
+      sw = Sw.find(1).menu
+    rescue
+      sw = Sw.create.menu
+    end
+    
+    # 문장 요소 추출
+    extract_list = extractor.extract(message)
+    
+    entry = extract_list[0]
+    intent = extract_list[1]
+    subIntent = extract_list[2]
+  
+    #subIntent 처리
+    case subIntent
+    when "내일", "ㄴㅇ"
+      day = timeHelper.dayOfWeek_Tomorrow
+    when "모레", "ㅁㄹ"
+      day = timeHelper.dayOfWeek_AfterTomprrow
+    else
+      day = timeHelper.dayOfWeek_Today
+    end
+    
+    puts day
+    puts "#{entry} : #{intent} : #{subIntent}"
+    
+  
+    #의도 별 메세지 출력
+    case entry
+    when nil
+      case intent
+      when "학식", "학생식당"
+        result = "\n@ 어느 학식 메뉴를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n참빛관\n새빛관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\n ex)내일 진수당"
+        return jsonMaker.getMessageJson(result)
+      when "시간"
+        result = "\n@ 어느 곳의 시간 정보를 알려드릴까요?\n\n후생관\n진수당\n예지원\n의대\n학생회관\n기숙사\n\nex)\n후생관 이용시간\n기숙사 통금시간"
+        return jsonMaker.getMessageJson(result)
+      end
+    when "기숙사","긱사","생활관"
+      case intent
+      when "시간", "언제"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water + messageFactory.makeMessage_time_dormitory_food)
+        
+      when "통금"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite)
+        
+      when "온수"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_water)
+        
+      else
+        result = "\n@ 어느 기숙사의 메뉴를 알려드릴까요?\n\n참빛관\n새빛관\n대동관\n평화관\n기존관\n\n오늘 내일 모레 이번주\n  를 입력하시면 다른 날의 메뉴도 알려드립니다.\n\nex)내일 참빛관\n\n\n@ 추가기능\n\n- 기숙사 시간\n- 기숙사 통금시간\n- 기숙사 온수시간"
+        return jsonMaker.getMessageJson(result)
+        
+      end
+    when "학사공지", "교내공지"
+      result = message_Manager.getMessage_Notice(0)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "일반공지"
+      result = message_Manager.getMessage_Notice(1)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "교내채용"
+      result = message_Manager.getMessage_Notice(2)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "특강"
+      result = message_Manager.getMessage_Notice(3)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "스터디"
+      result = message_Manager.getMessage_Notice(4)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "알바"
+      result = message_Manager.getMessage_Notice(5)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "판매구매"
+      result = message_Manager.getMessage_Notice(6)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "자취"
+      result = message_Manager.getMessage_Notice(7)
+      return jsonMaker.getMessageJson(result)
+      
+       
+    when "분실물"
+      result = message_Manager.getMessage_Notice(8)
+      return jsonMaker.getMessageJson(result)
+      
+       
+                
+    when "진수", "ㅈㅅ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
+          
+        else
+          if sw == 0
+            return jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(0,dayNumber(day)-1)) 
+          elsif sw == 1
+            return jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
+          end
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_jinsu)
+          
+      end
+       
+    when "의대", "ㅇㄷ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
+          
+        else
+          if sw == 0
+            return jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(1,dayNumber(day)-1))  
+          elsif sw == 1
+            return jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
+          end
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_medi)
+          
+      end
+       
+    when "학생회관", "ㅎㅅㅎㄱ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
+          
+        else
+          if sw == 0
+            return jsonMaker.getMessageJson(message_Manager.makeMenuText_studentHall_day(dayNumber(day)-1))
+          elsif sw == 1
+            return jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
+          end
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_studentHall)
+          
+      end
+       
+    when "후생관", "ㅎㅅㄱ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
+          
+        else
+          if sw == 0
+            return jsonMaker.getMessageJson(message_Manager.makeMenuText_hu_day(dayNumber(day)-1))
+          elsif sw == 1
+            return jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
+          end
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_hu)
+          
+      end
+       
+    when "예지원"
+      case intent
+      when nil , "학식"
+          return jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
+          
+      when "시간","언제"
+          return jsonMaker.getMessageJson("예지원은 현재 운영을 하지 않고 있습니다.")
+          
+      end
+       
+      
+    when "정담원", "ㅈㄷㅇ"
+      case intent
+      when nil, "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_all)
+          
+        else
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_day(dayNumber(day)-1))
+          
+        end
+      when "시간", "언제"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_jungdam)
+        
+      end
+      
+    when "참빛" ,"ㅊㅂ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_all)
+          
+        else
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_Cham_day(dayNumber(day)))
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water + messageFactory.makeMessage_time_dormitory_food)
+          
+      when "통금"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite)
+        
+      when "온수"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_water)
+        
+      end
+       
+    when "기존관" , "새빛" , "대동" , "평화", "한빛" , "ㄱㅈㄱ", "ㅅㅂ", "ㄷㄷ", "ㅍㅎ", "ㅎㅂ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_all)
+          
+        else
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_Basic_day(dayNumber(day)))
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite + messageFactory.makeMessage_time_dormitory_water + messageFactory.makeMessage_time_dormitory_food)
+          
+      when "통금"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_limite)
+        
+      when "온수"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_water)
+        
+      end
+       
+      
+    when "특성화", "ㅌㅅㅎ"
+      case intent
+      when nil , "학식"
+        
+        case subIntent
+        when "이번주", "ㅇㅂㅈ"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_special_all)
+          
+        else
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_special_day(dayNumber(day)))
+          
+        end
+      when "시간","언제"
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_time_dormitory_food + messageFactory.makeMessage_time_dormitory_limite)
+          
+      end
+       
+      
+    when "치킨집"
+      return jsonMaker.getMessageJson(message_Manager.getChikMessage)
+      
+       
+    when "날씨"
+      
+      case subIntent
+      when "내일"
+        return jsonMaker.getMessageJson(message_Manager.getTomorrowWeatherMessage)
+        
+      when "모레"
+        return jsonMaker.getMessageJson("모레 날씨 검색은 제공하고 있지않습니다.\n주간 날씨 검색을 이용해주세요.")
+        
+      when "주간","이번주"
+        return jsonMaker.getMessageJson(message_Manager.makeWeekWeatherMessage)
+        
+      else
+        return jsonMaker.getMessageJson(message_Manager.getTodayWeatherMessage)
+        
+      end
+    when "편의점", "시유", "씨유" , "cu", "CU"
+      return jsonMaker.getMessageJson(messageFactory.makeMessage_time_convenience_store)
+      
+    when "버스"
+      case intent
+      when "위치"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_bus_location)
+        
+      when "시간"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_bus_time)
+        
+      else
+        return jsonMaker.getMessageJson("교내 셔틀버스 정보를 제공하고 있습니다.\n\n  버스 위치 - 실시간 셔틀버스 위치\n  버스 시간 - 셔틀버스 시간")
+        
+      end
+    when "중도", "도서관"
+      case intent
+      when "자리", "좌석"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_library_empty_seat)
+        
+      when "시간"
+        return jsonMaker.getMessageJson(messageFactory.makeMessage_library_time)
+        
+      else
+        return jsonMaker.getMessageJson("도서관 정보를 제공하고 있습니다\n\중도 자리\n- 열람실 실시간 좌석수\n\n중도 시간\n- 자료실, 열람실, 편의점 이용시간")
+        
+      end
+    when "도움말"
+      return jsonMaker.getMessageJson(messageFactory.makeMessage_help_basic)
+      
+    else
+      return nil
+    end
+  end
+  
+  def dayNumber(day)
+    
+    case day
+    when 'Sunday'
+      result = 0
+    when 'Monday'
+      result = 1
+    when 'Tuesday'
+      result = 2
+    when 'Wednesday'
+      result = 3
+    when 'Thursday'
+      result = 4
+    when 'Friday'
+      result = 5
+    when 'Saturday'
+      result = 6
+    else
+     result = 7
+    end
+        
+    return result
   end
 end
