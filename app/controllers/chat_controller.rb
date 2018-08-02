@@ -2,6 +2,7 @@ require 'Extractor'
 require 'JsonMaker'
 require 'MessageFactory'
 require 'Message_Manager'
+require 'Thinker'
 require 'util/TimeHelper'
 require 'timeout'
 
@@ -19,7 +20,7 @@ class ChatController < ApplicationController
       complete_results = Timeout.timeout(4.5) do      
        
 
-    
+    thinker = Thinker.new
     timeHelper = TimeHelper.new
     messageFactory = MessageFactory.new
     message_Manager = Message_Manager.new
@@ -33,33 +34,11 @@ class ChatController < ApplicationController
     userWord = UserWord.create(user_key: user_key, content: message_content)
     
     #도움말 메세지
-    case message_content
-    when "나가기"
-      render json: jsonMaker.getMessageJson("감사합니다")
-      return;
-    when "전체 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_all)
-      return;
-    when "학식 메뉴 확인 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_menu)
-      return;
-    when "공지사항 확인 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_notice)
-      return;
-    when "학과사무실 정보 확인 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_major)
-      return;
-    when "배달음식점 번호 확인 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_delivery)
-      return;
-    when "날씨 확인 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_weather)
-      return;
-    when "기타 키워드"
-      render json: jsonMaker.getHelpMenuJson(messageFactory.makeMessage_help_etc)
+    resultJson = thinker.think(message_content)
+    unless resultJson.nil?
+      render json: resultJson
       return;
     end
-    
     #---------------------------------------------------------------------------------------------------------
     
     #이스터 에그와 디비 추가 키워드
