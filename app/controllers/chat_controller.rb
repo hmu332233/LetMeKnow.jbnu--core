@@ -4,6 +4,7 @@ require 'MessageFactory'
 require 'Message_Manager'
 require 'Thinker'
 require 'util/TimeHelper'
+require 'util/NotifySender'
 require 'timeout'
 
 class ChatController < ApplicationController
@@ -15,14 +16,14 @@ class ChatController < ApplicationController
 
   def message
     
+    user_key = params[:user_key]
+    message_content = params[:content]
+    
     #시간 제한
     begin
       complete_results = Timeout.timeout(4.5) do      
        
         thinker = Thinker.new
-
-        user_key = params[:user_key]
-        message_content = params[:content]
 
         # new 사용량 측정용
         userWord = UserWord.create(user_key: user_key, content: message_content)
@@ -42,6 +43,7 @@ class ChatController < ApplicationController
 
       end
     rescue Timeout::Error
+      NotifySender.new.send(" 시간초과\n\n메세지: #{message_content}\n유저: #{user_key}")
       # 시간제한 에러
       render json: {
         "message":{
@@ -51,7 +53,7 @@ class ChatController < ApplicationController
       return;
     rescue
       # 그 외 에러
-      # TODO:: 에러 내용과 키워드가 알람으로 가도록
+      NotifySender.new.send(" 에러\n\n메세지: #{message_content}\n유저: #{user_key}")
       render json: {
         "message":{
           "text": "(절규)(절규)\n예기치 못한 에러가 발생했습니다\n\n해당 에러는 리포팅 되었으며\n빠른 시일 내에 고치도록 하겠습니다.\n\n감사합니다."

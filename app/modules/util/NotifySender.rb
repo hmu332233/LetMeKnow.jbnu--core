@@ -16,8 +16,6 @@ class NotifySender
     req = Net::HTTP::Post.new(uri.path, header)
     req.set_form_data({'message' => message}, ';')
     res = https.request(req)
-    
-    puts "Response #{res.code} #{res.message}: #{res.body}"
   end
 end
 
