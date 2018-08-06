@@ -61,8 +61,6 @@ class ChatController < ApplicationController
       }
       return;
     end
-  
-    
   end
 
   def add_friend
@@ -76,77 +74,4 @@ class ChatController < ApplicationController
   def chat_room
     render json: ""
   end
-
-
-  # def dayNumber(day)
-    
-  #   case day
-  #   when 'Sunday'
-  #     result = 0
-  #   when 'Monday'
-  #     result = 1
-  #   when 'Tuesday'
-  #     result = 2
-  #   when 'Wednesday'
-  #     result = 3
-  #   when 'Thursday'
-  #     result = 4
-  #   when 'Friday'
-  #     result = 5
-  #   when 'Saturday'
-  #     result = 6
-  #   else
-  #    result = 7
-  #   end
-        
-  #   return result
-  # end
-  
-  # def easterEgg(word)
-        
-  #       result = nil
-        
-  #       alone_words = ["남친","여친","남자친구","여자친구"]
-        
-  #       alone_words.each do |alone_word|
-  #           if word.include?alone_word
-  #               return ['태어나지 않았습니다','존재하지 않습니다','생길거같지 않습니다'].sample
-  #           end
-  #       end
-       
-  #       case word
-  #       when "데이터삭제"
-  #           result = "모든데이터가 삭제되었습니다"
-  #           UserWord.delete_all
-  #       when "반상민"
-  #           start = Date.parse("22/04/2015")
-  #           today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-            
-  #           result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-  #           result += "1500일 : " + (today.mjd - (start+1500).mjd + 1).to_s + "\n"
-  #           result += "3년 : " + (today.mjd - Date.parse("22/04/2018").mjd + 1).to_s
-            
-  #       when "박도현"
-            
-  #           start = Date.parse("24/03/2016")
-  #           today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-            
-  #           result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-  #           result += "800일 : " + (today.mjd - (start+800).mjd + 1).to_s + "\n"
-  #           result += "2년 : " + (today.mjd - Date.parse("24/03/2018").mjd + 1).to_s
-          
-  #        when "연이웅이"
-  #           start = Date.parse("01/05/2018")
-  #           today = Date.parse((Time.now + (9*60*60)).strftime("%d/%m/%Y"))
-            
-  #           result = (today.mjd - start.mjd + 1).to_s + "일째 날입니다.\n"
-  #           result += "100일 : " + (today.mjd - (start+100).mjd + 1).to_s + "\n"
-  #           result += "1년 : " + (today.mjd - Date.parse("01/05/2019").mjd + 1).to_s
-          
-  #       end
-       
-  #       return result
-        
-  #   end
-  
 end
