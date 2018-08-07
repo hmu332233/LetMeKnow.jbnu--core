@@ -1,6 +1,6 @@
 require 'Weather'
 
-class Weather_Parser
+class WeatherParser
     
     
      def requestHTML

@@ -1,5 +1,5 @@
 require 'Post'
-class JBNU_Parser
+class JBNUParser
 
   # String[] boardId = {"K_PUBLIC","K_NOTICE","K_RECRUIT","K_SEMINAR","K_STUDY","K_ALBA","K_MARKET","K_LIVE","K_FOUND"};
 

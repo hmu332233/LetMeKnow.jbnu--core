@@ -1,7 +1,7 @@
 require 'uri'
 require 'Bus'
 
-class Bus_Parser
+class BusParser
     
     def getAddressBusNo(bus_no)
         

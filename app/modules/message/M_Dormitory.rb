@@ -1,4 +1,4 @@
-require 'JBNU_Dormitory_Parser'
+require 'parser/JBNUDormitoryParser'
 require 'util/TimeHelper'
 
 module M_Dormitory
@@ -41,7 +41,7 @@ module M_Dormitory
     
     def makeMessage_Cham_day(day)
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Cham
     
         menu = menus[day]
@@ -56,7 +56,7 @@ module M_Dormitory
     
     def makeMessage_Cham_all
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Cham
         
         message = ""
@@ -93,7 +93,7 @@ module M_Dormitory
     
     def makeMessage_Basic_day(day)
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Basic
    
         menu = menus[day]
@@ -109,7 +109,7 @@ module M_Dormitory
     
     def makeMessage_Basic_all
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Basic
         
         message = ""
@@ -154,7 +154,7 @@ module M_Dormitory
     
     def makeMessage_special_day(day)
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_special
         
         menu = menus[day]
@@ -171,7 +171,7 @@ module M_Dormitory
     
     def makeMessage_special_all
         
-        parser = JBNU_Dormitory_Parser.new
+        parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_special
         
         message = ""
@@ -254,7 +254,7 @@ module M_Dormitory
         if today == menu.week
             return menu
         else
-            parser = JBNU_Dormitory_Parser.new
+            parser = JBNUDormitoryParser.new
             menus = parser.requestMenu_Cham
             menu = menus[day]
             
