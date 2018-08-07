@@ -1,6 +1,6 @@
 require 'Menu_domitory'
 
-class JBNU_Dormitory_Parser
+class JBNUDormitoryParser
     
     def requestHTML_Cham
         
