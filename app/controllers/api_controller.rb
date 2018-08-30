@@ -5,4 +5,15 @@ class ApiController < ApplicationController
     userWords = UserWord.where({ user_key: user_key })
     render json: userWords.as_json
   end
+  
+  # /api/menu/update
+  def updateAllMenu
+    puts 'update menu'
+  end
+  
+  # /api/menu_domitory/update
+  def updateAllDomitoryMenu
+    puts 'update domitory menu'
+  end
+  
 end

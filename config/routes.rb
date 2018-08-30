@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   
   #api
   get '/api/user_words/user_key/:user_key' => 'api#getUserWordsByUserKey'
+  get '/api/menu/update' => 'api#updateAllMenu'
+  get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
 
   #major
   post '/major' => 'major#create'
