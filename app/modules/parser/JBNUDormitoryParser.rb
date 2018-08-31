@@ -1,4 +1,5 @@
 require 'Menu_domitory'
+require 'net/http'
 
 class JBNUDormitoryParser
     

@@ -10,28 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612202413) do
+ActiveRecord::Schema.define(version: 20180907171428) do
 
-  create_table "db_menu_domitories", force: :cascade do |t|
-    t.string   "week"
-    t.string   "breakfast"
-    t.string   "lunch"
-    t.string   "dinner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "hits", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "connect_hits", default: 0
-    t.integer  "all_hits",     default: 0
-    t.integer  "help_hits",    default: 0
-    t.integer  "notice_hits",  default: 0
-    t.integer  "domi_hits",    default: 0
-    t.integer  "office_hits",  default: 0
-    t.integer  "chik_hits",    default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "dormitory_menu_dbs", force: :cascade do |t|
+    t.string   "menus_string"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "majors", force: :cascade do |t|
@@ -59,15 +43,8 @@ ActiveRecord::Schema.define(version: 20180612202413) do
   create_table "user_words", force: :cascade do |t|
     t.string   "user_key"
     t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "words", force: :cascade do |t|
-    t.string   "content"
-    t.integer  "count",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

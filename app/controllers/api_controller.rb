@@ -1,3 +1,5 @@
+require 'saver/DormitoryMenuSaver'
+
 class ApiController < ApplicationController
   # /api/user_words/user_key/:user_key
   def getUserWordsByUserKey
@@ -13,7 +15,9 @@ class ApiController < ApplicationController
   
   # /api/menu_domitory/update
   def updateAllDomitoryMenu
-    puts 'update domitory menu'
+    dormitoryMenuSaver = DormitoryMenuSaver.new
+    dormitoryMenuSaver.saveCham()
+    dormitoryMenuSaver.getCham()
   end
   
 end
