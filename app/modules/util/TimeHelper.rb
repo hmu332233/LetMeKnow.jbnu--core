@@ -30,6 +30,4 @@ class TimeHelper
         day = (Time.now + (9*60*60) + (2*(24*60*60))).strftime("%A").to_s
         return day
     end
-    
-    
 end

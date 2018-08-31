@@ -10,14 +10,14 @@ class ApiController < ApplicationController
   
   # /api/menu/update
   def updateAllMenu
-    puts 'update menu'
+    dormitoryMenuSaver = DormitoryMenuSaver.new
+    dormitoryMenuSaver.getCham()
   end
   
   # /api/menu_domitory/update
   def updateAllDomitoryMenu
     dormitoryMenuSaver = DormitoryMenuSaver.new
     dormitoryMenuSaver.saveCham()
-    dormitoryMenuSaver.getCham()
   end
   
 end
