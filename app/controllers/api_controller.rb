@@ -16,12 +16,18 @@ class ApiController < ApplicationController
     end
   end
   
-  # /api/menu_domitory/update
+  # /api/menu_domitory/update?token=[token]
   def updateAllDomitoryMenu
-    dormitoryMenuSaver = DormitoryMenuSaver.new
-    dormitoryMenuSaver.saveCham()
-    dormitoryMenuSaver.saveBasic();
-    dormitoryMenuSaver.saveSpecial();
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      dormitoryMenuSaver = DormitoryMenuSaver.new
+      dormitoryMenuSaver.saveCham()
+      dormitoryMenuSaver.saveBasic();
+      dormitoryMenuSaver.saveSpecial();
+      render json: { result: true }
+    else
+      render json: { result: false }
+    end
   end
   
 end
