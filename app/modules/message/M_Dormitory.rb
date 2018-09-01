@@ -61,6 +61,8 @@ module M_Dormitory
         
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Cham
+        # dormitoryMenuSaver = DormitoryMenuSaver.new
+        # menus = dormitoryMenuSaver.getDormitoryMenus('cham')
         
         message = ""
         
@@ -98,6 +100,8 @@ module M_Dormitory
         
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Basic
+        # dormitoryMenuSaver = DormitoryMenuSaver.new
+        # menus = dormitoryMenuSaver.getDormitoryMenus('basic')
    
         menu = menus[day]
         
@@ -114,7 +118,9 @@ module M_Dormitory
         
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Basic
-        
+        # dormitoryMenuSaver = DormitoryMenuSaver.new
+        # menus = dormitoryMenuSaver.getDormitoryMenus('basic')
+      
         message = ""
         
         menus.each do |menu|
@@ -159,6 +165,8 @@ module M_Dormitory
         
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_special
+        # dormitoryMenuSaver = DormitoryMenuSaver.new
+        # menus = dormitoryMenuSaver.getDormitoryMenus('special')
         
         menu = menus[day]
         
@@ -176,7 +184,9 @@ module M_Dormitory
         
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_special
-        
+        # dormitoryMenuSaver = DormitoryMenuSaver.new
+        # menus = dormitoryMenuSaver.getDormitoryMenus('special')
+      
         message = ""
         
         menus.each do |menu|
