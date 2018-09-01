@@ -45,7 +45,7 @@ module M_Dormitory
         parser = JBNUDormitoryParser.new
         menus = parser.requestMenu_Cham
         # dormitoryMenuSaver = DormitoryMenuSaver.new
-        # menus = dormitoryMenuSaver.getCham
+        # menus = dormitoryMenuSaver.getDormitoryMenus('cham')
     
         menu = menus[day]
         

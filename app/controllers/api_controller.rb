@@ -11,13 +11,17 @@ class ApiController < ApplicationController
   # /api/menu/update
   def updateAllMenu
     dormitoryMenuSaver = DormitoryMenuSaver.new
-    dormitoryMenuSaver.getCham()
+    dormitoryMenuSaver.getDormitoryMenus('cham').each do |menu|
+      puts menu.to_json
+    end
   end
   
   # /api/menu_domitory/update
   def updateAllDomitoryMenu
     dormitoryMenuSaver = DormitoryMenuSaver.new
     dormitoryMenuSaver.saveCham()
+    dormitoryMenuSaver.saveBasic();
+    dormitoryMenuSaver.saveSpecial();
   end
   
 end
