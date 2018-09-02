@@ -25,6 +25,9 @@ class ManagementController < ApplicationController
   def major
     @major_list = Major.all
   end
+  
+  def menu
+  end
 
   def message
     @message_list = Message.all.reverse
