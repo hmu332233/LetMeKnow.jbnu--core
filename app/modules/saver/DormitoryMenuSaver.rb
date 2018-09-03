@@ -55,7 +55,7 @@ class DormitoryMenuSaver
       menus << Menu_domitory.new(menu['week'], menu['breakfast'], menu['lunch'], menu['dinner'])
     end
     
-    return [date, update_count, menus]
+    return [menus, update_count, date]
   end
   
 end

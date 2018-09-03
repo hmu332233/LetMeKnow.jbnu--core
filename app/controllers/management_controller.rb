@@ -32,19 +32,19 @@ class ManagementController < ApplicationController
     dormitoryMenuSaver = DormitoryMenuSaver.new
     
     chamData = dormitoryMenuSaver.getDormitoryMenus('cham');
-    @chamTime = chamData[0]
+    @chamTime = chamData[2]
     @chamUpdateCount = chamData[1]
-    @chamMenus = chamData[2]
+    @chamMenus = chamData[0]
     
     basicData = dormitoryMenuSaver.getDormitoryMenus('basic');
-    @basicTime = basicData[0]
+    @basicTime = basicData[2]
     @basicUpdateCount = basicData[1]
-    @basicMenus = basicData[2]
+    @basicMenus = basicData[0]
     
     specialData = dormitoryMenuSaver.getDormitoryMenus('special');
-    @specialTime = specialData[0]
+    @specialTime = specialData[2]
     @specialUpdateCount = specialData[1]
-    @specialMenus = specialData[2]
+    @specialMenus = specialData[0]
   end
 
   def message
