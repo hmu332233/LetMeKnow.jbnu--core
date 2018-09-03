@@ -1,3 +1,5 @@
+require 'saver/DormitoryMenuSaver'
+
 class ManagementController < ApplicationController
   
   def monitoring
@@ -27,6 +29,22 @@ class ManagementController < ApplicationController
   end
   
   def menu
+    dormitoryMenuSaver = DormitoryMenuSaver.new
+    
+    chamData = dormitoryMenuSaver.getDormitoryMenus('cham');
+    @chamTime = chamData[0]
+    @chamUpdateCount = chamData[1]
+    @chamMenus = chamData[2]
+    
+    basicData = dormitoryMenuSaver.getDormitoryMenus('basic');
+    @basicTime = basicData[0]
+    @basicUpdateCount = basicData[1]
+    @basicMenus = basicData[2]
+    
+    specialData = dormitoryMenuSaver.getDormitoryMenus('special');
+    @specialTime = specialData[0]
+    @specialUpdateCount = specialData[1]
+    @specialMenus = specialData[2]
   end
 
   def message

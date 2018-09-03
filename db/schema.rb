@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(version: 20180907171428) do
 
   create_table "dormitory_menu_dbs", force: :cascade do |t|
+    t.integer  "update_count", default: 0
     t.string   "key_name"
     t.string   "date"
     t.string   "menus_string"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "majors", force: :cascade do |t|

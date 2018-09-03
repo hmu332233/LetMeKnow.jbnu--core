@@ -12,6 +12,7 @@ class DormitoryMenuSaver
     
     dormitoryMenuDb = DormitoryMenuDb.find_or_create_by(date: date, key_name: 'special')
     dormitoryMenuDb.menus_string = menus.to_json.to_s
+    dormitoryMenuDb.update_count += 1
     dormitoryMenuDb.save
   end
   
@@ -24,6 +25,7 @@ class DormitoryMenuSaver
     
     dormitoryMenuDb = DormitoryMenuDb.find_or_create_by(date: date, key_name: 'basic')
     dormitoryMenuDb.menus_string = menus.to_json.to_s
+    dormitoryMenuDb.update_count += 1
     dormitoryMenuDb.save
   end
   
@@ -36,6 +38,7 @@ class DormitoryMenuSaver
     
     dormitoryMenuDb = DormitoryMenuDb.find_or_create_by(date: date, key_name: 'cham')
     dormitoryMenuDb.menus_string = menus.to_json.to_s
+    dormitoryMenuDb.update_count += 1
     dormitoryMenuDb.save
   end
   
@@ -43,14 +46,16 @@ class DormitoryMenuSaver
     timeHelpler = TimeHelper.new
     date = timeHelpler.now.to_formatted_s(:year_month_day)
 
-    chamJson = JSON.parse(DormitoryMenuDb.find_by(date: date, key_name: key_name).menus_string)
+    menuData = DormitoryMenuDb.find_by(date: date, key_name: key_name)
+    update_count = menuData.update_count
+    menuJson = JSON.parse(menuData.menus_string)
     
-    chamData = []
-    chamJson.each do |menu|
-      chamData << Menu_domitory.new(menu['week'], menu['breakfast'], menu['lunch'], menu['dinner'])
+    menus = []
+    menuJson.each do |menu|
+      menus << Menu_domitory.new(menu['week'], menu['breakfast'], menu['lunch'], menu['dinner'])
     end
     
-    return chamData
+    return [date, update_count, menus]
   end
   
 end
