@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DbMenuDomitoryTest < ActiveSupport::TestCase
+class DormitoryMenuDbTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

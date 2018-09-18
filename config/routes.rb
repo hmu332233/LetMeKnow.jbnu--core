@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   
   #api
   get '/api/user_words/user_key/:user_key' => 'api#getUserWordsByUserKey'
+  get '/api/menu/update' => 'api#updateAllMenu'
+  get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
 
   #major
   post '/major' => 'major#create'
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   get '/management/users' => 'management#user'
   get '/management/users/:user_key' => 'management#user_detail'
   get '/management/major'
+  get '/management/menu'
   get '/management/message'
   get '/management/backup'
   post '/management/setDB'

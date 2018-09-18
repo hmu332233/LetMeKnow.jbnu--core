@@ -1,0 +1,2 @@
+class DormitoryMenuDb < ApplicationRecord
+end

@@ -1,0 +1,71 @@
+<div class="main-panel">
+  <%= render 'topNavi', title: "메뉴 관리" %>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h4 class="title">참빛</h4>
+              <p class="category">
+                <%= @chamTime %> - <%= @chamUpdateCount %>
+              </p>
+            </div>
+            <div class="content">
+              <div class="footer">
+                <div class="chart-legend">
+                  <% @chamMenus.each do |chamMenu| %>
+                    <%= chamMenu.week.to_s %><br/>
+                    <%= chamMenu.breakfast.to_s %><br/>
+                    <%= chamMenu.lunch.to_s %><br/>
+                    <%= chamMenu.dinner.to_s %><br/>                  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="header">
+              <h4 class="title">새빛</h4>
+              <p class="category">
+                <%= @basicTime %> - <%= @basicUpdateCount %>
+              </p>
+            </div>
+            <div class="content">
+              <div class="footer">
+                <div class="chart-legend">
+                  <% @basicMenus.each do |menu| %>
+                    <%= menu.week.to_s %><br/>
+                    <%= menu.breakfast.to_s %><br/>
+                    <%= menu.lunch.to_s %><br/>
+                    <%= menu.dinner.to_s %><br/>                  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="header">
+              <h4 class="title">특성화</h4>
+              <p class="category">
+                <%= @specialTime %> - <%= @specialUpdateCount %>
+              </p>
+            </div>
+            <div class="content">
+              <div class="footer">
+                <div class="chart-legend">
+                  <% @specialMenus.each do |menu| %>
+                    <%= menu.week.to_s %><br/>
+                    <%= menu.breakfast.to_s %><br/>
+                    <%= menu.lunch.to_s %><br/>
+                    <%= menu.dinner.to_s %><br/>                  
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
