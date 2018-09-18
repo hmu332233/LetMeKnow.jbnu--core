@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>알려줘전북대</title>
- 
-  
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -11,120 +11,128 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-  
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-  <meta name="viewport" content="width=device-width" />
-  
-  <!--  Fonts and icons     -->
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <%= javascript_include_tag 'application' %>
+      <%= csrf_meta_tags %>
+
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <!--  Fonts and icons     -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 
 </head>
+
 <body>
-  
 
-<div class="wrapper">
-  
-  
-  <div class="sidebar" data-background-color="white" data-active-color="danger">
+  <div class="wrapper">
 
-    <!--
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+      <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
 		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 	-->
 
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="/management/main" class="simple-text">
-                    management
-                </a>
-            </div>
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="/management/main" class="simple-text">
+            management
+          </a>
+        </div>
 
-            <ul class="nav">
-                <li class="active">
-                    <a href="/management/main">
-                        <i class="ti-comment-alt"></i>
-                        <p>메세지 통계</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/management/users">
-                        <i class="ti-user"></i>
-                        <p>사용자 통계</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/management/sw_menu">
-                        <i class="ti-reload"></i>
-                        <p>파싱 스위치</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/management/monitoring">
-                        <i class="ti-desktop"></i>
-                        <p>모니터링</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/management/message">
-                        <i class="ti-pencil-alt"></i>
-                        <p>메세지 관리</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/management/major">
-                        <i class="ti-view-list-alt"></i>
-                        <p>전공 관리</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="/management/backup">
-                        <i class="ti-export"></i>
-                        <p>데이터 백업</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
+        <ul class="nav">
+          <li class="active">
+            <a href="/management/main">
+              <i class="ti-comment-alt"></i>
+              <p>메세지 통계</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/users">
+              <i class="ti-user"></i>
+              <p>사용자 통계</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/sw_menu">
+              <i class="ti-reload"></i>
+              <p>파싱 스위치</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/monitoring">
+              <i class="ti-desktop"></i>
+              <p>모니터링</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/menu">
+              <i class="ti-pencil-alt"></i>
+              <p>메뉴 관리</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/message">
+              <i class="ti-pencil-alt"></i>
+              <p>메세지 관리</p>
+            </a>
+          </li>
+          <li>
+            <a href="/management/major">
+              <i class="ti-view-list-alt"></i>
+              <p>전공 관리</p>
+            </a>
+          </li>
+          <li class="active-pro">
+            <a href="/management/backup">
+              <i class="ti-export"></i>
+              <p>데이터 백업</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  
 
-
-<%= yield %>
+    <%= yield %>
 
     <footer class="footer">
       <div class="container-fluid">
         <nav class="pull-left">
           <ul>
-              <li>
-                  <a href="http://www.creative-tim.com">
-                    Creative Tim
-                  </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                    Blog
-                </a>
-              </li>
-              <li>
-                <a href="http://www.creative-tim.com/license">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
-				<div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+            <li>
+              <a href="http://www.creative-tim.com">
+                Creative Tim
+              </a>
+            </li>
+            <li>
+              <a href="http://blog.creative-tim.com">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="http://www.creative-tim.com/license">
+                Licenses
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright pull-right">
+          &copy;
+          <script>
+            document.write(new Date().getFullYear())
+          </script>, made with
+          <i class="fa fa-heart heart"></i> by
+          <a href="http://www.creative-tim.com">Creative Tim</a>
         </div>
       </div>
     </footer>
 
-</div>
-    
-    
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
+  </div>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
+
 </html>

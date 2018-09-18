@@ -1,3 +1,4 @@
+require 'saver/DormitoryMenuSaver'
 require 'parser/JBNUDormitoryParser'
 require 'util/TimeHelper'
 
@@ -41,8 +42,10 @@ module M_Dormitory
     
     def makeMessage_Cham_day(day)
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_Cham
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_Cham
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('cham')[0]
     
         menu = menus[day]
         
@@ -56,8 +59,10 @@ module M_Dormitory
     
     def makeMessage_Cham_all
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_Cham
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_Cham
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('cham')[0]
         
         message = ""
         
@@ -93,8 +98,10 @@ module M_Dormitory
     
     def makeMessage_Basic_day(day)
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_Basic
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_Basic
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('basic')[0]
    
         menu = menus[day]
         
@@ -109,9 +116,11 @@ module M_Dormitory
     
     def makeMessage_Basic_all
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_Basic
-        
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_Basic
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('basic')[0]
+      
         message = ""
         
         menus.each do |menu|
@@ -154,8 +163,10 @@ module M_Dormitory
     
     def makeMessage_special_day(day)
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_special
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_special
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('special')[0]
         
         menu = menus[day]
         
@@ -171,9 +182,11 @@ module M_Dormitory
     
     def makeMessage_special_all
         
-        parser = JBNUDormitoryParser.new
-        menus = parser.requestMenu_special
-        
+        # parser = JBNUDormitoryParser.new
+        # menus = parser.requestMenu_special
+        dormitoryMenuSaver = DormitoryMenuSaver.new
+        menus = dormitoryMenuSaver.getDormitoryMenus('special')[0]
+      
         message = ""
         
         menus.each do |menu|
