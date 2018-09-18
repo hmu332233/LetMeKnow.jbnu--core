@@ -20,10 +20,7 @@ class ApiController < ApplicationController
   def updateAllDomitoryMenu
     token = params[:token]
     if !token.nil? && (token == ENV['saver_token'])
-      dormitoryMenuSaver = DormitoryMenuSaver.new
-      dormitoryMenuSaver.saveCham()
-      dormitoryMenuSaver.saveBasic();
-      dormitoryMenuSaver.saveSpecial();
+      DormitoryMenuDb.updateDormitoryMenu();
       render json: { result: true }
     else
       render json: { result: false }
