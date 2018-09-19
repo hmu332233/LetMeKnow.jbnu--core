@@ -51,6 +51,16 @@ class ChatController < ApplicationController
         }
       }
       return;
+    rescue NoMethodError
+      # 식단 갱신 안될때 에러
+      # FIXME:: 좀 더 확실한 에러를 잡아서 고치기
+      NotifySender.new.send(" 식단 갱신\n\n메세지: #{message_content}\n유저: #{user_key}")
+      DormitoryMenuDb.updateDormitoryMenu()
+      render json: {
+        "message":{
+          "text": "기숙사 식단을 업데이트 중입니다.(하하)\n\n3초 뒤 다시 시도해주세요."
+        }
+      }
     rescue
       # 그 외 에러
       NotifySender.new.send(" 에러\n\n메세지: #{message_content}\n유저: #{user_key}")
