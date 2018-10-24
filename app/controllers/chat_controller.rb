@@ -6,6 +6,7 @@ require 'Thinker'
 require 'util/TimeHelper'
 require 'util/NotifySender'
 require 'timeout'
+require 'ManagementApi'
 
 class ChatController < ApplicationController
   def keyboard
@@ -18,6 +19,10 @@ class ChatController < ApplicationController
     
     user_key = params[:user_key]
     message_content = params[:content]
+
+    Thread.new do
+      ManagementApi.sendUserWord(user_key, message_content)
+    end
     
     #시간 제한
     begin
