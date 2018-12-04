@@ -21,8 +21,8 @@ class ApiController < ApplicationController
   def updateAllDomitoryMenu
     token = params[:token]
     if !token.nil? && (token == ENV['saver_token'])
-      result = DormitoryMenuDb.updateDormitoryMenu();
-      render json: { success: true, result: result }
+      DormitoryMenuDb.updateDormitoryMenu();
+      render json: { success: true }
     else
       render json: { success: false }
     end
