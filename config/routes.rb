@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/api/user_words/user_key/:user_key' => 'api#getUserWordsByUserKey'
   get '/api/menu/update' => 'api#updateAllMenu'
   get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
+  get '/api/menu_domitory/update/yesterday' => 'api#updateYesterdayToggle'
 
   #major
   post '/major' => 'major#create'
