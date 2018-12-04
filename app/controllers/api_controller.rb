@@ -1,4 +1,5 @@
 require 'saver/DormitoryMenuSaver'
+require 'SwitchToggler'
 
 class ApiController < ApplicationController
   # /api/user_words/user_key/:user_key
@@ -20,10 +21,21 @@ class ApiController < ApplicationController
   def updateAllDomitoryMenu
     token = params[:token]
     if !token.nil? && (token == ENV['saver_token'])
-      DormitoryMenuDb.updateDormitoryMenu();
-      render json: { result: true }
+      result = DormitoryMenuDb.updateDormitoryMenu();
+      render json: { success: true, result: result }
     else
-      render json: { result: false }
+      render json: { success: false }
+    end
+  end
+  
+  # /api/menu_domitory/update/yesterday?token=[token]
+  def updateYesterdayToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = SwitchToggler.toggleUseYesterDayDormitoryMenu();
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
     end
   end
   

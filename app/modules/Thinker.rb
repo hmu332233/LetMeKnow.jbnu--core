@@ -166,9 +166,9 @@ class Thinker
     
     # 메뉴 스위치
     begin
-      sw = Sw.find(1).menu
+      use_mobile_menu = Sw.find(1).use_mobile_menu
     rescue
-      sw = Sw.create.menu
+      use_mobile_menu = Sw.create.use_mobile_menu
     end
     
     # 문장 요소 추출
@@ -274,9 +274,9 @@ class Thinker
           return jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_all)
           
         else
-          if sw == 0
+          unless use_mobile_menu
             return jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(0,dayNumber(day)-1)) 
-          elsif sw == 1
+          else
             return jsonMaker.getMessageJson(messageFactory.makeMessage_jinsu_day(dayNumber(day)))
           end
           
@@ -295,9 +295,9 @@ class Thinker
           return jsonMaker.getMessageJson(messageFactory.makeMessage_medi_all)
           
         else
-          if sw == 0
+          unless use_mobile_menu
             return jsonMaker.getMessageJson(message_Manager.makeMenuTextDay(1,dayNumber(day)-1))  
-          elsif sw == 1
+          else
             return jsonMaker.getMessageJson(messageFactory.makeMessage_medi_day(dayNumber(day)))
           end
           
@@ -316,9 +316,9 @@ class Thinker
           return jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_all)
           
         else
-          if sw == 0
+          unless use_mobile_menu
             return jsonMaker.getMessageJson(message_Manager.makeMenuText_studentHall_day(dayNumber(day)-1))
-          elsif sw == 1
+          else
             return jsonMaker.getMessageJson(messageFactory.makeMessage_studentHall_day(dayNumber(day)))
           end
           
@@ -337,9 +337,9 @@ class Thinker
           return jsonMaker.getMessageJson(messageFactory.makeMessage_hu_all)
           
         else
-          if sw == 0
+          unless use_mobile_menu
             return jsonMaker.getMessageJson(message_Manager.makeMenuText_hu_day(dayNumber(day)-1))
-          elsif sw == 1
+          else
             return jsonMaker.getMessageJson(messageFactory.makeMessage_hu_day(dayNumber(day)))
           end
           

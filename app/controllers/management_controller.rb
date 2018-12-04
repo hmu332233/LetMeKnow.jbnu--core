@@ -1,4 +1,5 @@
 require 'saver/DormitoryMenuSaver'
+require 'SwitchToggler'
 
 class ManagementController < ApplicationController
   
@@ -65,19 +66,13 @@ class ManagementController < ApplicationController
   end
   
   def sw_menu
+    SwitchToggler.toggleUseMobileMenu()
     @sw = Sw.find(1)
-    
-    puts @sw.menu
-    
-    if @sw.menu == 0
-      @sw.menu = 1
+    if @sw.use_mobile_menu
       @val = "모바일홈페이지"
-    elsif @sw.menu == 1
-      @sw.menu = 0
+    else 
       @val = "학교홈페이지"
     end 
-    
-    @sw.save
   end
     
 end
