@@ -14,5 +14,9 @@ class SwitchToggler
     
     return @sw.use_yesterday_domitory_menu
   end
+  def self.useYesterDayDormitoryMenu?
+    @sw = Sw.find(1)
+    return @sw.use_yesterday_domitory_menu
+  end
 end
     

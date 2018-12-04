@@ -1,6 +1,7 @@
 require 'parser/JBNUDormitoryParser'
 require 'util/TimeHelper'
 require 'Menu_domitory'
+require 'SwitchToggler'
 
 class DormitoryMenuSaver
   def saveSpecial
@@ -43,8 +44,13 @@ class DormitoryMenuSaver
   end
   
   def getDormitoryMenus(key_name)
+     
     timeHelpler = TimeHelper.new
-    date = timeHelpler.now.to_formatted_s(:year_month_day)
+    if SwitchToggler.useYesterDayDormitoryMenu?
+      date = timeHelpler.yesterday.to_formatted_s(:year_month_day)
+    else
+      date = timeHelpler.now.to_formatted_s(:year_month_day)
+    end
 
     menuData = DormitoryMenuDb.find_by(date: date, key_name: key_name)
     update_count = menuData.update_count
