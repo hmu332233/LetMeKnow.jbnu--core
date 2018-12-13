@@ -3,11 +3,12 @@ class JsonMaker
     def getMessageJson(text)
     
         json = {
-            "message":{
-                "text": "#{text}"
-            }
+          "version": "2.0",
+          "data": {
+            "message": "#{text}"
+          }
         }
-    
+
         return json
     end
     
