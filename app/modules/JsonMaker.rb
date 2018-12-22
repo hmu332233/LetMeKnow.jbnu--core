@@ -4,8 +4,33 @@ class JsonMaker
     
         json = {
           "version": "2.0",
-          "data": {
-            "message": "#{text}"
+          "template": {
+            "outputs": [{
+              "simpleText": {
+                "text": "#{text}"  
+              }  
+            }]
+          }
+        }
+
+        return json
+    end
+  
+    def getQuickRepliesJson(text)
+    
+        json = {
+          "version": "2.0",
+          "template": {
+            "outputs": [{
+              "simpleText": {
+                "text": "#{text}"  
+              }  
+            }],
+            "quickReplies": [{
+              "label": "테스트",
+              "action": "message",
+              "messageText": "test"
+            }]
           }
         }
 

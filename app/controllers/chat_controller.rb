@@ -44,7 +44,7 @@ class ChatController < ApplicationController
           return;
         end
 
-        render json: jsonMaker.getMessageJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n'도움말'이라고 입력하시면\n자세한 사용방법을 알려드립니다.")
+        render json: jsonMaker.getQuickRepliesJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n'도움말'이라고 입력하시면\n자세한 사용방법을 알려드립니다.")
         
       end
     rescue Timeout::Error
