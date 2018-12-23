@@ -16,8 +16,17 @@ class JsonMaker
         return json
     end
   
-    def getQuickRepliesJson(text)
+    def getQuickRepliesJson(text, replyMessages)
     
+        quickReplies = replyMessages.map do |message|
+          { 
+            "label": message,
+            "action": "message",
+            "messageText": message
+          }
+        end
+
+      
         json = {
           "version": "2.0",
           "template": {
@@ -26,11 +35,7 @@ class JsonMaker
                 "text": "#{text}"  
               }  
             }],
-            "quickReplies": [{
-              "label": "테스트",
-              "action": "message",
-              "messageText": "test"
-            }]
+            "quickReplies": quickReplies
           }
         }
 
