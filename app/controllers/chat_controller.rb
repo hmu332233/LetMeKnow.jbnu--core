@@ -7,6 +7,7 @@ require 'util/TimeHelper'
 require 'util/NotifySender'
 require 'timeout'
 require 'ManagementApi'
+require 'KeywordStore'
 
 class ChatController < ApplicationController
   def keyboard
@@ -44,7 +45,9 @@ class ChatController < ApplicationController
           return;
         end
 
-        render json: jsonMaker.getQuickRepliesJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n 다음과 같이 입력해보시는건 어떨까요?", ["버스 위치", "이번주 참빛"])
+        keywordStore = KeywordStore.new
+        
+        render json: jsonMaker.getQuickRepliesJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n 다음과 같이 입력해보시는건 어떨까요?", keywordStore.randomizeKeywords())
         
       end
     rescue Timeout::Error
