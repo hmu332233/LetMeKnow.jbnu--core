@@ -3,11 +3,42 @@ class JsonMaker
     def getMessageJson(text)
     
         json = {
-            "message":{
-                "text": "#{text}"
-            }
+          "version": "2.0",
+          "template": {
+            "outputs": [{
+              "simpleText": {
+                "text": "#{text}"  
+              }  
+            }]
+          }
         }
+
+        return json
+    end
+  
+    def getQuickRepliesJson(text, replyMessages)
     
+        quickReplies = replyMessages.map do |message|
+          { 
+            "label": message,
+            "action": "message",
+            "messageText": message
+          }
+        end
+
+      
+        json = {
+          "version": "2.0",
+          "template": {
+            "outputs": [{
+              "simpleText": {
+                "text": "#{text}"  
+              }  
+            }],
+            "quickReplies": quickReplies
+          }
+        }
+
         return json
     end
     
