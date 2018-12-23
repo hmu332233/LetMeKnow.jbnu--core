@@ -47,7 +47,7 @@ class ChatController < ApplicationController
 
         keywordStore = KeywordStore.new
         
-        render json: jsonMaker.getQuickRepliesJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n 다음과 같이 입력해보시는건 어떨까요?", keywordStore.randomizeKeywords())
+        render json: jsonMaker.getQuickRepliesJson("아직 이해하지 못하는 말이거나\n제공을 하고 있지 않는 기능입니다 (흑흑)\n\n 다음과 같이 입력해보시는건 어떨까요?", ["도움말"] + keywordStore.randomizeKeywords())
         
       end
     rescue Timeout::Error
