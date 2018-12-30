@@ -74,7 +74,14 @@ tester.prototype.testAll = function (testcases, callback) {
 * successCallback {function}: 성공시 수행할 동작
 */
 tester.prototype.requestMessage = function (message, successCallback) {
-    
+  
+  var data = {
+    userRequest: {
+      user: { id: 'api_user' },
+      utterance: message
+    }
+  };
+  
   var settings = {
     "async": true,
     "crossDomain": true,
@@ -84,7 +91,7 @@ tester.prototype.requestMessage = function (message, successCallback) {
       "Content-Type": "application/json"
     },
     "processData": false,
-    "data": "{\"content\": \""+ message +"\"}"
+    "data": JSON.stringify(data)
   }
   
   return $.ajax(settings);
