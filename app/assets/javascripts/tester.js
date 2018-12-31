@@ -63,7 +63,7 @@ tester.prototype.testAll = function (testcases, callback) {
         sendMessage: request.sendMessage,
         status: xhr.status,
         textStatus: textStatus,
-        message: data.message.text,
+        message: data.template.outputs[0].simpleText.text,
       });
     });
   });
