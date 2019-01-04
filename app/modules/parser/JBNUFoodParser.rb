@@ -352,13 +352,13 @@ class JBNUFoodParser
         end
         
         place = "후생관"
-        
+
         menus = [
             Menu.new(place,day,"중식","특식",[menu_datas[0]]),
             Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
             Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
             Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]]),
-            Menu.new(place,day,"중식","오므라이스",[menu_datas[13]])
+            Menu.new(place,day,"중식","오므라이스",[menu_datas[16]])
             ]
         
        return menus
