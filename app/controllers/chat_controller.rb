@@ -62,9 +62,9 @@ class ChatController < ApplicationController
       DormitoryMenuDb.updateDormitoryMenu()
       render json: jsonMaker.getMessageJson("기숙사 식단을 업데이트 중입니다.(하하)\n\n3초 뒤 다시 시도해주세요.")
       return;
-    rescue
+    rescue => error
       # 그 외 에러
-      NotifySender.new.send(" 에러\n\n메세지: #{message_content}\n유저: #{user_key}")
+      NotifySender.new.send(" 에러\n\n메세지: #{message_content}\n유저: #{user_key}\n\n에러내용:#{error.inspect}\n\n에러 스텍:#{error.backtrace.join("\n")}")
       render json: jsonMaker.getMessageJson("(절규)(절규)\n예기치 못한 에러가 발생했습니다\n\n해당 에러는 리포팅 되었으며\n빠른 시일 내에 고치도록 하겠습니다.\n\n감사합니다.")
       return;
     end
