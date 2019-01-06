@@ -188,7 +188,7 @@ class JBNUFoodParser
         
         
         place = "후생관"
-      
+        
         menus = [
             Menu.new(place,"월","중식","특식",[menu[9]]),
             Menu.new(place,"월","중식","찌개",[menu[16]]),
@@ -344,11 +344,11 @@ class JBNUFoodParser
     def requestMenu_hu_mobile(day)
         
         menu_datas = requestMenu_Mobile_Food(3,day)
-           
-        menu_datas.each_with_index do |menu, index|
-          if menu == nil
-            menu = ""
-          end
+        
+        for i in 0..20
+            if menu_datas[i] == nil
+                menu_datas[i] = ""
+            end
         end
         
         place = "후생관"
