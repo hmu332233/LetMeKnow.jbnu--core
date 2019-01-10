@@ -84,14 +84,14 @@ class Thinker
         return jsonMaker.getMessageJson(result)
       end
 
-    when "과사"
-      if sub_keyword.nil?
-        result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
-        return jsonMaker.getMessageJson(result)
-      else
-        result = message_Manager.getMajorMessage(sub_keyword)
-        return jsonMaker.getMessageJson(result)
-      end
+    # when "과사"
+    #   if sub_keyword.nil?
+    #     result = "검색할 학과를 입력해주세요.\n이름의 일부만 입력하셔도 검색해드립니다.\n\nex) \n소프트웨어공학과\n\n알려줘 과사 소프트\n알려줘 과사 소프트웨어공학과\n알려줘 과사 소프\n등등\n"
+    #     return jsonMaker.getMessageJson(result)
+    #   else
+    #     result = message_Manager.getMajorMessage(sub_keyword)
+    #     return jsonMaker.getMessageJson(result)
+    #   end
     else
       return nil
     end
