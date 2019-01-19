@@ -1,33 +1,17 @@
 # 알려줘전북대
 
 ## 알려줘전북대란?
-알려줘전북대는 카카오톡 자동응답 api를 이용해 만들어진 **카카오톡 플러스친구 챗봇 프로젝트**입니다. <br/><br/>
-전북대학교 학생들을 위한 기능들이 있으며 <br/>
-학교 공지사항, 학식, 학교 날씨, 학교 버스 등의 정보를 제공하고 있습니다 <br/>
-치킨을 자주 시켜먹는 대학생의 특성을 반영한 치킨마리수 계산과 같이 재밌는 기능도 제공하고 있습니다 <br/>
 
-## deploy
+알려줘전북대는 카카오톡 자동응답 api를 이용해 만들어진 **카카오톡 플러스친구 챗봇 프로젝트**입니다.  
 
-- `nginx` + `unicorn`
-```bash
-# 이미지 생성
-$ docker build -t [이미지 이름] .
-
-# 이미지 실행
-$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름]
-```
-- 추가적으로 환경변수로 지도검색을 위한 네이버 키가 필요하다  
-  `-e naver_id=[naver_key] -e naver_sc=[naver_sc]`
-
-- 동작하는 worker_processes의 수를 조절하고 싶다면 아래와 같이 환경변수를 추가한다.
-```bash
--e WEB_CONCURRENCY=[number] // default 3
-```
+전북대학교 학생들을 위한 기능들이 있으며  
+학교 공지사항, 학식, 학교 날씨, 학교 버스 등의 정보를 제공하고 있습니다  
+치킨을 자주 시켜먹는 대학생의 특성을 반영한 치킨마리수 계산과 같이 재밌는 기능도 제공하고 있습니다  
 
 ## 친구 추가 방법
 
-http://plus.kakao.com/home/@알려줘전북대 <br/>
-위 링크를 통해 친구추가 하거나 <br/>
+[플러스친구 - 알려줘전북대](https://pf.kakao.com/_LffxoM)  
+위 링크를 통해 친구추가 하거나  
 카카오톡 ID/플러스친구 검색에서 **알려줘전북대**를 검색하여 추가가 가능합니다
 
 ## 스크린샷
@@ -52,3 +36,32 @@ http://plus.kakao.com/home/@알려줘전북대 <br/>
 ### 치킨 마리수 계산<br/>
 
 <img src="http://blogfiles.naver.net/MjAxNzAyMDdfMjE1/MDAxNDg2Mzk4NzE4NzM4.7tJvhabOHMBiWbNO8nuoFeS6vj-QCVAFbnwlUckzNogg.kwwRrWs3P5BlVRUhUz9xZHZp03wm36U1mfTOLRmmvSUg.JPEG.hmu332233/KakaoTalk_20170206_171102801.jpg" style=" width:320px; height:86px; rwidth:320px; rheight:86px;" width="320" height="86" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="86px">
+
+
+## deploy
+
+- `nginx` + `unicorn`
+```bash
+# 이미지 생성
+$ docker build -t [이미지 이름] .
+
+# 이미지 실행
+$ docker run -d -p 80:80 -e SECRET_KEY_BASE=secret_key [이미지 이름]
+```
+- 추가적으로 환경변수로 지도검색을 위한 네이버 키가 필요하다  
+  `-e naver_id=[naver_key] -e naver_sc=[naver_sc]`
+
+- 동작하는 worker_processes의 수를 조절하고 싶다면 아래와 같이 환경변수를 추가한다.
+```bash
+-e WEB_CONCURRENCY=[number] // default 3
+```
+
+- 에러 또는 특수 상황시 line notify 메세지를 위한 token
+```bash
+-e notify_token=[token]
+```
+
+- 관리자 페이지 api를 호출하기 위한 관리자 페이지 host + path
+```bash
+-e management_server=[host]
+```
