@@ -19,6 +19,10 @@ class TimeHelper
         return time.strftime("%d")
     end
     
+    def dayOfWeek_Yesterday
+      day = (Time.now + (9*60*60) - (24*60*60)).strftime("%A").to_s
+      return day
+    end
 
     def dayOfWeek_Today
         
