@@ -180,6 +180,8 @@ class Thinker
   
     #subIntent 처리
     case subIntent
+    when "어제", "ㅇㅈ"
+      day = timeHelper.dayOfWeek_Yesterday
     when "내일", "ㄴㅇ"
       day = timeHelper.dayOfWeek_Tomorrow
     when "모레", "ㅁㄹ"
