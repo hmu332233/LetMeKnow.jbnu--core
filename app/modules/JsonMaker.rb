@@ -9,7 +9,8 @@ class JsonMaker
               "simpleText": {
                 "text": "#{text}"  
               }  
-            }]
+            }],
+            "quickReplies": ["label": "업데이트 공지", "action": "message", "messageText": "업데이트 공지"]
           }
         }
 
