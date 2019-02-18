@@ -87,11 +87,11 @@ module M_Dormitory
         message += menu.week + "\n\n"
 
         message += "아침" + "\n\n"
-        message += makeMessageDomiSplit_Basic(menu.breakfast[0].split(": ")[1]) + "\n\n"
+        message += makeMessageDomiSplit_Basic(menu.breakfast) + "\n\n"
         message += "점심" + "\n\n"
-        message += makeMessageDomiSplit_Basic(menu.lunch[0].split(": ")[1]) + "\n\n"
+        message += makeMessageDomiSplit_Basic(menu.lunch) + "\n\n"
         message += "저녁" + "\n\n"
-        message += makeMessageDomiSplit_Basic(menu.dinner[0].split(": ")[1])  
+        message += makeMessageDomiSplit_Basic(menu.dinner)  
         
         return message
     end
@@ -125,7 +125,7 @@ module M_Dormitory
         
         menus.each do |menu|
             
-            if menu.lunch == nil
+            if menu.lunch == ""
                 message += menu.week + "\n\n"
                 message += "등록된 식단이 없습니다."
             else
@@ -249,13 +249,13 @@ module M_Dormitory
         
         message = ""
         
-        menu_data.split(",").each_with_index do |lunch_d,i|
+        menu_data.split(" ").each_with_index do |lunch_d,i|
             
             message += lunch_d.strip + "\n"
     
         end
-        
-        return message.chop!
+
+        return message
     end
     
     #db 저장여부 판별

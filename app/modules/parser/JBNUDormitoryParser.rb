@@ -18,7 +18,8 @@ class JBNUDormitoryParser
     
     def requestHTML_Basic
         
-        uri = URI(URI.encode("http://likehome.chonbuk.ac.kr/board/bbs/board.php?dk_table=cbnu2_7_k"))
+        # uri = URI(URI.encode("http://likehome.chonbuk.ac.kr/board/bbs/board.php?dk_table=cbnu2_7_k"))
+        uri = URI(URI.encode("http://likehome.jbnu.ac.kr/home/main/inner.php?sMenu=B7100"))
        
         req = Net::HTTP::Get.new(uri)
     
@@ -77,6 +78,33 @@ class JBNUDormitoryParser
         return menus
         
     end
+  
+  def parseDateNew(doc)
+    
+    data = Array.new(7){Array.new(3, "")}
+    tableBodyElement = doc.css("#calendar > table > tbody")
+    tableRows = tableBodyElement.css("tr")
+    tableRows.each_with_index do |tr, i|
+      tableData = tr.css("td")
+      tableData.each_with_index do |td, j|
+        # puts "#{i} #{j}"
+        # puts td.inner_text.strip
+        data[j][i] = td.inner_text.strip
+      end
+    end
+
+    menus = [
+      Menu_domitory.new("일", data[0][0], data[0][1], data[0][2]),
+      Menu_domitory.new("월", data[1][0], data[1][1], data[1][2]),
+      Menu_domitory.new("화", data[2][0], data[2][1], data[2][2]),
+      Menu_domitory.new("수", data[3][0], data[3][1], data[3][2]),
+      Menu_domitory.new("목", data[4][0], data[4][1], data[4][2]),
+      Menu_domitory.new("금", data[5][0], data[5][1], data[5][2]),
+      Menu_domitory.new("토", data[6][0], data[6][1], data[6][2])
+    ]
+
+    return menus
+  end
     
     def requestMenu_Cham
     
@@ -90,7 +118,8 @@ class JBNUDormitoryParser
     def requestMenu_Basic
         
         doc = requestHTML_Basic
-        menus = parseData(doc)
+        # menus = parseData(doc)
+        menus = parseDateNew(doc)
        
         return menus
         
