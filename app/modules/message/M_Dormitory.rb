@@ -105,7 +105,7 @@ module M_Dormitory
    
         menu = menus[day]
         
-        if menu.lunch == nil
+        if menu.lunch == ""
             
             message = "등록된 식단이 없습니다."
             return message
