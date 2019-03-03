@@ -31,8 +31,8 @@ class JBNUDormitoryParser
     
     def requestHTML_special
         
-        uri = URI(URI.encode("http://likehome.jbnu.ac.kr/board/bbs/board.php?dk_table=cbnu2_7_2_k"))
-       
+        # uri = URI(URI.encode("http://likehome.jbnu.ac.kr/board/bbs/board.php?dk_table=cbnu2_7_2_k"))
+        uri = URI(URI.encode("http://likehome.jbnu.ac.kr/home/main/inner.php?sMenu=B7300"))
         req = Net::HTTP::Get.new(uri)
     
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
@@ -128,7 +128,8 @@ class JBNUDormitoryParser
     def requestMenu_special
         
         doc = requestHTML_special
-        menus = parseData(doc)
+        # menus = parseData(doc)
+        menus = parseDateNew(doc)
        
         return menus
         
