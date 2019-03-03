@@ -6,38 +6,50 @@ module M_Dormitory
     
     def makeMessage_Cham(menu)
         
+#         message = ""
+            
+#         message += menu.week + "\n\n"
+
+#         if menu.breakfast.size == 1
+#             message += "아침" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.breakfast[0].split(":")[1]) + "\n\n"
+#         else
+#             message += "아침" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.breakfast[0].split(":")[1]) + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.breakfast[1]) + "\n\n\n"
+#         end
+        
+#         if menu.lunch.size == 1
+#             message += "점심" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.lunch[0].split(":")[1]) + "\n\n"
+#         else
+#              message += "점심" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.lunch[0].split(":")[1]) + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.lunch[1]) + "\n\n\n"
+#         end
+        
+#         if menu.dinner.size == 1
+#             message += "저녁" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.dinner[0].split(":")[1]) + "\n\n"
+#         else
+#             message += "저녁" + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.dinner[0].split(":")[1]) + "\n\n"
+#             message += makeMessageDomiSplit_Cham(menu.dinner[1]) + "\n\n\n"
+#         end
+
+#         return message.chop!.chop!.chop!
         message = ""
             
         message += menu.week + "\n\n"
 
-        if menu.breakfast.size == 1
-            message += "아침" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.breakfast[0].split(":")[1]) + "\n\n"
-        else
-            message += "아침" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.breakfast[0].split(":")[1]) + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.breakfast[1]) + "\n\n\n"
-        end
+        message += "아침" + "\n\n"
+        message += makeMessageDomiSplit_Basic(menu.breakfast) + "\n\n"
+        message += "점심" + "\n\n"
+        message += makeMessageDomiSplit_Basic(menu.lunch) + "\n\n"
+        message += "저녁" + "\n\n"
+        message += makeMessageDomiSplit_Basic(menu.dinner)  
         
-        if menu.lunch.size == 1
-            message += "점심" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.lunch[0].split(":")[1]) + "\n\n"
-        else
-             message += "점심" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.lunch[0].split(":")[1]) + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.lunch[1]) + "\n\n\n"
-        end
-        
-        if menu.dinner.size == 1
-            message += "저녁" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.dinner[0].split(":")[1]) + "\n\n"
-        else
-            message += "저녁" + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.dinner[0].split(":")[1]) + "\n\n"
-            message += makeMessageDomiSplit_Cham(menu.dinner[1]) + "\n\n\n"
-        end
-
-        return message.chop!.chop!.chop!
+        return message
     end
     
     def makeMessage_Cham_day(day)
@@ -49,7 +61,7 @@ module M_Dormitory
     
         menu = menus[day]
         
-        if menu.lunch == nil
+        if menu.lunch == ""
             message = "등록된 식단이 없습니다."
             return message
         else
@@ -67,7 +79,7 @@ module M_Dormitory
         message = ""
         
         menus.each do |menu|
-            if menu.lunch == nil
+            if menu.lunch == ""
                 message += menu.week + "\n\n"
                 message += "등록된 식단이 없습니다."
             else
