@@ -10,7 +10,10 @@ class JsonMaker
                 "text": "#{text}"  
               }  
             }],
-            "quickReplies": ["label": "업데이트 공지", "action": "message", "messageText": "업데이트 공지"]
+            "quickReplies": [
+              {"label": "업데이트 공지", "action": "message", "messageText": "업데이트 공지"},
+              {"label": "멋쟁이사자처럼", "action": "message", "messageText": "멋쟁이사자처럼"}
+            ]
           }
         }
 
