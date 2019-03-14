@@ -99,9 +99,10 @@ class JBNUFoodParser
         
         rt = []
         t.each_with_index do |a,i|
-            # print i.to_s + " : " +a.inner_text + "\n"
-            rt << a.inner_text.to_s.squish
+          a.css("br").each { |node| node.replace("\n") }
+          rt << a.text.strip
         end
+      
         
         if place_id == 0
             place = "진수원(진수당)"
@@ -112,17 +113,18 @@ class JBNUFoodParser
         end
         
         menus = [
-            Menu.new(place,"월","중식","백반",[rt[9],rt[15],rt[20],rt[25]]),
-            Menu.new(place,"화","중식","백반",[rt[10],rt[16],rt[21],rt[26]]),
-            Menu.new(place,"수","중식","백반",[rt[11],rt[17],rt[22],rt[27]]),
-            Menu.new(place,"목","중식","백반",[rt[12],rt[18],rt[23],rt[28]]),
-            Menu.new(place,"금","중식","백반",[rt[13],rt[19],rt[24],rt[29]]),
-            Menu.new(place,"월","석식","백반",[rt[32],rt[37],rt[42],rt[47]]),
-            Menu.new(place,"화","석식","백반",[rt[33],rt[38],rt[43],rt[48]]),
-            Menu.new(place,"수","석식","백반",[rt[34],rt[39],rt[44],rt[49]]),
-            Menu.new(place,"목","석식","백반",[rt[35],rt[40],rt[45],rt[50]]),
-            Menu.new(place,"금","석식","백반",[rt[36],rt[41],rt[46],rt[51]])
+            Menu.new(place,"월","중식","백반",[rt[9]]),
+            Menu.new(place,"화","중식","백반",[rt[10]]),
+            Menu.new(place,"수","중식","백반",[rt[11]]),
+            Menu.new(place,"목","중식","백반",[rt[12]]),
+            Menu.new(place,"금","중식","백반",[rt[13]]),
+            Menu.new(place,"월","석식","백반",[rt[17]]),
+            Menu.new(place,"화","석식","백반",[rt[18]]),
+            Menu.new(place,"수","석식","백반",[rt[19]]),
+            Menu.new(place,"목","석식","백반",[rt[20]]),
+            Menu.new(place,"금","석식","백반",[rt[21]])
             ]
+        
         
         
         return menus
