@@ -153,7 +153,7 @@ module M_Menu
           menu.contents.each do |m|
               text += m + "\n"
           end
-          contents += text + "\n\n"
+          contents += text
       end
       
       return contents
