@@ -105,7 +105,7 @@ class Message_Manager
     def makeMenuText_studentHall_all
         
         parser = JBNUFoodParser.new
-        menus = parser.requestStudentHall
+        menus = parser.requestMenu(2)
         
          # head_text = menus[0].shop_name + "\n\n\n"
         contents = ""
@@ -130,7 +130,7 @@ class Message_Manager
         end
         
         parser = JBNUFoodParser.new
-        menus = parser.requestStudentHall
+        menus = parser.requestMenu(2)
         
         # head_text = menus[0].shop_name + "\n\n\n"
         contents = ""

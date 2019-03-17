@@ -161,7 +161,6 @@ module M_Menu
     
     #이번주 메뉴
     def makeMessage_jungdam_all
-    
         parser = JBNUFoodParser.new
         menus = parser.requesJungdam
         
@@ -179,28 +178,7 @@ module M_Menu
         return contents.to_s.chop!.chop!.chop!
         
     end
-    
-    def makeMessage_studentHall_all
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestStudentHall
-        
-         # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-        
-        menus.each do |menu|
-            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
-        
-    end
-    
+
     def makeMessage_hu_all
         
         parser = JBNUFoodParser.new
@@ -258,15 +236,20 @@ module M_Menu
     end
     
     def makeMessage_jinsu_all
-        return makeMessage_all(0)
+      return makeMessage_all(0)
     end
     
     def makeMessage_medi_all
-        return makeMessage_all(1)
+      return makeMessage_all(1)
+    end
+  
+    def makeMessage_studentHall_all
+      return makeMessage_all(2)
     end
     
     #진수 : 0
     #의대 : 1
+    #학생회관 : 2
     def makeMessage_all(id)
         
         parser = JBNUFoodParser.new

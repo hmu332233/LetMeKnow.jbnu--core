@@ -130,50 +130,6 @@ class JBNUFoodParser
         return menus
     end
     
-    def requestStudentHall
-        
-        doc = requestHTML
-        
-        tables = doc.css("#sub_right//table")
-        
-        place_id = 2
-        
-        t = tables[place_id].css("tr//td")
-        
-        rt = []
-        t.each_with_index do |a,i|
-            # print i.to_s + " : " +a.inner_text + "\n"
-            rt << a.inner_text.to_s.squish
-        end
-        
-        
-        
-        if place_id == 0
-            place = "진수원(진수당)"
-        elsif place_id == 1
-            place = "의대"
-        elsif place_id == 2
-            place == "학생회관"
-        end
-        
-        menus = [
-            Menu.new(place,"월","중식","백반",[rt[9],rt[15],rt[21],rt[27]]),
-            Menu.new(place,"화","중식","백반",[rt[10],rt[16],rt[22],rt[28]]),
-            Menu.new(place,"수","중식","백반",[rt[11],rt[17],rt[23],rt[29]]),
-            Menu.new(place,"목","중식","백반",[rt[12],rt[18],rt[24],rt[30]]),
-            Menu.new(place,"금","중식","백반",[rt[13],rt[19],rt[25],rt[31]]),
-            Menu.new(place,"월","석식","백반",[rt[35],rt[41],rt[47],rt[53]]),
-            Menu.new(place,"화","석식","백반",[rt[36],rt[42],rt[48],rt[54]]),
-            Menu.new(place,"수","석식","백반",[rt[37],rt[43],rt[49],rt[55]]),
-            Menu.new(place,"목","석식","백반",[rt[38],rt[44],rt[50],rt[56]]),
-            Menu.new(place,"금","석식","백반",[rt[39],rt[45],rt[51],rt[57]])
-            ]
-        
-        
-        return menus
-        
-    end
-    
     def requestMenu_hu
         
         doc = requestHTML
@@ -233,7 +189,7 @@ class JBNUFoodParser
             menu << td.inner_text.strip
         end
         
-        place = "예지원"
+        place = "정담원"
         
         menus = [
             Menu.new(place,"월","중식","한식",[menu[9],menu[15],menu[20],menu[25],menu[30]]),
