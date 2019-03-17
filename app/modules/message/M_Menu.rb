@@ -139,28 +139,24 @@ module M_Menu
     end
     
     def makeMessage_jungdam_day(day)
-        print day
-        if day >= 5
-            return "주말에는 운영하지 않습니다"
-        end
-       
-        parser = JBNUFoodParser.new
-        menus = parser.requesJungdam
-        menu = menus[day]
-        
-        contents = ""
-        
-        
-        text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-        menu.contents.each do |m|
-            text += m + "\n"
-        end
-            
-        contents += text + "\n\n"
-        
-        
-        return contents.to_s.chop!.chop!.chop!
-        
+      if day > 5 or day == 0
+          return "주말에는 운영하지 않습니다"
+      end
+      
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_jungdam_mobile(day)
+      
+      contents = ""
+      
+      menus.each do |menu|
+          text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+          menu.contents.each do |m|
+              text += m + "\n"
+          end
+          contents += text + "\n\n"
+      end
+      
+      return contents
     end
     
     #이번주 메뉴

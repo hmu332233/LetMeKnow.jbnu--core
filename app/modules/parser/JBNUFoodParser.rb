@@ -434,22 +434,21 @@ class JBNUFoodParser
         
     end
     
-      def requestMenu_yeji_mobile(day)
+      def requestMenu_jungdam_mobile(day)
         
         menu_datas = requestMenu_Mobile_Food(4,day)
-        
-        for i in 0..2
+
+        for i in 0..4
             if menu_datas[i] == nil
                 menu_datas[i] = ""
             end
         end
         
-        place = "예지원"
+        place = "정담원"
         
         menus = [
-            Menu.new(place,day,"중식","일품",[menu_datas[0],menu_datas[1]]),
-            Menu.new(place,day,"중식","특식",[menu_datas[2]])
-            ]
+            Menu.new(place, day, "중식", "백반", menu_datas[0..4]),
+        ]
         
        return menus
         
