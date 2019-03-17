@@ -181,23 +181,23 @@ class JBNUFoodParser
         tables = doc.css("#sub_right//table")
         
         menu_data = tables[4].css("tr//td")
-        
 
         menu = []
         menu_data.each_with_index do |td,i|
-            # print i.to_s + " : " + td.inner_text.strip + "\n"
-            menu << td.inner_text.strip
+          # print i.to_s + " : " + td.inner_text.strip + "\n"
+          td.css("br").each { |node| node.replace("\n") }
+          menu << td.text.strip
         end
         
         place = "정담원"
         
         menus = [
-            Menu.new(place,"월","중식","한식",[menu[9],menu[15],menu[20],menu[25],menu[30]]),
-            Menu.new(place,"화","중식","한식",[menu[10],menu[16],menu[21],menu[26],menu[31]]),
-            Menu.new(place,"수","중식","한식",[menu[11],menu[17],menu[22],menu[27],menu[32]]),
-            Menu.new(place,"목","중식","한식",[menu[12],menu[18],menu[23],menu[28],menu[33]]),
-            Menu.new(place,"금","중식","한식",[menu[13],menu[19],menu[24],menu[29],menu[34]])
-            ]
+          Menu.new(place,"월","중식","백반",[menu[9]]),
+          Menu.new(place,"화","중식","백반",[menu[10]]),
+          Menu.new(place,"수","중식","백반",[menu[11]]),
+          Menu.new(place,"목","중식","백반",[menu[12]]),
+          Menu.new(place,"금","중식","백반",[menu[13]])
+        ]
         
        return menus
     
