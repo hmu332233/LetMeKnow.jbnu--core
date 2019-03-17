@@ -140,35 +140,36 @@ class JBNUFoodParser
         
         menu = []
         menu_data.each_with_index do |td,i|
-            # print i.to_s + " : " + td.inner_text.strip + "\n"
-            menu << td.inner_text.strip
+          # print i.to_s + " : " + td.inner_text.strip + "\n"
+          td.css("br").each { |node| node.replace("\n") }
+          menu << td.inner_text.strip
         end
         
         
         place = "후생관"
         
         menus = [
-            Menu.new(place,"월","중식","특식",[menu[9]]),
-            Menu.new(place,"월","중식","찌개",[menu[16]]),
-            Menu.new(place,"월","중식","추억의 도시락",[menu[22],menu[27],menu[32]]),
-            Menu.new(place,"월","석식","백반",[menu[35],menu[40],menu[45]]),
-            Menu.new(place,"화","중식","특식",[menu[10]]),
-            Menu.new(place,"화","중식","찌개",[menu[17]]),
-            Menu.new(place,"화","중식","추억의 도시락",[menu[23],menu[28],menu[32]]),
-            Menu.new(place,"화","석식","백반",[menu[36],menu[41],menu[46]]),
-            Menu.new(place,"수","중식","특식",[menu[11]]),
-            Menu.new(place,"수","중식","찌개",[menu[18]]),
-            Menu.new(place,"수","중식","추억의 도시락",[menu[24],menu[29],menu[32]]),
-            Menu.new(place,"수","석식","백반",[menu[37],menu[42],menu[47]]),
-            Menu.new(place,"목","중식","특식",[menu[12]]),
-            Menu.new(place,"목","중식","찌개",[menu[19]]),
-            Menu.new(place,"목","중식","추억의 도시락",[menu[25],menu[30],menu[32]]),
-            Menu.new(place,"목","석식","백반",[menu[38],menu[43],menu[48]]),
-            Menu.new(place,"금","중식","특식",[menu[13]]),
-            Menu.new(place,"금","중식","찌개",[menu[20]]),
-            Menu.new(place,"금","중식","추억의 도시락",[menu[26],menu[31],menu[32]]),
-            Menu.new(place,"금","석식","백반",[menu[39],menu[44],menu[49]])
-            ]
+          Menu.new(place,"월","중식","특식",[menu[9]]),
+          Menu.new(place,"월","중식","찌개",[menu[16]]),
+          Menu.new(place,"월","중식","추억의 도시락",[menu[22]]),
+          Menu.new(place,"월","석식","백반",[menu[29]]),
+          Menu.new(place,"화","중식","특식",[menu[10]]),
+          Menu.new(place,"화","중식","찌개",[menu[17]]),
+          Menu.new(place,"화","중식","추억의 도시락",[menu[23]]),
+          Menu.new(place,"화","석식","백반",[menu[30]]),
+          Menu.new(place,"수","중식","특식",[menu[11]]),
+          Menu.new(place,"수","중식","찌개",[menu[18]]),
+          Menu.new(place,"수","중식","추억의 도시락",[menu[24]]),
+          Menu.new(place,"수","석식","백반",[menu[31]]),
+          Menu.new(place,"목","중식","특식",[menu[12]]),
+          Menu.new(place,"목","중식","찌개",[menu[19]]),
+          Menu.new(place,"목","중식","추억의 도시락",[menu[25]]),
+          Menu.new(place,"목","석식","백반",[menu[32]]),
+          Menu.new(place,"금","중식","특식",[menu[13]]),
+          Menu.new(place,"금","중식","찌개",[menu[20]]),
+          Menu.new(place,"금","중식","추억의 도시락",[menu[26]]),
+          Menu.new(place,"금","석식","백반",[menu[33]])
+        ]
         
        return menus
        
