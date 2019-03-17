@@ -139,33 +139,28 @@ module M_Menu
     end
     
     def makeMessage_jungdam_day(day)
-        print day
-        if day >= 5
-            return "주말에는 운영하지 않습니다"
-        end
-       
-        parser = JBNUFoodParser.new
-        menus = parser.requesJungdam
-        menu = menus[day]
-        
-        contents = ""
-        
-        
-        text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-        menu.contents.each do |m|
-            text += m + "\n"
-        end
-            
-        contents += text + "\n\n"
-        
-        
-        return contents.to_s.chop!.chop!.chop!
-        
+      if day > 5 or day == 0
+          return "주말에는 운영하지 않습니다"
+      end
+      
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_jungdam_mobile(day)
+      
+      contents = ""
+      
+      menus.each do |menu|
+          text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
+          menu.contents.each do |m|
+              text += m + "\n"
+          end
+          contents += text
+      end
+      
+      return contents
     end
     
     #이번주 메뉴
     def makeMessage_jungdam_all
-    
         parser = JBNUFoodParser.new
         menus = parser.requesJungdam
         
@@ -183,28 +178,7 @@ module M_Menu
         return contents.to_s.chop!.chop!.chop!
         
     end
-    
-    def makeMessage_studentHall_all
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestStudentHall
-        
-         # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-        
-        menus.each do |menu|
-            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
-        
-    end
-    
+
     def makeMessage_hu_all
         
         parser = JBNUFoodParser.new
@@ -218,6 +192,7 @@ module M_Menu
             contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
             contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
             contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+            contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
             contents += "\n"
             contents += menus[i+2].category + ":" + "\n\n"
             menus[i+2].contents.each do |con|
@@ -226,14 +201,14 @@ module M_Menu
             
             contents += "\n\n"
             
-            contents += menus[i+3].week + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
-            menus[i+3].contents.each do |con|
+            contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
+            menus[i+4].contents.each do |con|
                 contents += con + "\n"
             end
             
             contents += "\n\n\n"
             
-            i += 4
+            i += 5
         end
         
         return contents.to_s.chop!.chop!.chop!.chop!
@@ -262,15 +237,20 @@ module M_Menu
     end
     
     def makeMessage_jinsu_all
-        return makeMessage_all(0)
+      return makeMessage_all(0)
     end
     
     def makeMessage_medi_all
-        return makeMessage_all(1)
+      return makeMessage_all(1)
+    end
+  
+    def makeMessage_studentHall_all
+      return makeMessage_all(2)
     end
     
     #진수 : 0
     #의대 : 1
+    #학생회관 : 2
     def makeMessage_all(id)
         
         parser = JBNUFoodParser.new
