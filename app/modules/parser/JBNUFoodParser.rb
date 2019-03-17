@@ -99,9 +99,10 @@ class JBNUFoodParser
         
         rt = []
         t.each_with_index do |a,i|
-            # print i.to_s + " : " +a.inner_text + "\n"
-            rt << a.inner_text.to_s.squish
+          a.css("br").each { |node| node.replace("\n") }
+          rt << a.text.strip
         end
+      
         
         if place_id == 0
             place = "진수원(진수당)"
@@ -112,64 +113,21 @@ class JBNUFoodParser
         end
         
         menus = [
-            Menu.new(place,"월","중식","백반",[rt[9],rt[15],rt[20],rt[25]]),
-            Menu.new(place,"화","중식","백반",[rt[10],rt[16],rt[21],rt[26]]),
-            Menu.new(place,"수","중식","백반",[rt[11],rt[17],rt[22],rt[27]]),
-            Menu.new(place,"목","중식","백반",[rt[12],rt[18],rt[23],rt[28]]),
-            Menu.new(place,"금","중식","백반",[rt[13],rt[19],rt[24],rt[29]]),
-            Menu.new(place,"월","석식","백반",[rt[32],rt[37],rt[42],rt[47]]),
-            Menu.new(place,"화","석식","백반",[rt[33],rt[38],rt[43],rt[48]]),
-            Menu.new(place,"수","석식","백반",[rt[34],rt[39],rt[44],rt[49]]),
-            Menu.new(place,"목","석식","백반",[rt[35],rt[40],rt[45],rt[50]]),
-            Menu.new(place,"금","석식","백반",[rt[36],rt[41],rt[46],rt[51]])
+            Menu.new(place,"월","중식","백반",[rt[9]]),
+            Menu.new(place,"화","중식","백반",[rt[10]]),
+            Menu.new(place,"수","중식","백반",[rt[11]]),
+            Menu.new(place,"목","중식","백반",[rt[12]]),
+            Menu.new(place,"금","중식","백반",[rt[13]]),
+            Menu.new(place,"월","석식","백반",[rt[17]]),
+            Menu.new(place,"화","석식","백반",[rt[18]]),
+            Menu.new(place,"수","석식","백반",[rt[19]]),
+            Menu.new(place,"목","석식","백반",[rt[20]]),
+            Menu.new(place,"금","석식","백반",[rt[21]])
             ]
         
         
-        return menus
-    end
-    
-    def requestStudentHall
-        
-        doc = requestHTML
-        
-        tables = doc.css("#sub_right//table")
-        
-        place_id = 2
-        
-        t = tables[place_id].css("tr//td")
-        
-        rt = []
-        t.each_with_index do |a,i|
-            # print i.to_s + " : " +a.inner_text + "\n"
-            rt << a.inner_text.to_s.squish
-        end
-        
-        
-        
-        if place_id == 0
-            place = "진수원(진수당)"
-        elsif place_id == 1
-            place = "의대"
-        elsif place_id == 2
-            place == "학생회관"
-        end
-        
-        menus = [
-            Menu.new(place,"월","중식","백반",[rt[9],rt[15],rt[21],rt[27]]),
-            Menu.new(place,"화","중식","백반",[rt[10],rt[16],rt[22],rt[28]]),
-            Menu.new(place,"수","중식","백반",[rt[11],rt[17],rt[23],rt[29]]),
-            Menu.new(place,"목","중식","백반",[rt[12],rt[18],rt[24],rt[30]]),
-            Menu.new(place,"금","중식","백반",[rt[13],rt[19],rt[25],rt[31]]),
-            Menu.new(place,"월","석식","백반",[rt[35],rt[41],rt[47],rt[53]]),
-            Menu.new(place,"화","석식","백반",[rt[36],rt[42],rt[48],rt[54]]),
-            Menu.new(place,"수","석식","백반",[rt[37],rt[43],rt[49],rt[55]]),
-            Menu.new(place,"목","석식","백반",[rt[38],rt[44],rt[50],rt[56]]),
-            Menu.new(place,"금","석식","백반",[rt[39],rt[45],rt[51],rt[57]])
-            ]
-        
         
         return menus
-        
     end
     
     def requestMenu_hu
@@ -182,35 +140,41 @@ class JBNUFoodParser
         
         menu = []
         menu_data.each_with_index do |td,i|
-            # print i.to_s + " : " + td.inner_text.strip + "\n"
-            menu << td.inner_text.strip
+          # print i.to_s + " : " + td.inner_text.strip + "\n"
+          td.css("br").each { |node| node.replace("\n") }
+          menu << td.inner_text.strip
         end
         
         
         place = "후생관"
         
         menus = [
-            Menu.new(place,"월","중식","특식",[menu[9]]),
-            Menu.new(place,"월","중식","찌개",[menu[16]]),
-            Menu.new(place,"월","중식","추억의 도시락",[menu[22],menu[27],menu[32]]),
-            Menu.new(place,"월","석식","백반",[menu[35],menu[40],menu[45]]),
-            Menu.new(place,"화","중식","특식",[menu[10]]),
-            Menu.new(place,"화","중식","찌개",[menu[17]]),
-            Menu.new(place,"화","중식","추억의 도시락",[menu[23],menu[28],menu[32]]),
-            Menu.new(place,"화","석식","백반",[menu[36],menu[41],menu[46]]),
-            Menu.new(place,"수","중식","특식",[menu[11]]),
-            Menu.new(place,"수","중식","찌개",[menu[18]]),
-            Menu.new(place,"수","중식","추억의 도시락",[menu[24],menu[29],menu[32]]),
-            Menu.new(place,"수","석식","백반",[menu[37],menu[42],menu[47]]),
-            Menu.new(place,"목","중식","특식",[menu[12]]),
-            Menu.new(place,"목","중식","찌개",[menu[19]]),
-            Menu.new(place,"목","중식","추억의 도시락",[menu[25],menu[30],menu[32]]),
-            Menu.new(place,"목","석식","백반",[menu[38],menu[43],menu[48]]),
-            Menu.new(place,"금","중식","특식",[menu[13]]),
-            Menu.new(place,"금","중식","찌개",[menu[20]]),
-            Menu.new(place,"금","중식","추억의 도시락",[menu[26],menu[31],menu[32]]),
-            Menu.new(place,"금","석식","백반",[menu[39],menu[44],menu[49]])
-            ]
+          Menu.new(place,"월","중식","특식",[menu[9]]),
+          Menu.new(place,"월","중식","찌개",[menu[16]]),
+          Menu.new(place,"월","중식","추억의 도시락",[menu[22]]),
+          Menu.new(place,"월","중식","오므라이스",[menu[55]]),
+          Menu.new(place,"월","석식","백반",[menu[29]]),
+          Menu.new(place,"화","중식","특식",[menu[10]]),
+          Menu.new(place,"화","중식","찌개",[menu[17]]),
+          Menu.new(place,"화","중식","추억의 도시락",[menu[23]]),
+          Menu.new(place,"화","중식","오므라이스",[menu[56]]),
+          Menu.new(place,"화","석식","백반",[menu[30]]),
+          Menu.new(place,"수","중식","특식",[menu[11]]),
+          Menu.new(place,"수","중식","찌개",[menu[18]]),
+          Menu.new(place,"수","중식","추억의 도시락",[menu[24]]),
+          Menu.new(place,"수","중식","오므라이스",[menu[57]]),
+          Menu.new(place,"수","석식","백반",[menu[31]]),
+          Menu.new(place,"목","중식","특식",[menu[12]]),
+          Menu.new(place,"목","중식","찌개",[menu[19]]),
+          Menu.new(place,"목","중식","추억의 도시락",[menu[25]]),
+          Menu.new(place,"목","중식","오므라이스",[menu[58]]),
+          Menu.new(place,"목","석식","백반",[menu[32]]),
+          Menu.new(place,"금","중식","특식",[menu[13]]),
+          Menu.new(place,"금","중식","찌개",[menu[20]]),
+          Menu.new(place,"금","중식","추억의 도시락",[menu[26]]),
+          Menu.new(place,"금","중식","오므라이스",[menu[59]]),
+          Menu.new(place,"금","석식","백반",[menu[33]])
+        ]
         
        return menus
        
@@ -223,23 +187,23 @@ class JBNUFoodParser
         tables = doc.css("#sub_right//table")
         
         menu_data = tables[4].css("tr//td")
-        
 
         menu = []
         menu_data.each_with_index do |td,i|
-            # print i.to_s + " : " + td.inner_text.strip + "\n"
-            menu << td.inner_text.strip
+          # print i.to_s + " : " + td.inner_text.strip + "\n"
+          td.css("br").each { |node| node.replace("\n") }
+          menu << td.text.strip
         end
         
-        place = "예지원"
+        place = "정담원"
         
         menus = [
-            Menu.new(place,"월","중식","한식",[menu[9],menu[15],menu[20],menu[25],menu[30]]),
-            Menu.new(place,"화","중식","한식",[menu[10],menu[16],menu[21],menu[26],menu[31]]),
-            Menu.new(place,"수","중식","한식",[menu[11],menu[17],menu[22],menu[27],menu[32]]),
-            Menu.new(place,"목","중식","한식",[menu[12],menu[18],menu[23],menu[28],menu[33]]),
-            Menu.new(place,"금","중식","한식",[menu[13],menu[19],menu[24],menu[29],menu[34]])
-            ]
+          Menu.new(place,"월","중식","백반",[menu[9]]),
+          Menu.new(place,"화","중식","백반",[menu[10]]),
+          Menu.new(place,"수","중식","백반",[menu[11]]),
+          Menu.new(place,"목","중식","백반",[menu[12]]),
+          Menu.new(place,"금","중식","백반",[menu[13]])
+        ]
         
        return menus
     
@@ -432,22 +396,21 @@ class JBNUFoodParser
         
     end
     
-      def requestMenu_yeji_mobile(day)
+      def requestMenu_jungdam_mobile(day)
         
         menu_datas = requestMenu_Mobile_Food(4,day)
-        
-        for i in 0..2
+
+        for i in 0..4
             if menu_datas[i] == nil
                 menu_datas[i] = ""
             end
         end
         
-        place = "예지원"
+        place = "정담원"
         
         menus = [
-            Menu.new(place,day,"중식","일품",[menu_datas[0],menu_datas[1]]),
-            Menu.new(place,day,"중식","특식",[menu_datas[2]])
-            ]
+            Menu.new(place, day, "중식", "백반", menu_datas[0..4]),
+        ]
         
        return menus
         

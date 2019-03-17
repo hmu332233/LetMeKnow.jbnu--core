@@ -371,7 +371,7 @@ class Thinker
           return jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_all)
           
         else
-          return jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_day(dayNumber(day)-1))
+          return jsonMaker.getMessageJson(messageFactory.makeMessage_jungdam_day(dayNumber(day)))
           
         end
       when "시간", "언제"
