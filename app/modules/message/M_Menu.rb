@@ -192,6 +192,7 @@ module M_Menu
             contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
             contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
             contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+            contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
             contents += "\n"
             contents += menus[i+2].category + ":" + "\n\n"
             menus[i+2].contents.each do |con|
@@ -200,14 +201,14 @@ module M_Menu
             
             contents += "\n\n"
             
-            contents += menus[i+3].week + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
-            menus[i+3].contents.each do |con|
+            contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
+            menus[i+4].contents.each do |con|
                 contents += con + "\n"
             end
             
             contents += "\n\n\n"
             
-            i += 4
+            i += 5
         end
         
         return contents.to_s.chop!.chop!.chop!.chop!
