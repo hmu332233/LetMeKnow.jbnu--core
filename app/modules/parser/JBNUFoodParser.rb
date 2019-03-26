@@ -99,6 +99,7 @@ class JBNUFoodParser
         
         rt = []
         t.each_with_index do |a,i|
+          # print i.to_s + " : " + a.inner_text.strip + "\n"
           a.css("br").each { |node| node.replace("\n") }
           rt << a.text.strip
         end
@@ -113,16 +114,16 @@ class JBNUFoodParser
         end
         
         menus = [
-            Menu.new(place,"월","중식","백반",[rt[9]]),
-            Menu.new(place,"화","중식","백반",[rt[10]]),
-            Menu.new(place,"수","중식","백반",[rt[11]]),
-            Menu.new(place,"목","중식","백반",[rt[12]]),
-            Menu.new(place,"금","중식","백반",[rt[13]]),
-            Menu.new(place,"월","석식","백반",[rt[17]]),
-            Menu.new(place,"화","석식","백반",[rt[18]]),
-            Menu.new(place,"수","석식","백반",[rt[19]]),
-            Menu.new(place,"목","석식","백반",[rt[20]]),
-            Menu.new(place,"금","석식","백반",[rt[21]])
+            Menu.new(place,"월","중식","백반",[rt[8]]),
+            Menu.new(place,"화","중식","백반",[rt[9]]),
+            Menu.new(place,"수","중식","백반",[rt[10]]),
+            Menu.new(place,"목","중식","백반",[rt[11]]),
+            Menu.new(place,"금","중식","백반",[rt[12]]),
+            Menu.new(place,"월","석식","백반",[rt[15]]),
+            Menu.new(place,"화","석식","백반",[rt[16]]),
+            Menu.new(place,"수","석식","백반",[rt[17]]),
+            Menu.new(place,"목","석식","백반",[rt[18]]),
+            Menu.new(place,"금","석식","백반",[rt[19]])
             ]
         
         
@@ -198,11 +199,11 @@ class JBNUFoodParser
         place = "정담원"
         
         menus = [
-          Menu.new(place,"월","중식","백반",[menu[9]]),
-          Menu.new(place,"화","중식","백반",[menu[10]]),
-          Menu.new(place,"수","중식","백반",[menu[11]]),
-          Menu.new(place,"목","중식","백반",[menu[12]]),
-          Menu.new(place,"금","중식","백반",[menu[13]])
+          Menu.new(place,"월","중식","백반",[menu[8]]),
+          Menu.new(place,"화","중식","백반",[menu[9]]),
+          Menu.new(place,"수","중식","백반",[menu[10]]),
+          Menu.new(place,"목","중식","백반",[menu[11]]),
+          Menu.new(place,"금","중식","백반",[menu[12]])
         ]
         
        return menus
