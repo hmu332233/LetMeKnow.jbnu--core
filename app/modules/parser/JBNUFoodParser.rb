@@ -99,6 +99,7 @@ class JBNUFoodParser
         
         rt = []
         t.each_with_index do |a,i|
+          # print i.to_s + " : " + a.inner_text.strip + "\n"
           a.css("br").each { |node| node.replace("\n") }
           rt << a.text.strip
         end
@@ -113,16 +114,16 @@ class JBNUFoodParser
         end
         
         menus = [
-            Menu.new(place,"월","중식","백반",[rt[9]]),
-            Menu.new(place,"화","중식","백반",[rt[10]]),
-            Menu.new(place,"수","중식","백반",[rt[11]]),
-            Menu.new(place,"목","중식","백반",[rt[12]]),
-            Menu.new(place,"금","중식","백반",[rt[13]]),
-            Menu.new(place,"월","석식","백반",[rt[17]]),
-            Menu.new(place,"화","석식","백반",[rt[18]]),
-            Menu.new(place,"수","석식","백반",[rt[19]]),
-            Menu.new(place,"목","석식","백반",[rt[20]]),
-            Menu.new(place,"금","석식","백반",[rt[21]])
+            Menu.new(place,"월","중식","백반",[rt[8]]),
+            Menu.new(place,"화","중식","백반",[rt[9]]),
+            Menu.new(place,"수","중식","백반",[rt[10]]),
+            Menu.new(place,"목","중식","백반",[rt[11]]),
+            Menu.new(place,"금","중식","백반",[rt[12]]),
+            Menu.new(place,"월","석식","백반",[rt[15]]),
+            Menu.new(place,"화","석식","백반",[rt[16]]),
+            Menu.new(place,"수","석식","백반",[rt[17]]),
+            Menu.new(place,"목","석식","백반",[rt[18]]),
+            Menu.new(place,"금","석식","백반",[rt[19]])
             ]
         
         
@@ -149,31 +150,31 @@ class JBNUFoodParser
         place = "후생관"
         
         menus = [
-          Menu.new(place,"월","중식","특식",[menu[9]]),
-          Menu.new(place,"월","중식","찌개",[menu[16]]),
-          Menu.new(place,"월","중식","추억의 도시락",[menu[22]]),
-          Menu.new(place,"월","중식","오므라이스",[menu[55]]),
-          Menu.new(place,"월","석식","백반",[menu[29]]),
-          Menu.new(place,"화","중식","특식",[menu[10]]),
-          Menu.new(place,"화","중식","찌개",[menu[17]]),
-          Menu.new(place,"화","중식","추억의 도시락",[menu[23]]),
-          Menu.new(place,"화","중식","오므라이스",[menu[56]]),
-          Menu.new(place,"화","석식","백반",[menu[30]]),
-          Menu.new(place,"수","중식","특식",[menu[11]]),
-          Menu.new(place,"수","중식","찌개",[menu[18]]),
-          Menu.new(place,"수","중식","추억의 도시락",[menu[24]]),
-          Menu.new(place,"수","중식","오므라이스",[menu[57]]),
-          Menu.new(place,"수","석식","백반",[menu[31]]),
-          Menu.new(place,"목","중식","특식",[menu[12]]),
-          Menu.new(place,"목","중식","찌개",[menu[19]]),
-          Menu.new(place,"목","중식","추억의 도시락",[menu[25]]),
-          Menu.new(place,"목","중식","오므라이스",[menu[58]]),
-          Menu.new(place,"목","석식","백반",[menu[32]]),
-          Menu.new(place,"금","중식","특식",[menu[13]]),
-          Menu.new(place,"금","중식","찌개",[menu[20]]),
-          Menu.new(place,"금","중식","추억의 도시락",[menu[26]]),
-          Menu.new(place,"금","중식","오므라이스",[menu[59]]),
-          Menu.new(place,"금","석식","백반",[menu[33]])
+          Menu.new(place,"월","중식","특식",[menu[8]]),
+          Menu.new(place,"월","중식","찌개",[menu[14]]),
+          Menu.new(place,"월","중식","추억의 도시락",[menu[20]]),
+          Menu.new(place,"월","중식","오므라이스",[menu[46]]),
+          Menu.new(place,"월","석식","백반",[menu[27]]),
+          Menu.new(place,"화","중식","특식",[menu[9]]),
+          Menu.new(place,"화","중식","찌개",[menu[15]]),
+          Menu.new(place,"화","중식","추억의 도시락",[menu[21]]),
+          Menu.new(place,"화","중식","오므라이스",[menu[47]]),
+          Menu.new(place,"화","석식","백반",[menu[28]]),
+          Menu.new(place,"수","중식","특식",[menu[10]]),
+          Menu.new(place,"수","중식","찌개",[menu[16]]),
+          Menu.new(place,"수","중식","추억의 도시락",[menu[22]]),
+          Menu.new(place,"수","중식","오므라이스",[menu[48]]),
+          Menu.new(place,"수","석식","백반",[menu[29]]),
+          Menu.new(place,"목","중식","특식",[menu[11]]),
+          Menu.new(place,"목","중식","찌개",[menu[17]]),
+          Menu.new(place,"목","중식","추억의 도시락",[menu[23]]),
+          Menu.new(place,"목","중식","오므라이스",[menu[49]]),
+          Menu.new(place,"목","석식","백반",[menu[30]]),
+          Menu.new(place,"금","중식","특식",[menu[12]]),
+          Menu.new(place,"금","중식","찌개",[menu[18]]),
+          Menu.new(place,"금","중식","추억의 도시락",[menu[24]]),
+          Menu.new(place,"금","중식","오므라이스",[menu[50]]),
+          Menu.new(place,"금","석식","백반",[menu[31]])
         ]
         
        return menus
@@ -198,11 +199,11 @@ class JBNUFoodParser
         place = "정담원"
         
         menus = [
-          Menu.new(place,"월","중식","백반",[menu[9]]),
-          Menu.new(place,"화","중식","백반",[menu[10]]),
-          Menu.new(place,"수","중식","백반",[menu[11]]),
-          Menu.new(place,"목","중식","백반",[menu[12]]),
-          Menu.new(place,"금","중식","백반",[menu[13]])
+          Menu.new(place,"월","중식","백반",[menu[8]]),
+          Menu.new(place,"화","중식","백반",[menu[9]]),
+          Menu.new(place,"수","중식","백반",[menu[10]]),
+          Menu.new(place,"목","중식","백반",[menu[11]]),
+          Menu.new(place,"금","중식","백반",[menu[12]])
         ]
         
        return menus
