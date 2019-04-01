@@ -17,11 +17,7 @@ module M_Menu
     
         menus.each do |menu|
             text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            # menu.contents.each do |m|
-            menu.contents.each_with_index do |m, i|
-                if i == 1
-                  m.reverse!
-                end
+            menu.contents.each do |m|
                 text += m + "\n"
             end
             
@@ -46,11 +42,7 @@ module M_Menu
     
         menus.each do |menu|
             text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            # menu.contents.each do |m|
-            menu.contents.each_with_index do |m, i|
-                if i == 1
-                  m.reverse!
-                end
+            menu.contents.each do |m|
                 text += m + "\n"
             end
             
@@ -75,11 +67,7 @@ module M_Menu
    
         menus.each do |menu|
             text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            # menu.contents.each do |m|
-            menu.contents.each_with_index do |m, i|
-                if i == 1
-                  m.reverse!
-                end
+            menu.contents.each do |m|
                 text += m + "\n"
             end
             
@@ -104,8 +92,7 @@ module M_Menu
         i = 0
 
         contents += dayKor(menus[i].week) + "(" + menus[i].time + ")"+"\n\n"
-        # contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-        contents += menus[i].category + " : " + menus[i].contents[0].reverse! + "\n"
+        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
         contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
         contents += menus[i+4].category + " : " + menus[i+4].contents[0] + "\n"
         contents += "\n"

@@ -269,9 +269,7 @@ module M_Dormitory
         message = ""
         
         menu_data.split(" ").each_with_index do |lunch_d,i|
-            if i == 1
-              lunch_d.reverse!
-            end
+            
             message += lunch_d.strip + "\n"
     
         end
