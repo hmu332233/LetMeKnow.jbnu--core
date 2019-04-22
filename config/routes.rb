@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/api/menu/update' => 'api#updateAllMenu'
   get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
   get '/api/menu_domitory/update/yesterday' => 'api#updateYesterdayToggle'
+  get '/api/menu_domitory/update/use_db' => 'api#updateDbToggle'
 
   #major
   post '/major' => 'major#create'

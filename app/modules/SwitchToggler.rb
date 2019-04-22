@@ -18,5 +18,13 @@ class SwitchToggler
     @sw = Sw.find(1)
     return @sw.use_yesterday_domitory_menu
   end
+  
+  def self.toggleUseDbMenu
+    @sw = Sw.find(1)
+    @sw.use_db_menu = !@sw.use_db_menu
+    @sw.save
+    
+    return @sw.use_db_menu
+  end
 end
     

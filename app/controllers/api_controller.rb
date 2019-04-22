@@ -39,4 +39,15 @@ class ApiController < ApplicationController
     end
   end
   
+  # /api/menu_domitory/update/use_db?token=[token]
+  def updateDbToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = SwitchToggler.toggleUseDbMenu();
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  
 end
