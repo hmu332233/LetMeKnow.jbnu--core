@@ -1,4 +1,5 @@
 require 'parser/JBNUFoodParser'
+require 'MenuStore'
 
 module M_Menu
     #학식 모바일
@@ -6,8 +7,8 @@ module M_Menu
       if day > 5 or day == 0
         return "주말에는 운영하지 않습니다"
       end
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu_jinsu_mobile(day)
+      menuStore = MenuStore.new
+      menus = menuStore.getJinsuMenusOfDay(day)
       return makeMenusMessage(menus)
     end
     
@@ -61,7 +62,9 @@ module M_Menu
     end
     
     def makeMessage_jinsu_all
-      return makeMessage_all(0)
+      menuStore = MenuStore.new
+      menus = menuStore.getJinsuMenus()
+      return makeMenusMessage(menus)
     end
     
     def makeMessage_medi_all
