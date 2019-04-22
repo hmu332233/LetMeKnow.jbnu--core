@@ -16,17 +16,17 @@ module M_Menu
       if day > 5 or day == 0
         return "주말에는 운영하지 않습니다"
       end
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu_medi_mobile(day)
+      menuStore = MenuStore.new
+      menus = menuStore.getMediMenusOfDay(day)
       return makeMenusMessage(menus)
     end
     
     def makeMessage_studentHall_day(day)
-      if day > 6 or day == 0
+      if day > 5 or day == 0
           return "주말에는 운영하지 않습니다"
       end
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu_studentHall_mobile(day)
+      menuStore = MenuStore.new
+      menus = menuStore.getStudentHallMenusOfDay(day)
       return makeMenusMessage(menus)
     end
     
@@ -68,11 +68,15 @@ module M_Menu
     end
     
     def makeMessage_medi_all
-      return makeMessage_all(1)
+      menuStore = MenuStore.new
+      menus = menuStore.getMediMenus()
+      return makeMenusMessage(menus)
     end
   
     def makeMessage_studentHall_all
-      return makeMessage_all(2)
+      menuStore = MenuStore.new
+      menus = menuStore.getStudentHallMenus()
+      return makeMenusMessage(menus)
     end
   
     def makeMenuMessage(menu)
@@ -88,17 +92,7 @@ module M_Menu
       messages = menus.map { |menu| makeMenuMessage(menu) }
       return messages.join("\n\n");
     end
-  
-    #진수 : 0
-    #의대 : 1
-    #학생회관 : 2
-    def makeMessage_all(id)
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu(id)
-      return makeMenusMessage(menus)
-    end
-    
-    
+
     def dayKor(day)
     
         case day
