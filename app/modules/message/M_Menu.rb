@@ -161,79 +161,15 @@ module M_Menu
     
     #이번주 메뉴
     def makeMessage_jungdam_all
-        parser = JBNUFoodParser.new
-        menus = parser.requesJungdam
-        
-        contents = ""
-        
-        menus.each do |menu|
-            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
-        
+      parser = JBNUFoodParser.new
+      menus = parser.requesJungdam
+      return makeMenusMessage(menus)
     end
-
-    def makeMessage_hu_all
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_hu
-        
-        contents = ""
-        
-        i = 0
-        while i < menus.size
-        
-            contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
-            contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-            contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
-            contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
-            contents += "\n"
-            contents += menus[i+2].category + ":" + "\n\n"
-            menus[i+2].contents.each do |con|
-                contents += con + "\n"
-            end
-            
-            contents += "\n\n"
-            
-            contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
-            menus[i+4].contents.each do |con|
-                contents += con + "\n"
-            end
-            
-            contents += "\n\n\n"
-            
-            i += 5
-        end
-        
-        return contents.to_s.chop!.chop!.chop!.chop!
-        
-    end
-    
-    def makeMessage_yeji_all
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestYeji
-        
-        contents = ""
-        
-        menus.each do |menu|
-            
-            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-            
-        end
-        
-        return contents.chop!
+   
+    def makeMessage_yeji_all        
+      parser = JBNUFoodParser.new
+      menus = parser.requestYeji
+      return makeMenusMessage(menus)
     end
     
     def makeMessage_jinsu_all
@@ -247,8 +183,33 @@ module M_Menu
     def makeMessage_studentHall_all
       return makeMessage_all(2)
     end
-    
   
+    def makeMessage_hu_all
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_hu
+      contents = ""
+      i = 0
+      while i < menus.size
+        contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
+        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+        contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+        contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
+        contents += "\n"
+        contents += menus[i+2].category + ":" + "\n\n"
+        menus[i+2].contents.each do |con|
+            contents += con + "\n"
+        end
+        contents += "\n\n"
+        contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
+        menus[i+4].contents.each do |con|
+            contents += con + "\n"
+        end
+        contents += "\n\n\n"
+        i += 5
+      end
+      return contents.to_s.chop!.chop!.chop!.chop!
+    end
+    
     def makeMenuMessage(menu)
       week = menu.week.is_a?(Integer) ? dayKor(menu.week) : menu.week
       text = week + "(" + menu.time + ") - " + menu.category+"\n\n"
@@ -258,14 +219,18 @@ module M_Menu
       return text
     end
   
+    def makeMenusMessage(menus)
+      messages = menus.map { |menu| makeMenuMessage(menu) }
+      return messages.join("\n\n");
+    end
+  
     #진수 : 0
     #의대 : 1
     #학생회관 : 2
     def makeMessage_all(id)
       parser = JBNUFoodParser.new
       menus = parser.requestMenu(id)
-      messages = menus.map { |menu| makeMenuMessage(menu) }
-      return messages.join("\n\n");
+      return makeMenusMessage(menus)
     end
     
     
