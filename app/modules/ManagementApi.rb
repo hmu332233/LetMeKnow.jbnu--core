@@ -1,4 +1,5 @@
 require 'util/HttpRequester'
+require 'Menu'
 
 class ManagementApi
   def self.sendUserWord(userKey, messageContent)
@@ -10,19 +11,25 @@ class ManagementApi
   def self.getJinsuMenu()
     @@TARGET_URL = ENV['management_server']
     json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/jinsu")
-    return json
+    lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    dinnerMenus = json['data']['dinner'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    return lunchMenus + dinnerMenus
   end
   
   def self.getMediMenu()
     @@TARGET_URL = ENV['management_server']
     json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/medi")
-    return json
+    lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    dinnerMenus = json['data']['dinner'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    return lunchMenus + dinnerMenus
   end
   
   def self.getStudentHallMenu()
     @@TARGET_URL = ENV['management_server']
     json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/studentHall")
-    return json
+    lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    dinnerMenus = json['data']['dinner'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    return lunchMenus + dinnerMenus
   end
 end
 
