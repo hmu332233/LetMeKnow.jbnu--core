@@ -19,7 +19,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getJinsuMenu()
     else
-      menus = JBNUFoodParser.requestMenu(0)
+      menus = @parser.requestMenu(0)
     end
     return menus
   end
@@ -28,7 +28,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getJinsuMenuOfDay(day-1)
     else
-      menus = JBNUFoodParser.requestMenu_jinsu_mobile(day)
+      menus = @parser.requestMenu_jinsu_mobile(day)
     end
     return menus
   end
@@ -37,7 +37,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getMediMenu()
     else
-      menus = JBNUFoodParser.requestMenu(1)
+      menus = @parser.requestMenu(1)
     end
     return menus
   end
@@ -46,7 +46,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getMediMenuOfDay(day-1)
     else
-      menus = JBNUFoodParser.requestMenu_medi_mobile(day)
+      menus = @parser.requestMenu_medi_mobile(day)
     end
     return menus
   end
@@ -55,7 +55,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getStudentHallMenu()
     else
-      menus = JBNUFoodParser.requestMenu(2)
+      menus = @parser.requestMenu(2)
     end
     return menus
   end
@@ -64,7 +64,7 @@ class MenuStore
     if self.useDbMenu?
       menus = ManagementApi.getStudentHallMenuOfDay(day-1)
     else
-      menus = JBNUFoodParser.requestMenu_studentHall_mobile(day)
+      menus = @parser.requestMenu_studentHall_mobile(day)
     end
     return menus
   end
