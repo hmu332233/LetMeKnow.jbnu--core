@@ -1,162 +1,50 @@
 require 'parser/JBNUFoodParser'
 
 module M_Menu
-    
     #학식 모바일
     def makeMessage_jinsu_day(day)
-        
-        if day > 5 or day == 0
-            return "주말에는 운영하지 않습니다"
-        end
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_jinsu_mobile(day)
-        
-        # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-    
-        menus.each do |menu|
-            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
+      if day > 5 or day == 0
+        return "주말에는 운영하지 않습니다"
+      end
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_jinsu_mobile(day)
+      return makeMenusMessage(menus)
     end
     
-    
     def makeMessage_medi_day(day)
-        
-         if day > 5 or day == 0
-            return "주말에는 운영하지 않습니다"
-        end
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_medi_mobile(day)
-        
-        # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-    
-        menus.each do |menu|
-            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
-        
+      if day > 5 or day == 0
+        return "주말에는 운영하지 않습니다"
+      end
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_medi_mobile(day)
+      return makeMenusMessage(menus)
     end
     
     def makeMessage_studentHall_day(day)
-        
-        if day > 6 or day == 0
-            return "주말에는 운영하지 않습니다"
-        end
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_studentHall_mobile(day)
-        
-        # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-   
-        menus.each do |menu|
-            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
-    end
-    
-    def makeMessage_hu_day(day)
-        
-        if day > 5 or day == 0
-            return "주말에는 운영하지 않습니다"
-        end
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_hu_mobile(day)
-        
-        
-        contents = ""
-        
-        i = 0
-
-        contents += dayKor(menus[i].week) + "(" + menus[i].time + ")"+"\n\n"
-        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-        contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
-        contents += menus[i+4].category + " : " + menus[i+4].contents[0] + "\n"
-        contents += "\n"
-        contents += menus[i+2].category + ":" + "\n\n"
-        menus[i+2].contents.each do |con|
-            contents += con + "\n"
-        end
-        
-        contents += "\n\n"
-        
-        contents += dayKor(menus[i+3].week) + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
-        menus[i+3].contents.each do |con|
-            contents += con + "\n"
-        end
-        
-        return contents.to_s.chop!
-        
+      if day > 6 or day == 0
+          return "주말에는 운영하지 않습니다"
+      end
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_studentHall_mobile(day)
+      return makeMenusMessage(menus)
     end
     
     def makeMessage_yeji_day(day)
-        
-        if day > 5 or day == 0
-            return "주말에는 운영하지 않습니다"
-        end
-       
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu_yeji_mobile(day)
-       
-        contents = ""
-        
-        menus.each do |menu|
-            
-            text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-            
-        end
-        
-        return contents.chop!
-        
+      if day > 5 or day == 0
+          return "주말에는 운영하지 않습니다"
+      end
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu_yeji_mobile(day)
+     return makeMenusMessage(menus)
     end
     
     def makeMessage_jungdam_day(day)
       if day > 5 or day == 0
           return "주말에는 운영하지 않습니다"
       end
-      
       parser = JBNUFoodParser.new
       menus = parser.requestMenu_jungdam_mobile(day)
-      
-      contents = ""
-      
-      menus.each do |menu|
-          text = dayKor(menu.week) + "(" + menu.time + ") - " + menu.category+"\n\n"
-          menu.contents.each do |m|
-              text += m + "\n"
-          end
-          contents += text
-      end
-      
-      return contents
+      return makeMenusMessage(menus)
     end
     
     #이번주 메뉴
@@ -184,32 +72,6 @@ module M_Menu
       return makeMessage_all(2)
     end
   
-    def makeMessage_hu_all
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu_hu
-      contents = ""
-      i = 0
-      while i < menus.size
-        contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
-        contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-        contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
-        contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
-        contents += "\n"
-        contents += menus[i+2].category + ":" + "\n\n"
-        menus[i+2].contents.each do |con|
-            contents += con + "\n"
-        end
-        contents += "\n\n"
-        contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
-        menus[i+4].contents.each do |con|
-            contents += con + "\n"
-        end
-        contents += "\n\n\n"
-        i += 5
-      end
-      return contents.to_s.chop!.chop!.chop!.chop!
-    end
-    
     def makeMenuMessage(menu)
       week = menu.week.is_a?(Integer) ? dayKor(menu.week) : menu.week
       text = week + "(" + menu.time + ") - " + menu.category+"\n\n"
@@ -253,4 +115,57 @@ module M_Menu
         
         return result
     end
+  
+  
+  # 후생관
+  def makeMessage_hu_day(day)
+    if day > 5 or day == 0
+      return "주말에는 운영하지 않습니다"
+    end
+    parser = JBNUFoodParser.new
+    menus = parser.requestMenu_hu_mobile(day)
+    contents = ""
+    i = 0
+    contents += dayKor(menus[i].week) + "(" + menus[i].time + ")"+"\n\n"
+    contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+    contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+    contents += menus[i+4].category + " : " + menus[i+4].contents[0] + "\n"
+    contents += "\n"
+    contents += menus[i+2].category + ":" + "\n\n"
+    menus[i+2].contents.each do |con|
+      contents += con + "\n"
+    end
+    contents += "\n\n"
+    contents += dayKor(menus[i+3].week) + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
+    menus[i+3].contents.each do |con|
+      contents += con + "\n"
+    end
+    return contents.to_s.chop!
+  end
+  
+  def makeMessage_hu_all
+    parser = JBNUFoodParser.new
+    menus = parser.requestMenu_hu
+    contents = ""
+    i = 0
+    while i < menus.size
+      contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
+      contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
+      contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
+      contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
+      contents += "\n"
+      contents += menus[i+2].category + ":" + "\n\n"
+      menus[i+2].contents.each do |con|
+          contents += con + "\n"
+      end
+      contents += "\n\n"
+      contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
+      menus[i+4].contents.each do |con|
+          contents += con + "\n"
+      end
+      contents += "\n\n\n"
+      i += 5
+    end
+    return contents.to_s.chop!.chop!.chop!.chop!
+  end
 end
