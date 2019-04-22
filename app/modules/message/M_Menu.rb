@@ -248,27 +248,24 @@ module M_Menu
       return makeMessage_all(2)
     end
     
+  
+    def makeMenuMessage(menu)
+      week = menu.week.is_a?(Integer) ? dayKor(menu.week) : menu.week
+      text = week + "(" + menu.time + ") - " + menu.category+"\n\n"
+      menu.contents.each do |m|
+          text += m + "\n"
+      end
+      return text
+    end
+  
     #진수 : 0
     #의대 : 1
     #학생회관 : 2
     def makeMessage_all(id)
-        
-        parser = JBNUFoodParser.new
-        menus = parser.requestMenu(id)
-        
-        # head_text = menus[0].shop_name + "\n\n\n"
-        contents = ""
-        
-        menus.each do |menu|
-            text = menu.week + "(" + menu.time + ") - " + menu.category+"\n\n"
-            menu.contents.each do |m|
-                text += m + "\n"
-            end
-            
-            contents += text + "\n\n"
-        end
-        
-        return contents.to_s.chop!.chop!.chop!
+      parser = JBNUFoodParser.new
+      menus = parser.requestMenu(id)
+      messages = menus.map { |menu| makeMenuMessage(menu) }
+      return messages.join("\n\n");
     end
     
     
