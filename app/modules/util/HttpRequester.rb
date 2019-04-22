@@ -15,4 +15,11 @@ class HttpRequester
       http.request(req)
     end
   end
+  
+  def self.requestGetReturnJson(url)
+    uri = URI(URI.encode(url))  
+    req = Net::HTTP::Get.new(uri)
+    res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+    return JSON.parse(res.body)
+  end
 end

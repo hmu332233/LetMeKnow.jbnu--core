@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180907171428) do
   create_table "sws", force: :cascade do |t|
     t.integer  "menu",                        default: 0
     t.boolean  "use_mobile_menu",             default: true
+    t.boolean  "use_db_menu",                 default: true
     t.boolean  "use_yesterday_domitory_menu", default: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false

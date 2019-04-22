@@ -35,9 +35,6 @@ class ChatController < ApplicationController
        
         thinker = Thinker.new
 
-        # new 사용량 측정용
-        userWord = UserWord.create(user_key: user_key, content: message_content)
-
         #메세지 의도에 따른 결과
         resultJson = thinker.think(message_content)
         unless resultJson.nil?
