@@ -43,15 +43,15 @@ module M_Menu
       if day > 5 or day == 0
           return "주말에는 운영하지 않습니다"
       end
-      parser = JBNUFoodParser.new
-      menus = parser.requestMenu_jungdam_mobile(day)
+      menuStore = MenuStore.new
+      menus = menuStore.getJungdamMenusOfDay(day)
       return makeMenusMessage(menus)
     end
     
     #이번주 메뉴
     def makeMessage_jungdam_all
-      parser = JBNUFoodParser.new
-      menus = parser.requesJungdam
+      menuStore = MenuStore.new
+      menus = menuStore.getJungdamMenus()
       return makeMenusMessage(menus)
     end
    
