@@ -68,4 +68,22 @@ class MenuStore
     end
     return menus
   end
+  
+  def getJungdamMenus
+    if self.useDbMenu?
+      menus = ManagementApi.getJungdamMenu()
+    else
+      menus = @parser.requesJungdam()
+    end
+    return menus
+  end
+  
+  def getJungdamMenusOfDay(day)
+    if self.useDbMenu?
+      menus = ManagementApi.getJungdamMenuOfDay(day-1)
+    else
+      menus = @parser.requestMenu_jungdam_mobile(day)
+    end
+    return menus
+  end
 end

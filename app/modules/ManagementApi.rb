@@ -49,13 +49,13 @@ class ManagementApi
   
   def self.getJungdamMenu()
     @@TARGET_URL = ENV['management_server']
-    json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/studentHall")
+    json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/jungdam")
     lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
     return lunchMenus
   end
   
   def self.getJungdamMenuOfDay(day)
-    menus = self.getStudentHallMenu()
+    menus = self.getJungdamMenu()
     return [menus[day]]
   end
 end
