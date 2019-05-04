@@ -69,9 +69,9 @@ class ManagementApi
   
   def self.getHuMenuOfDay(day)
     menus = self.getHuMenu()
-    lunchIndex = day
+    lunchIndex = day * 4
     dinnerIndex = 20 + day
-    return [*menus[day..day+3], menus[dinnerIndex]]
+    return [*menus[lunchIndex..lunchIndex+3], menus[dinnerIndex]]
   end
 end
 
