@@ -154,26 +154,26 @@ class JBNUFoodParser
           Menu.new(place,"월","중식","찌개",[menu[14]]),
           Menu.new(place,"월","중식","추억의 도시락",[menu[20]]),
           Menu.new(place,"월","중식","오므라이스",[menu[46]]),
-          Menu.new(place,"월","석식","백반",[menu[27]]),
           Menu.new(place,"화","중식","특식",[menu[9]]),
           Menu.new(place,"화","중식","찌개",[menu[15]]),
           Menu.new(place,"화","중식","추억의 도시락",[menu[21]]),
           Menu.new(place,"화","중식","오므라이스",[menu[47]]),
-          Menu.new(place,"화","석식","백반",[menu[28]]),
           Menu.new(place,"수","중식","특식",[menu[10]]),
           Menu.new(place,"수","중식","찌개",[menu[16]]),
           Menu.new(place,"수","중식","추억의 도시락",[menu[22]]),
           Menu.new(place,"수","중식","오므라이스",[menu[48]]),
-          Menu.new(place,"수","석식","백반",[menu[29]]),
           Menu.new(place,"목","중식","특식",[menu[11]]),
           Menu.new(place,"목","중식","찌개",[menu[17]]),
           Menu.new(place,"목","중식","추억의 도시락",[menu[23]]),
           Menu.new(place,"목","중식","오므라이스",[menu[49]]),
-          Menu.new(place,"목","석식","백반",[menu[30]]),
           Menu.new(place,"금","중식","특식",[menu[12]]),
           Menu.new(place,"금","중식","찌개",[menu[18]]),
           Menu.new(place,"금","중식","추억의 도시락",[menu[24]]),
           Menu.new(place,"금","중식","오므라이스",[menu[50]]),
+          Menu.new(place,"월","석식","백반",[menu[27]]),
+          Menu.new(place,"화","석식","백반",[menu[28]]),
+          Menu.new(place,"수","석식","백반",[menu[29]]),
+          Menu.new(place,"목","석식","백반",[menu[30]]),
           Menu.new(place,"금","석식","백반",[menu[31]])
         ]
         
@@ -319,12 +319,12 @@ class JBNUFoodParser
         place = "후생관"
 
         menus = [
-            Menu.new(place,day,"중식","특식",[menu_datas[0]]),
-            Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
-            Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
-            Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]]),
-            Menu.new(place,day,"중식","오므라이스",[menu_datas[17]])
-            ]
+          Menu.new(place,day,"중식","특식",[menu_datas[0]]),
+          Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
+          Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
+          Menu.new(place,day,"중식","오므라이스",[menu_datas[17]]),
+          Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]])
+        ]
         
        return menus
         
