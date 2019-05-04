@@ -119,14 +119,14 @@ module M_Menu
     if day > 5 or day == 0
       return "주말에는 운영하지 않습니다"
     end
-    parser = JBNUFoodParser.new
-    menus = parser.requestMenu_hu_mobile(day)
+    menuStore = MenuStore.new
+    menus = menuStore.getHuMenusOfDay(day)
     return makeHuMenuMessage(menus)
   end
   
   def makeMessage_hu_all
-    parser = JBNUFoodParser.new
-    menus = parser.requestMenu_hu
+    menuStore = MenuStore.new
+    menus = menuStore.getHuMenus()
     return makeHuMenusMessage(menus)
   end
   
