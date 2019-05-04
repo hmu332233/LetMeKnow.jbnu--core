@@ -86,4 +86,22 @@ class MenuStore
     end
     return menus
   end
+  
+  def getHuMenus
+    if self.useDbMenu?
+      menus = ManagementApi.getHuMenu()
+    else
+      menus = @parser.requestMenu_hu()
+    end
+    return menus
+  end
+  
+  def getHuMenusOfDay(day)
+    if self.useDbMenu?
+      menus = ManagementApi.getHuMenuOfDay(day-1)
+    else
+      menus = @parser.requestMenu_hu_mobile(day)
+    end
+    return menus
+  end
 end

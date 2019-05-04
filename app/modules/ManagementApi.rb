@@ -58,6 +58,21 @@ class ManagementApi
     menus = self.getJungdamMenu()
     return [menus[day]]
   end
+  
+  def self.getHuMenu()
+    @@TARGET_URL = ENV['management_server']
+    json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/hu")
+    lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    dinnerMenus = json['data']['dinner'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
+    return lunchMenus + dinnerMenus
+  end
+  
+  def self.getHuMenuOfDay(day)
+    menus = self.getHuMenu()
+    lunchIndex = day
+    dinnerIndex = 20 + day
+    return [*menus[day..day+3], menus[dinnerIndex]]
+  end
 end
 
 

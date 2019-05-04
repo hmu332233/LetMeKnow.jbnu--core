@@ -119,50 +119,49 @@ module M_Menu
     if day > 5 or day == 0
       return "주말에는 운영하지 않습니다"
     end
-    parser = JBNUFoodParser.new
-    menus = parser.requestMenu_hu_mobile(day)
-    contents = ""
-    i = 0
-    contents += dayKor(menus[i].week) + "(" + menus[i].time + ")"+"\n\n"
-    contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-    contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
-    contents += menus[i+4].category + " : " + menus[i+4].contents[0] + "\n"
-    contents += "\n"
-    contents += menus[i+2].category + ":" + "\n\n"
-    menus[i+2].contents.each do |con|
-      contents += con + "\n"
-    end
-    contents += "\n\n"
-    contents += dayKor(menus[i+3].week) + "(" + menus[i+3].time + ") - " + menus[i+3].category+"\n\n"
-    menus[i+3].contents.each do |con|
-      contents += con + "\n"
-    end
-    return contents.to_s.chop!
+    menuStore = MenuStore.new
+    menus = menuStore.getHuMenusOfDay(day)
+    return makeHuMenuMessage(menus)
   end
   
   def makeMessage_hu_all
-    parser = JBNUFoodParser.new
-    menus = parser.requestMenu_hu
-    contents = ""
-    i = 0
-    while i < menus.size
-      contents += menus[i].week + "(" + menus[i].time + ")"+"\n\n"
-      contents += menus[i].category + " : " + menus[i].contents[0] + "\n"
-      contents += menus[i+1].category + " : " + menus[i+1].contents[0] + "\n"
-      contents += menus[i+3].category + " : " + menus[i+3].contents[0] + "\n"
-      contents += "\n"
-      contents += menus[i+2].category + ":" + "\n\n"
-      menus[i+2].contents.each do |con|
-          contents += con + "\n"
-      end
-      contents += "\n\n"
-      contents += menus[i+4].week + "(" + menus[i+4].time + ") - " + menus[i+4].category+"\n\n"
-      menus[i+4].contents.each do |con|
-          contents += con + "\n"
-      end
-      contents += "\n\n\n"
-      i += 5
+    menuStore = MenuStore.new
+    menus = menuStore.getHuMenus()
+    return makeHuMenusMessage(menus)
+  end
+  
+  def makeHuMenuMessage(menus)
+    week = menus[0].week.is_a?(Integer) ? dayKor(menus[0].week) : menus[0].week
+    lunchTime = menus[0].time
+    dinnerTime = menus[4].time
+
+    text = week + "(" + lunchTime + ")"+"\n\n"
+    text += menus[0].category + " : " + menus[0].contents[0] + "\n"
+    text += menus[1].category + " : " + menus[1].contents[0] + "\n"
+    text += menus[3].category + " : " + menus[3].contents[0] + "\n"
+    text += "\n"
+    text += menus[2].category + ":" + "\n\n"
+    menus[2].contents.each do |content|
+      text += content + "\n"
     end
-    return contents.to_s.chop!.chop!.chop!.chop!
+    text += "\n\n"
+    text += week + "(" + dinnerTime + ") - " + menus[4].category+"\n\n"
+    menus[4].contents.each do |content|
+      text += content + "\n"
+    end
+    return text
+  end
+  
+  def makeHuMenusMessage(menus)
+    huMenus = [
+      [*menus[0..3], menus[20]],
+      [*menus[4..7], menus[21]],
+      [*menus[8..11], menus[22]],
+      [*menus[12..15], menus[23]],
+      [*menus[16..19], menus[24]]
+    ]
+    
+    messages = huMenus.map { |menus| makeHuMenuMessage(menus) }
+    return messages.join("\n\n");
   end
 end
