@@ -6,6 +6,33 @@ class Sw < ActiveRecord::Base
   JINSU = 'JINSU'
   STUDENT_HALL = 'STUDENT_HALL'
   
+  def self.toggleUseDbMenu(type)
+    begin
+      @sw = Sw.find(1)
+    rescue
+      @sw = Sw.create
+    end
+    case type
+      when MEDI
+        @nextValue = !@sw.use_db_medi
+        @sw.use_db_medi = @nextValue
+      when HU
+        @nextValue = !@sw.use_db_hu
+        @sw.use_db_hu = @nextValue
+      when JUNGDAM
+        @nextValue = !@sw.use_db_jungdam
+        @sw.use_db_jungdam = @nextValue
+      when JINSU
+        @nextValue = !@sw.use_db_jinsu
+        @sw.use_db_jinsu = @nextValue
+      when STUDENT_HALL
+        @nextValue = !@sw.use_db_student_hall
+        @sw.use_db_student_hall = @nextValue
+    end
+    @sw.save
+    return @nextValue
+  end
+  
   def self.useDbMenu?(type)    
     case type
       when MEDI
