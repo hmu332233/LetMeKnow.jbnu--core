@@ -5,18 +5,9 @@ class MenuStore
   def initialize
     @parser = JBNUFoodParser.new
   end
-  
-  def useDbMenu?
-    begin
-      useDbMenu = Sw.find(1).use_db_menu
-    rescue
-      useDbMenu = Sw.create.use_db_menu
-    end
-    return useDbMenu
-  end
-  
+
   def getJinsuMenus
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::JINSU)
       menus = ManagementApi.getJinsuMenu()
     else
       menus = @parser.requestMenu(0)
@@ -25,7 +16,7 @@ class MenuStore
   end
   
   def getJinsuMenusOfDay(day)
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::JINSU)
       menus = ManagementApi.getJinsuMenuOfDay(day-1)
     else
       menus = @parser.requestMenu_jinsu_mobile(day)
@@ -34,7 +25,7 @@ class MenuStore
   end
   
   def getMediMenus
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::MEDI)
       menus = ManagementApi.getMediMenu()
     else
       menus = @parser.requestMenu(1)
@@ -43,7 +34,7 @@ class MenuStore
   end
   
   def getMediMenusOfDay(day)
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::MEDI)
       menus = ManagementApi.getMediMenuOfDay(day-1)
     else
       menus = @parser.requestMenu_medi_mobile(day)
@@ -52,7 +43,7 @@ class MenuStore
   end
   
   def getStudentHallMenus
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::STUDENT_HALL)
       menus = ManagementApi.getStudentHallMenu()
     else
       menus = @parser.requestMenu(2)
@@ -61,7 +52,7 @@ class MenuStore
   end
   
   def getStudentHallMenusOfDay(day)
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::STUDENT_HALL)
       menus = ManagementApi.getStudentHallMenuOfDay(day-1)
     else
       menus = @parser.requestMenu_studentHall_mobile(day)
@@ -70,7 +61,7 @@ class MenuStore
   end
   
   def getJungdamMenus
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::JUNGDAM)
       menus = ManagementApi.getJungdamMenu()
     else
       menus = @parser.requesJungdam()
@@ -79,7 +70,7 @@ class MenuStore
   end
   
   def getJungdamMenusOfDay(day)
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::JUNGDAM)
       menus = ManagementApi.getJungdamMenuOfDay(day-1)
     else
       menus = @parser.requestMenu_jungdam_mobile(day)
@@ -88,7 +79,7 @@ class MenuStore
   end
   
   def getHuMenus
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::HU)
       menus = ManagementApi.getHuMenu()
     else
       menus = @parser.requestMenu_hu()
@@ -97,7 +88,7 @@ class MenuStore
   end
   
   def getHuMenusOfDay(day)
-    if self.useDbMenu?
+    if Sw.useDbMenu?(Sw::HU)
       menus = ManagementApi.getHuMenuOfDay(day-1)
     else
       menus = @parser.requestMenu_hu_mobile(day)
