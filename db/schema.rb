@@ -42,6 +42,11 @@ ActiveRecord::Schema.define(version: 20180907171428) do
     t.boolean  "use_mobile_menu",             default: true
     t.boolean  "use_db_menu",                 default: true
     t.boolean  "use_yesterday_domitory_menu", default: false
+    t.boolean  "use_db_medi",                 default: true
+    t.boolean  "use_db_hu",                   default: true
+    t.boolean  "use_db_jungdam",              default: true
+    t.boolean  "use_db_jinsu",                default: true
+    t.boolean  "use_db_student_hall",         default: true
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end

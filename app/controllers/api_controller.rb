@@ -50,4 +50,56 @@ class ApiController < ApplicationController
     end
   end
   
+  # /api/menu_domitory/update/medi/use_db?token=[token]
+  def updateDbMediToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.toggleUseDbMenu(Sw::MEDI)
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  
+  # /api/menu_domitory/update/hu/use_db?token=[token]
+  def updateDbHuToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.toggleUseDbMenu(Sw::HU)
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  # /api/menu_domitory/update/jungdam/use_db?token=[token]
+  def updateDbJungdamToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.toggleUseDbMenu(Sw::JUNGDAM)
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  # /api/menu_domitory/update/jinsu/use_db?token=[token]
+  def updateDbJinsuToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.toggleUseDbMenu(Sw::JINSU)
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  # /api/menu_domitory/update/student_hall/use_db?token=[token]
+  def updateDbStudentHallToggle
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.toggleUseDbMenu(Sw::STUDENT_HALL)
+      render json: { success: true, result: result }
+    else
+      render json: { success: false }
+    end
+  end
+  
 end
