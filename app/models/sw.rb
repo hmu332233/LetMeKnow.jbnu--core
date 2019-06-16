@@ -1,10 +1,18 @@
 class Sw < ActiveRecord::Base
-  JINSU = 'JINSU'
   MEDI = 'MEDI'
   HU = 'HU'
   JUNGDAM = 'JUNGDAM'
   JINSU = 'JINSU'
   STUDENT_HALL = 'STUDENT_HALL'
+  
+  def self.get()
+    begin
+      @sw = Sw.find(1)
+    rescue
+      @sw = Sw.create
+    end
+    return @sw
+  end
   
   def self.toggleUseDbMenu(type)
     begin

@@ -102,4 +102,24 @@ class ApiController < ApplicationController
     end
   end
   
+  # /api/menu_domitory/use_db?token=[token]
+  def getUseDb
+    token = params[:token]
+    if !token.nil? && (token == ENV['saver_token'])
+      result = Sw.get()
+      render json: {
+        success: true,
+        result: {
+          medi: result.use_db_medi,
+          hu: result.use_db_hu,
+          jungdam: result.use_db_jungdam,
+          jinsu: result.use_db_jinsu,
+          student_hall: result.use_db_student_hall
+        } 
+      }
+    else
+      render json: { success: false }
+    end
+  end
+  
 end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/api/menu_domitory/update/jungdam/use_db' => 'api#updateDbJungdamToggle'
   get '/api/menu_domitory/update/jinsu/use_db' => 'api#updateDbJinsuToggle'
   get '/api/menu_domitory/update/student_hall/use_db' => 'api#updateDbStudentHallToggle'
+  get '/api/menu_domitory/use_db' => 'api#getUseDb'
 
   #major
   post '/major' => 'major#create'
