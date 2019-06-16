@@ -14,12 +14,14 @@ Rails.application.routes.draw do
   get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
   get '/api/menu_domitory/update/yesterday' => 'api#updateYesterdayToggle'
   get '/api/menu_domitory/update/use_db' => 'api#updateDbToggle'
-  get '/api/menu_domitory/update/medi/use_db' => 'api#updateDbMediToggle'
-  get '/api/menu_domitory/update/hu/use_db' => 'api#updateDbHuToggle'
-  get '/api/menu_domitory/update/jungdam/use_db' => 'api#updateDbJungdamToggle'
-  get '/api/menu_domitory/update/jinsu/use_db' => 'api#updateDbJinsuToggle'
-  get '/api/menu_domitory/update/student_hall/use_db' => 'api#updateDbStudentHallToggle'
+  
   get '/api/menu_domitory/use_db' => 'api#getUseDb'
+  put '/api/menu_domitory/medi/use_db' => 'api#updateDbMediToggle'
+  put '/api/menu_domitory/hu/use_db' => 'api#updateDbHuToggle'
+  put '/api/menu_domitory/jungdam/use_db' => 'api#updateDbJungdamToggle'
+  put '/api/menu_domitory/jinsu/use_db' => 'api#updateDbJinsuToggle'
+  put '/api/menu_domitory/student_hall/use_db' => 'api#updateDbStudentHallToggle'
+  
 
   #major
   post '/major' => 'major#create'
