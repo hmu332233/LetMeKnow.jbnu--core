@@ -62,16 +62,18 @@ class ManagementApi
   def self.getHuMenu()
     @@TARGET_URL = ENV['management_server']
     json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/hu")
+    breakfastMenus = json['data']['breakfast'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
     lunchMenus = json['data']['lunch'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
     dinnerMenus = json['data']['dinner'].map { |menu| Menu.new(menu['place'], menu['week'], menu['time'], menu['category'], [menu['menus']]) }
-    return lunchMenus + dinnerMenus
+    return breakfastMenus + lunchMenus + dinnerMenus
   end
   
   def self.getHuMenuOfDay(day)
     menus = self.getHuMenu()
-    lunchIndex = day * 4
-    dinnerIndex = 20 + day
-    return [*menus[lunchIndex..lunchIndex+3], menus[dinnerIndex]]
+    breakfastIndex = day
+    lunchIndex = 5 + (day * 4)
+    dinnerIndex = 25 + day
+    return [menus[breakfastIndex], *menus[lunchIndex..lunchIndex+3], menus[dinnerIndex]]
   end
 end
 

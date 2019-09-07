@@ -310,6 +310,10 @@ class JBNUFoodParser
         
         menu_datas = requestMenu_Mobile_Food(3,day)
         
+        # menu_datas.each_with_index do |t, i|
+        #   puts "#{i} #{t}"
+        # end
+      
         for i in 0..20
             if menu_datas[i] == nil
                 menu_datas[i] = ""
@@ -319,11 +323,12 @@ class JBNUFoodParser
         place = "후생관"
 
         menus = [
-          Menu.new(place,day,"중식","특식",[menu_datas[0]]),
-          Menu.new(place,day,"중식","찌개",[menu_datas[1]]),
-          Menu.new(place,day,"중식","추억의 도시락",[menu_datas[2],menu_datas[3]]),
+          Menu.new(place,day,"조식","찌개 백반",[menu_datas[0], menu_datas[1], menu_datas[2], menu_datas[3]]),
+          Menu.new(place,day,"중식","찌개",[menu_datas[4]]),
+          Menu.new(place,day,"중식","볶음밥",[menu_datas[5]]),
+          Menu.new(place,day,"중식","추억의 도시락",[menu_datas[6],menu_datas[7]]),
           Menu.new(place,day,"중식","오므라이스",[menu_datas[17]]),
-          Menu.new(place,day,"석식","백반",[menu_datas[4],menu_datas[5],menu_datas[6]])
+          Menu.new(place,day,"석식","백반",[menu_datas[8],menu_datas[9],menu_datas[10]])
         ]
         
        return menus
