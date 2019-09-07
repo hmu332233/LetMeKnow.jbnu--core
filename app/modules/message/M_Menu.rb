@@ -132,21 +132,27 @@ module M_Menu
   
   def makeHuMenuMessage(menus)
     week = menus[0].week.is_a?(Integer) ? dayKor(menus[0].week) : menus[0].week
-    lunchTime = menus[0].time
-    dinnerTime = menus[4].time
+    breakfastTime = menus[0].time
+    lunchTime = menus[1].time
+    dinnerTime = menus[5].time
 
-    text = week + "(" + lunchTime + ")"+"\n\n"
-    text += menus[0].category + " : " + menus[0].contents[0] + "\n"
-    text += menus[1].category + " : " + menus[1].contents[0] + "\n"
-    text += menus[3].category + " : " + menus[3].contents[0] + "\n"
-    text += "\n"
-    text += menus[2].category + ":" + "\n\n"
-    menus[2].contents.each do |content|
+    text = week + "(" + breakfastTime + ") - " + menus[0].category+"\n\n"
+    menus[0].contents.each do |content|
       text += content + "\n"
     end
     text += "\n\n"
-    text += week + "(" + dinnerTime + ") - " + menus[4].category+"\n\n"
-    menus[4].contents.each do |content|
+    text += week + "(" + lunchTime + ")"+"\n\n"
+    text += menus[1].category + " : " + menus[1].contents[0] + "\n"
+    text += menus[2].category + " : " + menus[2].contents[0] + "\n"
+    text += menus[4].category + " : " + menus[4].contents[0] + "\n"
+    text += "\n"
+    text += menus[3].category + ":" + "\n\n"
+    menus[3].contents.each do |content|
+      text += content + "\n"
+    end
+    text += "\n\n"
+    text += week + "(" + dinnerTime + ") - " + menus[5].category+"\n\n"
+    menus[5].contents.each do |content|
       text += content + "\n"
     end
     return text
@@ -154,11 +160,11 @@ module M_Menu
   
   def makeHuMenusMessage(menus)
     huMenus = [
-      [*menus[0..3], menus[20]],
-      [*menus[4..7], menus[21]],
-      [*menus[8..11], menus[22]],
-      [*menus[12..15], menus[23]],
-      [*menus[16..19], menus[24]]
+      [menus[0], *menus[5..8], menus[25]],
+      [menus[1], *menus[9..12], menus[26]],
+      [menus[2], *menus[13..16], menus[27]],
+      [menus[3], *menus[17..20], menus[28]],
+      [menus[4], *menus[21..24], menus[29]]
     ]
     
     messages = huMenus.map { |menus| makeHuMenuMessage(menus) }
