@@ -8,6 +8,13 @@ class ManagementApi
     HttpRequester.requestPostWithJson("#{@@TARGET_URL}/api/v1/user_words", @@JSON)
   end
   
+  def self.getQuickReplies()
+    @@TARGET_URL = ENV['management_server']
+    json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/addon/quick-replies")
+    quickReplies = json['data']
+    return quickReplies
+  end
+  
   def self.getJinsuMenu()
     @@TARGET_URL = ENV['management_server']
     json = HttpRequester.requestGetReturnJson("#{@@TARGET_URL}/api/v1/menus/jinsu")
