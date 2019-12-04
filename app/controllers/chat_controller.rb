@@ -24,10 +24,6 @@ class ChatController < ApplicationController
     
     user_key = params[:userRequest][:user][:id]
     message_content = params[:userRequest][:utterance]
-
-    Thread.new do
-      ManagementApi.sendUserWord(user_key, message_content)
-    end
     
     #시간 제한
     begin
