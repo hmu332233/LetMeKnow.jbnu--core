@@ -180,6 +180,8 @@ class Thinker
   
     #subIntent 처리
     case subIntent
+    when "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"
+      day = subIntent
     when "어제", "ㅇㅈ"
       day = timeHelper.dayOfWeek_Yesterday
     when "내일", "ㄴㅇ"
@@ -502,19 +504,19 @@ class Thinker
   def dayNumber(day)
     
     case day
-    when 'Sunday'
+    when 'Sunday', '일요일'
       result = 0
-    when 'Monday'
+    when 'Monday', '월요일'
       result = 1
-    when 'Tuesday'
+    when 'Tuesday', '화요일'
       result = 2
-    when 'Wednesday'
+    when 'Wednesday', '수요일'
       result = 3
-    when 'Thursday'
+    when 'Thursday', '목요일'
       result = 4
-    when 'Friday'
+    when 'Friday', '금요일'
       result = 5
-    when 'Saturday'
+    when 'Saturday', '토요일'
       result = 6
     else
      result = 7
