@@ -38,7 +38,7 @@ class Extractor
         end
         
         #subIntent 추출
-        date_keyword = %w[어제 내일 모레 주간 이번주]
+        date_keyword = %w[어제 내일 모레 주간 이번주 일요일 월요일 화요일 수요일 목요일 금요일 토요일]
         date_initial_keyword = %w[ㅇㅈ ㄴㅇ ㅁㄹ ㅈㄱ ㅇㅂㅈ]
         
         subIntent_list = date_keyword + date_initial_keyword
