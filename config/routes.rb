@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/api/menu_domitory/update' => 'api#updateAllDomitoryMenu'
   get '/api/menu_domitory/update/yesterday' => 'api#updateYesterdayToggle'
   get '/api/menu_domitory/update/use_db' => 'api#updateDbToggle'
+  get '/api/menu_domitory/menus' => 'api#getDormitoryMenus'
   
   get '/api/menu_domitory/use_db' => 'api#getUseDb'
   put '/api/menu_domitory/medi/use_db' => 'api#updateDbMediToggle'
