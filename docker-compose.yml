@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  help-jbnu--core:
+    image: help-jbnu--core
+    ports:
+      - "23001:80"
+    environment:
+      - WEB_CONCURRENCY=5
+      - SECRET_KEY_BASE=
+      - naver_id=
+      - naver_sc=
+      - notify_token=
+      - saver_token=
+      - management_server=

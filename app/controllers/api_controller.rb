@@ -95,4 +95,30 @@ class ApiController < ApplicationController
     }
   end
   
+  def getDormitoryMenus
+    dormitoryMenuSaver = DormitoryMenuSaver.new
+    
+    chamData = dormitoryMenuSaver.getDormitoryMenus('cham'); 
+    basicData = dormitoryMenuSaver.getDormitoryMenus('basic'); 
+    specialData = dormitoryMenuSaver.getDormitoryMenus('special');
+    
+    render json: {
+      cham: {
+        menus: chamData[0],
+        updatedAt: chamData[2],
+        updateCount: chamData[1],
+      },
+      basic: {
+        menus: basicData[0],
+        updatedAt: basicData[2],
+        updateCount: basicData[1],
+      }, 
+      special: {
+        menus: specialData[0],
+        updatedAt: specialData[2],
+        updateCount: specialData[1],
+      }
+    }
+  end
+  
 end
