@@ -1,5 +1,13 @@
 # 알려줘전북대
 
+**Note**
+
+이 프로젝트는 [알려줘전북대](https://pf.kakao.com/_LffxoM)의 일부입니다.  
+프로젝트에 대해서는 아래의 repository에서 확인해주세요.
+[https://github.com/hmu332233/LetMeKnow.jbnu](https://github.com/hmu332233/LetMeKnow.jbnu)
+
+
+<!-- 
 ## 알려줘전북대란?
 
 알려줘전북대는 카카오톡 자동응답 api를 이용해 만들어진 **카카오톡 플러스친구 챗봇 프로젝트**입니다.  
@@ -36,7 +44,7 @@
 ### 치킨 마리수 계산<br/>
 
 <img src="http://blogfiles.naver.net/MjAxNzAyMDdfMjE1/MDAxNDg2Mzk4NzE4NzM4.7tJvhabOHMBiWbNO8nuoFeS6vj-QCVAFbnwlUckzNogg.kwwRrWs3P5BlVRUhUz9xZHZp03wm36U1mfTOLRmmvSUg.JPEG.hmu332233/KakaoTalk_20170206_171102801.jpg" style=" width:320px; height:86px; rwidth:320px; rheight:86px;" width="320" height="86" imgqe="true" jsonvalue="%7B%7D" rwidth="320px" rheight="86px">
-
+ -->
 
 ## deploy
 
